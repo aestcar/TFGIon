@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "bibliotecapp-4cf6b": {
+      "hosting": {
+        "app": [
+          "bibliotecapp-4cf6b"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "bibliotecapp-4cf6b"
+  }
+}

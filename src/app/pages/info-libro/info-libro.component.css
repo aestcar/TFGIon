@@ -1,0 +1,121 @@
+.noMarginBottom{
+    margin-bottom: 0px;
+}
+
+p{
+    margin-bottom: 8px;
+}
+
+#main{
+    display: flex;
+}
+
+#divImagen{
+    flex: 40%;
+    justify-content: right;
+}
+
+#divImagen > img{
+    padding: 20px;
+    width: 60%;
+    float:right;
+}
+
+#divDetalles{
+    flex: 50%;
+}
+
+#divDetalles > p{
+    padding: 20px;
+    font-size: 22px;
+}
+
+#divDetalles > p > span{
+    font-weight: 600;
+}
+
+#divDetalles > button{
+    margin-left: 20px;
+}
+
+.divNoDisponible{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.divNoDisponible > mat-icon{
+    color: #d90429;
+    margin-right: 5px;
+    margin-left: 20px;
+}
+
+.noDisponP{
+    font-size: 18px;
+}
+
+.divBotonPedir, .divBotonReservar{
+    margin-left: 20px;
+}
+
+/* ---------------------------------- */
+
+#error{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+}
+
+#error > img{
+    width: 30%;
+}
+
+#error > #tituloErr{
+    font-weight: 600;
+}
+
+
+#error > p{
+    font-size: 16px;
+}
+
+#error > button{
+    font-size: 16px;
+}
+
+button {
+    margin: 0;
+    display: inline-flex;
+    cursor: pointer;
+    user-select: none;
+    align-items: center;
+    vertical-align: bottom;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+
+    color: #ffffff;
+    background: #006d77;
+    border: 1px solid #006d77;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 3px;
+
+    overflow: hidden;
+    position: relative;
+}
+
+button:enabled:hover {
+    background: #02a8b8;
+    color: #ffffff;
+    border-color: #02a8b8;
+}
+
+button:disabled{
+    background: #dddddd;
+    color: #ffffff;
+    border-color: #dddddd;
+}

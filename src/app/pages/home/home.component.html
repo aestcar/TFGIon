@@ -1,0 +1,150 @@
+<ion-content>
+    <app-header></app-header>
+
+    <div *ngIf="isAdmin == true" id="divAdmin">
+      <p>Visualizando vista del usuario... </p>
+      <button (click)="adminClick()">Acceder a Administración</button>
+    </div>
+
+    <div id="divPrincipal">
+
+        <div id="buscadoryfiltro">
+          
+          <p>Busca y pide entre nuestros <span>más de {{contadorLibros}} espectaculares libros</span><p>
+
+          <div id="buscador" tabindex="0">
+            <ion-icon name="search-outline"></ion-icon>
+            <input type="text" placeholder="Buscar" id="input" (keyup.enter)="onEnter()">
+          </div>
+
+          <div id="filtro" >
+            <div (click)="filtroClick()" id="divFiltro" tabindex="0">
+              <ion-icon name="funnel-outline"></ion-icon>
+              <p>Filtrar</p>
+            </div>
+          </div>
+        </div>
+
+      <div *ngIf="!esOrdenAZ" class="tabla">
+        <div *ngFor="let libro of (lista | async)?.reverse()" class="card">
+
+          <div class="divImgLibro" (click)="libroClick(libro)">
+            <!-- Tiene o no imagen de portada? -->
+            <img *ngIf="!libro.portadaImgPath" class="imgLibro" alt="libro" src="../assets/images/principales/portadanodisp.png" height="230px" width="153px"> <!-- por defecto -->
+            <img *ngIf="libro.portadaImgPath" class="imgLibro" alt="libro" src="{{libro.portadaImgPath}}" height="230px" width="153px">
+          </div>
+
+          <p class="tituloLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.titulo)}}</p>
+          <p class="autorLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.autor)}}</p>
+
+          <div class="libroNoDisponible" *ngIf="!libro.disponible">
+            <div class="divNoDisponible" (click)="libroClick(libro)">
+              <ion-icon name="warning-outline"></ion-icon>
+              <p>Libro no disponible</p>
+            </div>
+            <div class="divBotonReservar"><button class="botonReservar" (click)="reservarClick()">Reservar</button></div>
+          </div>
+
+          <div class="divBotonPedir"><button class="botonPedir" (click)="pedirClick(libro)" *ngIf="libro.disponible">Pedir</button></div>
+
+        </div>
+
+      </div>
+
+      <!----------------------------------------------------------------------------------------------------------------->
+            <!-- Si el orden es A-Z hay que hacer reverse() a la lista, por tanto se debe duplicar-->
+      <div *ngIf="esOrdenAZ" class="tabla">
+        <div *ngFor="let libro of lista | async" class="card">
+
+          <div class="divImgLibro" (click)="libroClick(libro)">
+            <!-- Tiene o no imagen de portada? -->
+            <img *ngIf="!libro.portadaImgPath" class="imgLibro" alt="libro" src="../assets/images/principales/portadanodisp.png" height="230px" width="153px"> <!-- por defecto -->
+            <img *ngIf="libro.portadaImgPath" class="imgLibro" alt="libro" src="{{libro.portadaImgPath}}" height="230px" width="153px">
+          </div>
+
+          <p class="tituloLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.titulo)}}</p>
+          <p class="autorLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.autor)}}</p>
+
+          <div class="libroNoDisponible" *ngIf="!libro.disponible">
+            <div class="divNoDisponible">
+              <ion-icon name="warning-outline"></ion-icon>
+              <p>Libro no disponible</p>
+            </div>
+            <div class="divBotonReservar"><button class="botonReservar" (click)="reservarClick()">Reservar</button></div>
+          </div>
+
+          <div class="divBotonPedir"><button class="botonPedir" (click)="pedirClick(libro)" *ngIf="libro.disponible">Pedir</button></div>
+
+        </div>
+
+      </div>
+
+      <!----------------------------------------------------------------------------------------------------------------->
+
+      <div id="divBotonCargarMas">
+        <button id="botonCargarMas" (click)="cargarMas()">Cargar Más...</button>
+      </div>  
+
+      <!-- Testeo -->
+      <!-- <button (click)="addLibro()">Holaa</button> -->
+      <!-- <button (click)="addEvento()">Añadir evento</button> -->
+
+    </div>
+    
+    <div id="divEventos">
+
+      <h2>Eventos</h2>
+
+      <div id="tablaEventos">
+        <div *ngFor="let evento of (listaEventos | async)?.reverse()" class="evento">
+
+          <img *ngIf="!evento.portadaImgPath" class="imgEvento" alt={{evento.nombre}} src="../assets/images/principales/newevent.png" height="250px" width="180px">
+          <img *ngIf="evento.portadaImgPath" class="imgEvento" alt={{evento.nombre}} src="{{evento.portadaImgPath}}" height="250px" width="180px">
+
+          <p class="nombreEvento">{{aplicarNombreEsteticoSimplificado(evento.nombre)}}</p>
+          <div id="divDescripcionEvento"><p class="descripcionEvento">{{evento.descripcion}}</p></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="fooder">
+      <div id="primeraCol">
+        <p class="tituloHorario">Horario:</p>
+        <div id="divHorario">
+          <p> <span> Lunes a Viernes </span> 9:00 a 21:00</p>
+          <p> <span>Sábado </span> 9:00 a 14:00</p>
+          <p> <span>Domingo </span> Cerrado</p>
+        </div>
+
+        <div id="divCalendario">
+          <mat-card class="demo-inline-calendar-card">
+            <mat-calendar></mat-calendar>
+          </mat-card>
+        </div>
+
+      </div>
+
+      <div id="segundaCol">
+        <p><span>Biblioteca 33</span></p>
+        <p><span>C/</span>Carrer la Palmera, 7, 03320 Torre del Pla, Alicante</p>
+        <p><span>Teléfono: </span>666 666 666</p>
+        <img class="imgBiblio" alt="Imagen Biblioteca" src="../assets/images/principales/biblio.jpg" height="150px" width="300px">
+      </div>
+    </div>
+
+    <div id="postfooder">
+      <div class="sigue">
+        <p>Síguenos: </p>
+      </div>
+
+      <div class="redes"> 
+        <img alt="facebook" src="../assets/images/social/facebook.png" width="5%" (click)="redClick('f')">
+        <img alt="instagram" src="../assets/images/social/instagram.png" width="5%" (click)="redClick('i')">
+        <img alt="twitter" src="../assets/images/social/twitter.png" width="5%" (click)="redClick('t')">
+        <!--ion-icon name="logo-youtube" width="5%" (click)="redClick('y')"></ion-icon-->
+        <img alt="youtube" src="../assets/images/social/youtube.png" width="5%" (click)="redClick('y')"-->
+      </div>
+    </div>
+
+  </ion-content>
