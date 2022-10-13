@@ -43,9 +43,9 @@ export class AdminBorrarEventoComponent implements OnInit {
     this.idABorrar = row.nombre;
   }
 
-  aplicarNombreEstetico(s:any){
+  aplicarNombreEstetico(s:any, i:number){
     if(typeof s === 'string'){
-      return this.tituloService.aplicarNombreEstetico(s);
+      return this.tituloService.aplicarNombreEstetico(s, i);
     }else{
       return '';
     }

@@ -69,9 +69,9 @@ export class AdminBorrarLibroComponent implements OnInit {
     //)));
   }
 
-  aplicarNombreEstetico(s:any){
+  aplicarNombreEstetico(s:any, i:number){
     if(typeof s === 'string'){
-      return this.tituloService.aplicarNombreEstetico(s);
+      return this.tituloService.aplicarNombreEstetico(s, i);
     }else{
       return '';
     }

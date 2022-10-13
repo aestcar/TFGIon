@@ -217,8 +217,8 @@ export class HomeComponent implements OnInit {
   }
 
   // Esteticos 
-  aplicarNombreEstetico(s:string){
-    return this.tituloService.aplicarNombreEstetico(s);
+  aplicarNombreEstetico(s:string, i:number){
+    return this.tituloService.aplicarNombreEstetico(s, i);
   }
 
   aplicarNombreEsteticoSimplificado(s:string){

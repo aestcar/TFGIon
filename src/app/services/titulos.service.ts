@@ -8,15 +8,15 @@ export class TitulosService {
   constructor() { }
 
   // la casa de pepe el de los palotes -> La Casa De Pepe El...
-  aplicarNombreEstetico(s:string){
+  aplicarNombreEstetico(s:string, length:number){
     if(s==''){return '';}
     else if(!s){return ''}
 
     let res:string;
     res = s;
     // Poner ... si el nombre es muy largo
-    if(s.length > 21){
-      res = s.slice(0,21).concat('...');
+    if(s.length > length){
+      res = s.slice(0,length).concat('...');
     }
 
     // Hacer las primeras letras MAYUS

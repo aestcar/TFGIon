@@ -33,10 +33,10 @@ export class AdminGestionErroresComponent implements OnInit {
     this.index = indice + 1;
   }
 
-  aplicarNombreEstetico(s:any){
+  aplicarNombreEstetico(s:any, i:number){
     if(!this.errorSeleccionado){return '';}
     else if(this.errorSeleccionado.msg == ''){return '';}
-    return this.tituloService.aplicarNombreEstetico(s.msg);
+    return this.tituloService.aplicarNombreEstetico(s.msg, i);
   }
 
   borrar(errorSeleccionado:Problema){

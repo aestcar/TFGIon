@@ -51,8 +51,8 @@ export class InfoLibroComponent implements OnInit {
     }
   }
 
-  aplicarEsteticos(s:string){
-    return this.tituloService.aplicarNombreEstetico(s);
+  aplicarEsteticos(s:string, i:number){
+    return this.tituloService.aplicarNombreEstetico(s,i);
   }
 
   quitarNumsYGuion(s:string){

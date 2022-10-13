@@ -9,8 +9,9 @@
     <div id="divPrincipal">
 
         <div id="buscadoryfiltro">
-          
-          <p>Busca y pide entre nuestros <span>más de {{contadorLibros}} espectaculares libros</span><p>
+          <div>
+            <p id="tituloPrincipal">Busca y pide entre nuestros <span>más de {{contadorLibros}} espectaculares libros</span><p>
+          </div>
 
           <div id="buscador" tabindex="0">
             <ion-icon name="search-outline"></ion-icon>
@@ -34,8 +35,8 @@
             <img *ngIf="libro.portadaImgPath" class="imgLibro" alt="libro" src="{{libro.portadaImgPath}}" height="230px" width="153px">
           </div>
 
-          <p class="tituloLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.titulo)}}</p>
-          <p class="autorLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.autor)}}</p>
+          <p class="tituloLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.titulo, 17)}}</p>
+          <p class="autorLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.autor, 19)}}</p>
 
           <div class="libroNoDisponible" *ngIf="!libro.disponible">
             <div class="divNoDisponible" (click)="libroClick(libro)">
@@ -62,8 +63,8 @@
             <img *ngIf="libro.portadaImgPath" class="imgLibro" alt="libro" src="{{libro.portadaImgPath}}" height="230px" width="153px">
           </div>
 
-          <p class="tituloLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.titulo)}}</p>
-          <p class="autorLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.autor)}}</p>
+          <p class="tituloLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.titulo, 17)}}</p>
+          <p class="autorLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.autor, 19)}}</p>
 
           <div class="libroNoDisponible" *ngIf="!libro.disponible">
             <div class="divNoDisponible">
@@ -143,7 +144,7 @@
         <img alt="instagram" src="../assets/images/social/instagram.png" width="5%" (click)="redClick('i')">
         <img alt="twitter" src="../assets/images/social/twitter.png" width="5%" (click)="redClick('t')">
         <!--ion-icon name="logo-youtube" width="5%" (click)="redClick('y')"></ion-icon-->
-        <img alt="youtube" src="../assets/images/social/youtube.png" width="5%" (click)="redClick('y')"-->
+        <img alt="youtube" src="../assets/images/social/youtube.png" width="5%" (click)="redClick('y')">
       </div>
     </div>
 

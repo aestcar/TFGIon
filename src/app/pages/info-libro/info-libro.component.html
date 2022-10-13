@@ -6,13 +6,13 @@
   </div>
 
   <div id="divDetalles">
-      <p><span>Titulo:</span> {{aplicarEsteticos(libroSeleccionado.titulo)}}</p>
-      <p><span>Autor: </span>{{aplicarEsteticos(libroSeleccionado.autor)}}</p>
-      <p><span>ISBN: </span>{{aplicarEsteticos(libroSeleccionado.isbn)}}</p>
-      <p *ngIf="libroSeleccionado.editorial"><span>Editorial: </span>{{aplicarEsteticos(libroSeleccionado.editorial)}}</p>
-      <p *ngIf="libroSeleccionado.paginas"><span>Nº.Páginas: </span>{{aplicarEsteticos(libroSeleccionado.paginas.toString())}}</p>
-      <p><span>Categoria: </span>{{aplicarEsteticos(quitarNumsYGuion(libroSeleccionado.categoria))}}</p>
-      <p><span>Tipo: </span>{{aplicarEsteticos(quitarNumsYGuion(libroSeleccionado.tipo))}}</p>
+      <p><span>Titulo:</span> {{aplicarEsteticos(libroSeleccionado.titulo, 21)}}</p>
+      <p><span>Autor: </span>{{aplicarEsteticos(libroSeleccionado.autor, 23)}}</p>
+      <p><span>ISBN: </span>{{aplicarEsteticos(libroSeleccionado.isbn, 20)}}</p>
+      <p *ngIf="libroSeleccionado.editorial"><span>Editorial: </span>{{aplicarEsteticos(libroSeleccionado.editorial, 20)}}</p>
+      <p *ngIf="libroSeleccionado.paginas"><span>Nº.Páginas: </span>{{aplicarEsteticos(libroSeleccionado.paginas.toString(), 20)}}</p>
+      <p><span>Categoria: </span>{{aplicarEsteticos(quitarNumsYGuion(libroSeleccionado.categoria), 20)}}</p>
+      <p><span>Tipo: </span>{{aplicarEsteticos(quitarNumsYGuion(libroSeleccionado.tipo), 20)}}</p>
 
       <button *ngIf="libroSeleccionado.disponible" (click)="clickPedir()">Pedir</button>
 

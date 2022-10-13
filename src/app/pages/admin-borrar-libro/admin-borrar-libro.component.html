@@ -10,7 +10,7 @@
     <input matInput type="number" (keyup)="applyFilter($event)" placeholder="Ex. 9788408061052" #input>
   </mat-form-field>
 
-  <button (click)="clickBorrarLibro()" [disabled]="!filaABorrar">Borrar {{aplicarNombreEstetico(filaABorrar?.titulo)}}</button>
+  <button (click)="clickBorrarLibro()" [disabled]="!filaABorrar">Borrar {{aplicarNombreEstetico(filaABorrar?.titulo, 21)}}</button>
 
   <table mat-table id="mat-table" [dataSource]="libros" class="mat-elevation-z8">
 

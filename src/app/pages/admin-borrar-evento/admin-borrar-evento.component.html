@@ -4,7 +4,7 @@
       <button (click)="atrasDesdeBorrarEv()">Atrás</button>
     </div>
 
-    <button (click)="clickBorrarEvento()" [disabled]="!filaEvABorrar">Borrar {{aplicarNombreEstetico(idABorrar)}}</button>
+    <button (click)="clickBorrarEvento()" [disabled]="!filaEvABorrar">Borrar {{aplicarNombreEstetico(idABorrar, 21)}}</button>
 
     <table mat-table id="mat-table2" [dataSource]="eventos" class="mat-elevation-z8">
 

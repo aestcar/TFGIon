@@ -130,7 +130,7 @@ textarea:focus, input:focus{
     background-position: center;
 }
 
-#buscadoryfiltro > p{
+#buscadoryfiltro > div > p{
     text-align: center;
     font-size: 30px;
 
@@ -139,7 +139,7 @@ textarea:focus, input:focus{
     -webkit-text-shadow: 0 0 2px #fff;
 }
 
-#buscadoryfiltro > p > span::before{
+#buscadoryfiltro > div > p > span::before{
     content: "\A";
 	white-space: pre;
 }
@@ -211,11 +211,11 @@ textarea:focus, input:focus{
 
 .tituloLibro{
     font-weight: 600;
-    margin-left: 5px;
+    /*margin-left: 5px;*/
 }
 
 .autorLibro{
-    margin-left: 5px;
+    /*margin-left: 5px;*/
 }
 
 .divNoDisponible{
@@ -423,3 +423,9 @@ h2{
     background-color: green !important;
     color: white !important;
   }
+
+
+/* ----------------------------------- MEDIA QUERYS ----------------------------------- */
+@media (max-width: 400px) {
+
+}
