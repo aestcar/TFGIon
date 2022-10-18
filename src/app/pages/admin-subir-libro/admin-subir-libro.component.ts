@@ -53,7 +53,6 @@ export class AdminSubirLibroComponent implements OnInit {
       {value: 'infantil-20', viewValue: 'Infantil'},
       {value: 'juveniles-13', viewValue: 'Juveniles'},
       {value: 'literatura-14', viewValue: 'Literatura'},
-      {value: 'nuevo-15', viewValue: 'Nuevo'},
       {value: 'poéticos-16', viewValue: 'Poéticos'},
       {value: 'religión-17', viewValue: 'Religión'},
       {value: 'romance-18', viewValue: 'Romance'},

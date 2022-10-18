@@ -1,6 +1,4 @@
 <h1 mat-dialog-title>Filtrar Por</h1>
-<div mat-dialog-content>
-</div>
 <div mat-dialog-actions>
   <mat-form-field appearance="fill">
     <mat-label>Seleccione Orden</mat-label>
@@ -9,8 +7,17 @@
                 {{elemento.viewValue}}
             </mat-option>
         </mat-select>
+</mat-form-field> 
+
+<mat-form-field appearance="fill">
+  <mat-label>Seleccione Categoria</mat-label>
+      <mat-select (selectionChange)="categoriaCambiada($event.value)">
+          <mat-option *ngFor="let elemento of categorias" [value]="elemento.value">
+              {{elemento.viewValue}}
+          </mat-option>
+      </mat-select>
 </mat-form-field>
 
-  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button mat-dialog-close id="mat-dialog-close">Cancelar</button>
   <button mat-button mat-dialog-close cdkFocusInitial>Aplicar Cambios</button>
 </div>

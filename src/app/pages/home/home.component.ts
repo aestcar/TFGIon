@@ -47,7 +47,13 @@ export class HomeComponent implements OnInit {
   uid?:string;
 
   // Orden
-  esOrdenAZ:boolean;
+  esOrdenAZ:boolean; // Controla el reverse
+  esOrdenAZIcon:boolean;
+  esOrdenZA:boolean;
+  esOrdenNew:boolean;
+
+  categoria:string;
+  iconCat:string;
 
   // Libro info
   libroSeleccionado:Libro;
@@ -68,17 +74,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void { 
-    this.es = {
-      firstDayOfWeek: 1,
-      dayNames: [ "domingo","lunes","martes","miércoles","jueves","viernes","sábado" ],
-      dayNamesShort: [ "dom","lun","mar","mié","jue","vie","sáb" ],
-      dayNamesMin: [ "D","L","M","X","J","V","S" ],
-      monthNames: [ "enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre" ],
-      monthNamesShort: [ "ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic" ],
-      today: 'Hoy',
-      clear: 'Borrar'
-    }
-
     this.funcionContadorLibros();
 
     // Autenticacion
@@ -132,9 +127,9 @@ export class HomeComponent implements OnInit {
     this.lista = this.libroService.buscarLibros(aBuscar);
   }
 
-
+  // Filtros...
   filtroClick(){
-    console.log(this.isAdmin);
+    // Abre el dialogo selector
     const dialogo =this.dialog.open(DialogoComponent, {
       width: '250px'
     });
@@ -143,19 +138,91 @@ export class HomeComponent implements OnInit {
     this.lista.forEach((e) => e.pop());
 
     dialogo.afterClosed().subscribe(() => {
+      // Obtiene los valores
       let orden = dialogo.componentInstance.getOrden();
+      let cat = dialogo.componentInstance.getCategoria();
 
-      if(orden.includes('0')){
-        this.lista = this.libroService.getLibrosOrdenadosAZ();
-        this.esOrdenAZ = true;
-      }else if(orden.includes('1')){
-        // Solo cambia el boolean y por tanto el HTML asociado
-        this.lista = this.libroService.getLibrosOrdenadosAZ();
-        this.esOrdenAZ = false;
-      }else if(orden.includes('2')){
-        this.lista = this.libroService.getLibrosNuevos();
+      // Si no hay categoria solo se Comprobar orden
+      if(!cat){
+        if(!orden){}
+        else if(orden.includes('0')){
+          console.log('entra por 0');
+          this.lista = this.libroService.getLibrosOrdenadosAZ();
+          this.esOrdenAZ = true;
+          this.esOrdenAZIcon = true;
+        }else if(orden.includes('1')){
+          // Solo cambia el boolean y por tanto el HTML asociado
+          this.lista = this.libroService.getLibrosOrdenadosAZ();
+          console.log('es orden 1');
+          this.esOrdenAZ = false;
+          this.esOrdenZA = true;
+        }else if(orden.includes('2')){
+          console.log('entra por 2');
+          this.esOrdenNew = true;
+          this.lista = this.libroService.getLibrosNuevos();
+        }
+      }
+
+      // Comprobar categoria
+      if(cat){
+       this.categoria = cat;
+        this.asignarIcono();
+        this.lista = this.libroService.getLibrosPorCategoria(cat);
+
+        // El orden da igual siempre es A-Z
+        if(!orden){}
+        if(orden.includes('0')){
+          this.esOrdenAZ = false;
+          this.esOrdenAZIcon = true;
+        }else if(orden.includes('1')){
+          // Solo cambia el boolean y por tanto el HTML asociado
+          this.esOrdenAZ = true;
+          this.esOrdenAZIcon = false;
+          this.esOrdenZA = true;
+        }else if(orden.includes('2')){
+          this.esOrdenNew = true;
+        }
       }
     });
+  }
+
+  cerrarIcono(s:string){
+    if(s == 'za'){
+      this.esOrdenZA = false;
+    }else if(s == 'az'){
+      this.esOrdenAZIcon = false;
+    }else if(s == 'new'){
+      this.esOrdenNew = false;
+      this.lista = this.libroService.getLibros();
+    }else if(s == 'cat'){
+      this.categoria = '';
+      this.lista = this.libroService.getLibrosOrdenadosAZ();
+    }
+  }
+
+  asignarIcono(){
+    if(!this.categoria){}
+    else if(this.categoria.includes('acción')){ console.log('cambiado'); this.iconCat = "speedometer-outline" }
+    else if(this.categoria.includes('autobiográficos')){ this.iconCat = "book-outline" }
+    else if(this.categoria.includes('autoayuda')){ this.iconCat = "medkit-outline" }
+    else if(this.categoria.includes('científicos')){ this.iconCat = "flask-outline" }
+    else if(this.categoria.includes('ciencia-ficción')){ this.iconCat = "planet-outline" }
+    else if(this.categoria.includes('comic')){ this.iconCat = "library-outline" }
+    else if(this.categoria.includes('cuento')){ this.iconCat = "flower-outline" }
+    else if(this.categoria.includes('de-viaje')){ this.iconCat = "airplane-outline" }
+    else if(this.categoria.includes('deporte')){ this.iconCat = "football-outline" }
+    else if(this.categoria.includes('erótico')){ this.iconCat = "heart-outline" }
+    else if(this.categoria.includes('ficción')){ this.iconCat = "telescope-outline" }
+    else if(this.categoria.includes('historia')){ this.iconCat = "newspaper-outline" }
+    else if(this.categoria.includes('humor')){ this.iconCat = "happy-outline" }
+    else if(this.categoria.includes('infantil')){ this.iconCat = "rocket-outline" }
+    else if(this.categoria.includes('juveniles')){ this.iconCat = "shirt-outline" }
+    else if(this.categoria.includes('literatura')){ this.iconCat = "book-outline" }
+    else if(this.categoria.includes('poéticos')){ this.iconCat = "rose-outline" }
+    else if(this.categoria.includes('religión')){ this.iconCat = "bonfire-outline" }
+    else if(this.categoria.includes('romance')){ this.iconCat = "heart-circle-outline" }
+    else if(this.categoria.includes('suspense')){ this.iconCat = "walk-outline" }
+    else if(this.categoria.includes('nuevo')){ this.iconCat = "sparkles-outline" }
   }
 
   buscar(){} 
@@ -225,4 +292,7 @@ export class HomeComponent implements OnInit {
     return this.tituloService.aplicarNombreEsteticoSimplificado(s);
   }
 
+  quitarNumsYGuion(s:string){
+    return this.tituloService.quitarNumsYGuion(s);
+  }
 }

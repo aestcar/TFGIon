@@ -89,6 +89,19 @@ export class LibrosService {
     );
   }
 
+  getLibrosPorCategoria(id:string){
+    this.librosDBOrdenadosAZ = this.db.list('/libros', (ref) =>
+      ref.orderByChild('categoria')
+      .startAt(id)
+      .endAt(id));
+
+    return this.librosDBOrdenadosAZ.snapshotChanges().pipe(
+      map((changes) =>
+        changes.map((c) => this.getUserFromPayload(c.payload))
+      )
+    );
+  }
+
 
   // -------------------------------------------------------------------------------------------
   buscarLibros(aBuscar:string){
