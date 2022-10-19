@@ -52,6 +52,8 @@ import { AdminGestionReservasComponent } from './pages/admin-gestion-reservas/ad
 import { AdminGestionErroresComponent } from './pages/admin-gestion-errores/admin-gestion-errores.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { InfoLibroComponent } from './pages/info-libro/info-libro.component';
+import { EventosComponent } from './components/eventos/eventos.component';
+import { ConocenosComponent } from './components/conocenos/conocenos.component';
 
 
 
@@ -62,6 +64,8 @@ import { InfoLibroComponent } from './pages/info-libro/info-libro.component';
     AdminComponent,
     PerfilComponent,
     DialogoComponent,
+    EventosComponent,
+    ConocenosComponent,
     InfoLibroComponent,
     ReportesComponent,
     AdminSubirLibroComponent,

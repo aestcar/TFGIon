@@ -1,5 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Capacitor } from '@capacitor/core';
 //import { AutenticacionService } from '../../services/autenticacion.service';
 
 @Component({
@@ -33,6 +34,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  esAndroid():boolean{
+    if(Capacitor.getPlatform() === 'android'){return true;}
+    else{
+      return false;
+    }
+  }
+
   clickLogo(){
     window.location.reload();
   }
@@ -40,12 +48,6 @@ export class HeaderComponent implements OnInit {
   perfilClick(){
     this.zone.run(() => {
       this.router.navigate(['/perfil']);
-    });
-  }
-
-  clickMisReservas(){
-    this.zone.run(() => {
-      this.router.navigate(['/mis-reservas']);
     });
   }
 
@@ -57,11 +59,8 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  clickReportes(){
-    this.zone.run(() => {
-      this.router.navigate(['/reportes']);
-    });
+  menuAbierto(){
+    console.log('Se abbrio');
   }
-
 }
 

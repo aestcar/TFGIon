@@ -4,23 +4,78 @@
     <p>Bibliotecapp</p>
   </div>
 
-  <div id="navBar">
+  <div *ngIf="esAndroid()" id="menuHam">
+    <div id="main-content">
+      <ion-menu-toggle>
+        <ion-icon name="menu-outline"></ion-icon>
+      </ion-menu-toggle>
+    </div>
+  </div>
 
-    <p><a routerLink="/" fragment="fooder" routerLinkActive="active">Conócenos</a></p>
-    <p><a routerLink="/" fragment="divEventos" routerLinkActive="active">Eventos</a></p>
-    <p (click)="clickMisReservas()">Mis reservas</p>
-    <p (click)="clickReportes()">Reportar Error</p>
+  <div *ngIf="!esAndroid()" id="navBar">
+
+    <p><a routerLink="/conocenos" routerLinkActive="active">Conócenos</a></p>
+    <p><a routerLink="/eventos" routerLinkActive="active">Eventos</a></p>
+    <p><a routerLink="/mis-reservas" routerLinkActive="active">Mis reservas</a></p>
+    <p><a routerLink="/reportes" routerLinkActive="active">Reportar Error</a></p>
 
     <div id="perfil" (click)="perfilClick()">
-
-      <mat-icon *ngIf="!user && !photo"> account_circle </mat-icon>  
-
+      <mat-icon *ngIf="!user && !photo"> account_circle </mat-icon>
       <img id="iconoPerfil" *ngIf="user && !photo" alt="foto del usuario" src="{{user.photoURL}}">
       <!-- Si el usuario no se ha registrado hoy, miramos en el storage a ver si lo está -->
       <img id="iconoPerfil" *ngIf="!user && photo" alt="foto del usuario" src="{{photo}}">
-
-
     </div>
 
   </div>
+</div>
+
+<div id="menu">
+  <ion-menu contentId="main-content" side="end" id="aNegro" swipeGesture="true" ionDidOpen="menuAbierto">
+
+    <ion-header>
+      <ion-toolbar id="cabeza">
+        <ion-title>Bibliotecapp</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item>
+          <a routerLink="/conocenos" routerLinkActive="active">
+            <ion-icon name="accessibility-outline"></ion-icon>
+            <ion-label>Conócenos</ion-label>
+          </a>
+        </ion-item>
+
+        <ion-item>
+          <a routerLink="/eventos" routerLinkActive="active">
+              <ion-icon name="newspaper-outline"></ion-icon>
+              <ion-label>Eventos</ion-label>
+          </a>
+        </ion-item>
+
+        <ion-item>
+          <a routerLink="/mis-reservas" routerLinkActive="active">
+            <ion-icon name="list-outline"></ion-icon>
+            <ion-label>Mis Reservas</ion-label>
+          </a>
+        </ion-item>
+
+        <ion-item>
+          <a routerLink="/reportes" routerLinkActive="active">
+            <ion-icon name="alert-circle-outline"></ion-icon>
+            <ion-label>Reportar Error</ion-label>
+          </a>
+        </ion-item>
+
+        <ion-item>
+          <a routerLink="/perfil" routerLinkActive="active">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <ion-label>Perfil</ion-label>
+          </a>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+
+    <p class="textCenter">Versión 0.1</p>
+  </ion-menu>
 </div>

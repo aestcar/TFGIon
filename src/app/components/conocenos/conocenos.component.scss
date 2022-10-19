@@ -1,0 +1,74 @@
+/* ---------------  FOODER ----------------------- */
+
+#fooder, #postfooder{
+    padding-top: 20px;
+    display: flex;
+    background-color: #2b2d42;
+}
+
+#primeraCol, #segundaCol{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#primeraCol, #segundaCol{
+    flex: 50%;
+}
+
+p{
+    color: white;
+    text-align: center;
+}
+
+p > span{
+    font-weight: 600;
+}
+
+.tituloHorario{
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 3px;
+}
+
+#divCalendario{
+    display: flex;
+    justify-content: center;
+}
+
+#divCalendario > p-calendar{
+    background-color: white;
+}
+
+
+#postfooder > div > p{
+    text-align: right;
+    justify-content: right;
+}
+
+#postfooder > .sigue{
+    flex: 48%;
+    align-items: right;
+}
+
+#postfooder > .redes{
+    flex: 50%;
+    display: flex;
+    gap: 10px;
+    margin-left: 2%;
+}
+
+#postfooder > div > img{
+    cursor: pointer;
+}
+
+#postfooder{
+    padding-bottom: 10px;
+}
+
+.mat-calendar-body-cell-content.mat-calendar-body-today{
+    background-color: green !important;
+    color: white !important;
+  }

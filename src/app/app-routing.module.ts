@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ConocenosComponent } from './components/conocenos/conocenos.component';
+import { EventosComponent } from './components/eventos/eventos.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { HomeComponent } from './pages/home/home.component';
 import { InfoLibroComponent } from './pages/info-libro/info-libro.component';
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'admin', component:AdminComponent},
   { path: 'mis-reservas', component:MisReservasComponent},
   { path: 'reportes', component:ReportesComponent},
+  { path: 'conocenos', component:ConocenosComponent},
+  { path: 'eventos', component:EventosComponent},
   { path: '**', component: NotFoundComponent }
 ];
 

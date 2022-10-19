@@ -150,7 +150,7 @@ textarea:focus, input:focus{
     margin: 20px 20px 0px 20px;
 }
 
-#buscador, #filtro{
+#buscador{
     display: flex;
     align-items: center;
 }
@@ -160,6 +160,7 @@ textarea:focus, input:focus{
 }
 
 #filtro{
+    display: flex;
     margin-top: 10px;
     margin-right: 20px;
     justify-content: right;
@@ -272,7 +273,8 @@ ion-chip{
 
 /* ---------------  STUFF ----------------------- */
 #botonCargarMas{
-    background-color: #2b2d42;
+    /*background-color: #2b2d42;*/
+    background-color: violet;
     border: none;
     padding: 10px 20px 10px 20px;
     color: white;
@@ -289,122 +291,6 @@ ion-chip{
     margin-top: 30px;
     display: flex;
     justify-content: center;
-}
-
-/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ---------------  EVENTOS ----------------------- */
-
-#divEventos{
-    background-color: #ffddd2;
-    padding-top: 30px;
-    padding-bottom: 10px;
-}
-
-#tablaEventos{
-    margin-left: 20px;
-    margin-right: 20px;
-    display: flex;
-    flex-wrap: nowrap;
-    gap:60px;
-    overflow: auto;
-}
-
-h2{
-    text-align: center;
-    color: black;
-    font-size: 30px;
-    margin-bottom: 20px;
-}
-
-.nombreEvento{
-    font-weight: 600;
-    text-decoration: underline;
-    text-align: center;
-}
-
-.descripcionEvento{
-    margin-bottom: 10px;
-    overflow-wrap: break-word;
-    text-align: center;
-}
-
-#divDescripcionEvento{
-    width:180px;
-}
-
-/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ---------------  FOODER ----------------------- */
-
-#fooder, #postfooder{
-    padding-top: 20px;
-    display: flex;
-    background-color: #2b2d42;
-}
-
-#primeraCol{
-    flex: 50%;
-    justify-items: right;
-    margin-left: 10px;
-}
-
-#segundaCol{
-    flex: 50%;
-}
-
-#divHorario{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-}
-
-#divHorario > p, #segundaCol > p, #postfooder > div > p{
-    color: white;
-}
-
-#divHorario > p > span, #segundaCol > p > span{
-    font-weight: 600;
-}
-
-.tituloHorario{
-    font-size: 18px;
-    font-weight: 600;
-    color: white;
-    margin-bottom: 3px;
-}
-
-#divCalendario{
-    display: flex;
-    justify-content: center;
-}
-
-#divCalendario > p-calendar{
-    background-color: white;
-}
-
-
-#postfooder > div > p{
-    text-align: right;
-    justify-content: right;
-}
-
-#postfooder > .sigue{
-    flex: 48%;
-    align-items: right;
-}
-
-#postfooder > .redes{
-    flex: 50%;
-    display: flex;
-    gap: 10px;
-    margin-left: 2%;
-}
-
-#postfooder > div > img{
-    cursor: pointer;
-}
-
-#postfooder{
-    padding-bottom: 10px;
 }
 
 #divAdmin{
