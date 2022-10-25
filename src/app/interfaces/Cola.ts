@@ -1,4 +1,4 @@
 export interface Cola {
-    idUser:string;
-    id:string;
+  idUser: string;
+  id: string;
 }

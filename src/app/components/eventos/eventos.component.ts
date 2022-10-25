@@ -10,26 +10,27 @@ import { TitulosService } from 'src/app/services/titulos.service';
   styleUrls: ['./eventos.component.scss'],
 })
 export class EventosComponent implements OnInit {
-
   listaEventos: Observable<Array<Evento>>;
 
-  constructor(private eventoService:EventosService, private tituloService:TitulosService) { 
+  constructor(
+    private eventoService: EventosService,
+    private tituloService: TitulosService
+  ) {
     this.listaEventos = this.eventoService.getEventos();
   }
 
   ngOnInit() {}
 
-   // Esteticos 
-   aplicarNombreEstetico(s:string, i:number){
+  // Esteticos
+  aplicarNombreEstetico(s: string, i: number) {
     return this.tituloService.aplicarNombreEstetico(s, i);
   }
 
-  aplicarNombreEsteticoSimplificado(s:string){
+  aplicarNombreEsteticoSimplificado(s: string) {
     return this.tituloService.aplicarNombreEsteticoSimplificado(s);
   }
 
-  quitarNumsYGuion(s:string){
+  quitarNumsYGuion(s: string) {
     return this.tituloService.quitarNumsYGuion(s);
   }
-
 }

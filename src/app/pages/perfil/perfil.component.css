@@ -1,9 +1,9 @@
-button{
+button {
     cursor: pointer;
-    border:none;
+    border: none;
 }
 
-div{
+div {
     text-align: left;
 }
 
@@ -11,32 +11,33 @@ div{
     max-width: 400px;
 }
 
-#tituloHeader{
+#tituloHeader {
     justify-content: center;
 }
 
-#titulo{
+#titulo {
     text-align: center;
     margin-bottom: 5px;
     font-size: 25px;
 }
-  
+
 .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
 }
 
-#divImg{
+#divImg {
     display: flex;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
-#mat-card-image{
+#mat-card-image {
     width: 50%;
 }
 
-#registrado{
-    background-color: #399aa3;
+#registrado {
+    background-color: #83c5be;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -45,12 +46,51 @@ div{
     height: 100%;
 }
 
-mat-card-content > p > span{
+mat-card-content>p>span {
     font-weight: 600;
 }
 
-#cartaPrincipal{
+#cartaPrincipal {
     width: 50%;
-    background-color: orange;
+    background-color: #edf6f9;
 }
 
+button {
+    margin: 0;
+    display: inline-flex;
+    cursor: pointer;
+    user-select: none;
+    align-items: center;
+    vertical-align: bottom;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+
+    color: #ffffff;
+    background: #e29578;
+    border: 1px solid #e29578;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 3px;
+
+    overflow: hidden;
+    position: relative;
+}
+
+button:enabled:hover {
+    background: #ffddd2;
+    color: #ffffff;
+    border-color: #ffddd2;
+}
+
+button:disabled {
+    background: #dddddd;
+    color: #ffffff;
+    border-color: #dddddd;
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: space-around;
+}

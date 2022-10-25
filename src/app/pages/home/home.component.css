@@ -213,8 +213,6 @@ ion-chip{
 
 .card:hover > .divImgLibro > .imgLibro{
     padding: 10px;
-    height: 220px;
-    width: 143px;
 }
 
 .tituloLibro{
@@ -232,15 +230,21 @@ ion-chip{
     align-items: center;
 }
 
-.divNoDisponible > mat-icon, .divNoDisponible > ion-icon{
+.divNoDisponible > mat-icon, .divNoDisponible > ion-icon,  .libroNoDisponible > .divBotonReservar > span > ion-icon {
     color: #d90429;
     margin-right: 5px;
-    margin-left: 5px;
+    pointer-events: none;
+}
+
+.libroNoDisponible > .divBotonReservar > span{
+    justify-content: center;
+    align-items: center;
 }
 
 .divBotonPedir, .divBotonReservar{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .botonPedir{
@@ -284,7 +288,7 @@ ion-chip{
 }
 
 #botonCargarMas:hover{
-    color: #686da1;
+    color: #2b2d42;
 }
 
 #divBotonCargarMas{

@@ -1,39 +1,39 @@
 /* ---------------  EVENTOS ----------------------- */
 
-#divEventos{
-    background-color: #ffddd2;
-    padding-top: 30px;
-    padding-bottom: 10px;
+#divEventos {
+  background-color: #ffddd2;
+  padding-top: 30px;
+  padding-bottom: 10px;
 }
 
-#tablaEventos{
-    margin-left: 20px;
-    margin-right: 20px;
-    display: flex;
-    flex-wrap: nowrap;
-    gap:60px;
-    overflow: auto;
+#tablaEventos {
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 60px;
+  overflow: auto;
 }
 
-h2{
-    text-align: center;
-    color: black;
-    font-size: 30px;
-    margin-bottom: 20px;
+h2 {
+  text-align: center;
+  color: black;
+  font-size: 30px;
+  margin-bottom: 20px;
 }
 
-.nombreEvento{
-    font-weight: 600;
-    text-decoration: underline;
-    text-align: center;
+.nombreEvento {
+  font-weight: 600;
+  text-decoration: underline;
+  text-align: center;
 }
 
-.descripcionEvento{
-    margin-bottom: 10px;
-    overflow-wrap: break-word;
-    text-align: center;
+.descripcionEvento {
+  margin-bottom: 10px;
+  overflow-wrap: break-word;
+  text-align: center;
 }
 
-#divDescripcionEvento{
-    width:180px;
+#divDescripcionEvento {
+  width: 180px;
 }

@@ -1,4 +1,4 @@
-h1{
+h1 {
   font-size: 18px;
   margin-bottom: 0px;
 }
@@ -18,8 +18,9 @@ button {
   background: #006d77;
   border: 1px solid #006d77;
   padding: 0.4rem 0.8rem;
-  font-size:  0.8rem;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  font-size: 0.8rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+    box-shadow 0.2s;
   border-radius: 3px;
 
   overflow: hidden;
@@ -32,13 +33,13 @@ button:enabled:hover {
   border-color: #02a8b8;
 }
 
-button:disabled{
+button:disabled {
   background: #dddddd;
   color: #ffffff;
   border-color: #dddddd;
 }
 
-#mat-dialog-close{
+#mat-dialog-close {
   color: #006d77;
   background: #ffffff;
   margin-right: 2px;

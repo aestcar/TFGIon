@@ -1,36 +1,38 @@
-<div id="fooder">
-  <div id="primeraCol">
-    <p class="tituloHorario">Horario:</p>
-      <p> <span> Lunes a Viernes </span> 9:00 a 21:00</p>
-      <p> <span>Sábado </span> 9:00 a 14:00</p>
-      <p> <span>Domingo </span> Cerrado</p>
+<div id="main">
+  <div id="fooder">
+    <div id="primeraCol">
+      <p class="tituloHorario">Horario:</p>
+      <p><span> Lunes a Viernes </span> 9:00 a 21:00</p>
+      <p><span>Sábado </span> 9:00 a 14:00</p>
+      <p><span>Domingo </span> Cerrado</p>
 
       <div id="divCalendario">
         <mat-card class="demo-inline-calendar-card">
           <mat-calendar></mat-calendar>
         </mat-card>
-      </div>  
+      </div>
+    </div>
 
+    <div id="segundaCol">
+      <p><span>Biblioteca 33</span></p>
+      <p><span>C/</span>Carrer la Palmera, 7, 03320 Torre del Pla, Alicante</p>
+      <p><span>Teléfono: </span>666 666 666</p>
+      <img
+        class="imgBiblio"
+        alt="Imagen Biblioteca"
+        src="../assets/images/principales/biblio.jpg"
+        width="50%"
+      />
+    </div>
   </div>
 
-  <div id="segundaCol">
-    <p><span>Biblioteca 33</span></p>
-    <p><span>C/</span>Carrer la Palmera, 7, 03320 Torre del Pla, Alicante</p>
-    <p><span>Teléfono: </span>666 666 666</p>
-    <img class="imgBiblio" alt="Imagen Biblioteca" src="../assets/images/principales/biblio.jpg" width="50%">
-  </div>
-</div>
-
-<div id="postfooder">
-  <div class="sigue">
-    <p>Síguenos: </p>
-  </div>
-
-  <div class="redes">
-    <img alt="facebook" src="../assets/images/social/facebook.png" width="5%" (click)="redClick('f')">
-    <img alt="instagram" src="../assets/images/social/instagram.png" width="5%" (click)="redClick('i')">
-    <img alt="twitter" src="../assets/images/social/twitter.png" width="5%" (click)="redClick('t')">
-    <!--ion-icon name="logo-youtube" width="5%" (click)="redClick('y')"></ion-icon-->
-    <img alt="youtube" src="../assets/images/social/youtube.png" width="5%" (click)="redClick('y')">
+  <div id="postfooder">
+    <div class="redes">
+      <p>Síguenos:</p>
+      <ion-icon name="logo-facebook" (click)="redClick('f')"></ion-icon>
+      <ion-icon name="logo-instagram" (click)="redClick('i')"></ion-icon>
+      <ion-icon name="logo-twitter" (click)="redClick('t')"></ion-icon>
+      <ion-icon name="logo-youtube" (click)="redClick('y')"></ion-icon>
+    </div>
   </div>
 </div>

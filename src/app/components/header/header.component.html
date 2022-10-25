@@ -1,6 +1,6 @@
 <div id="header">
   <div id="logo" (click)="clickLogo()">
-    <img src="../assets/images/principales/logo.png" alt="logo">
+    <img src="../assets/images/principales/logo.png" alt="logo" />
     <p>Bibliotecapp</p>
   </div>
 
@@ -13,25 +13,42 @@
   </div>
 
   <div *ngIf="!esAndroid()" id="navBar">
-
     <p><a routerLink="/conocenos" routerLinkActive="active">Conócenos</a></p>
     <p><a routerLink="/eventos" routerLinkActive="active">Eventos</a></p>
-    <p><a routerLink="/mis-reservas" routerLinkActive="active">Mis reservas</a></p>
-    <p><a routerLink="/reportes" routerLinkActive="active">Reportar Error</a></p>
+    <p>
+      <a routerLink="/mis-reservas" routerLinkActive="active">Mis reservas</a>
+    </p>
+    <p>
+      <a routerLink="/reportes" routerLinkActive="active">Reportar Error</a>
+    </p>
 
     <div id="perfil" (click)="perfilClick()">
       <mat-icon *ngIf="!user && !photo"> account_circle </mat-icon>
-      <img id="iconoPerfil" *ngIf="user && !photo" alt="foto del usuario" src="{{user.photoURL}}">
+      <img
+        id="iconoPerfil"
+        *ngIf="user && !photo"
+        alt="foto del usuario"
+        src="{{ user.photoURL }}"
+      />
       <!-- Si el usuario no se ha registrado hoy, miramos en el storage a ver si lo está -->
-      <img id="iconoPerfil" *ngIf="!user && photo" alt="foto del usuario" src="{{photo}}">
+      <img
+        id="iconoPerfil"
+        *ngIf="!user && photo"
+        alt="foto del usuario"
+        src="{{ photo }}"
+      />
     </div>
-
   </div>
 </div>
 
 <div id="menu">
-  <ion-menu contentId="main-content" side="end" id="aNegro" swipeGesture="true" ionDidOpen="menuAbierto">
-
+  <ion-menu
+    contentId="main-content"
+    side="end"
+    id="aNegro"
+    swipeGesture="true"
+    ionDidOpen="menuAbierto"
+  >
     <ion-header>
       <ion-toolbar id="cabeza">
         <ion-title>Bibliotecapp</ion-title>
@@ -48,8 +65,8 @@
 
         <ion-item>
           <a routerLink="/eventos" routerLinkActive="active">
-              <ion-icon name="newspaper-outline"></ion-icon>
-              <ion-label>Eventos</ion-label>
+            <ion-icon name="newspaper-outline"></ion-icon>
+            <ion-label>Eventos</ion-label>
           </a>
         </ion-item>
 

@@ -19,38 +19,38 @@
         <input type="text" placeholder="Buscar" id="input" (keyup)="onEnter()">
       </div>
 
-        <div id="filtro">
+      <div id="filtro">
 
-          <ion-chip *ngIf="categoria">
-            <ion-icon name={{iconCat}}></ion-icon>
-            <ion-label>{{aplicarNombreEsteticoSimplificado(quitarNumsYGuion(categoria))}}</ion-label>
-            <ion-icon name="close" (click)="cerrarIcono('cat')"></ion-icon>
-          </ion-chip>
+        <ion-chip *ngIf="categoria">
+          <ion-icon name={{iconCat}}></ion-icon>
+          <ion-label>{{aplicarNombreEsteticoSimplificado(quitarNumsYGuion(categoria))}}</ion-label>
+          <ion-icon name="close" (click)="cerrarIcono('cat')"></ion-icon>
+        </ion-chip>
 
-          <ion-chip *ngIf="esOrdenNew">
-            <ion-icon name="sparkles-outline"></ion-icon>
-            <ion-label>Nuevos</ion-label>
-            <ion-icon name="close" (click)="cerrarIcono('new')"></ion-icon>
-          </ion-chip>
+        <ion-chip *ngIf="esOrdenNew">
+          <ion-icon name="sparkles-outline"></ion-icon>
+          <ion-label>Nuevos</ion-label>
+          <ion-icon name="close" (click)="cerrarIcono('new')"></ion-icon>
+        </ion-chip>
 
-          <ion-chip *ngIf="esOrdenZA">
-            <ion-icon name="arrow-up-outline"></ion-icon>
-            <ion-label>Z-A</ion-label>
-            <ion-icon name="close" (click)="cerrarIcono('za')"></ion-icon>
-          </ion-chip>
+        <ion-chip *ngIf="esOrdenZA">
+          <ion-icon name="arrow-up-outline"></ion-icon>
+          <ion-label>Z-A</ion-label>
+          <ion-icon name="close" (click)="cerrarIcono('za')"></ion-icon>
+        </ion-chip>
 
-          <ion-chip *ngIf="esOrdenAZIcon">
-            <ion-icon name="arrow-down-outline"></ion-icon>
-            <ion-label>A-Z</ion-label>
-            <ion-icon name="close" (click)="cerrarIcono('az')"></ion-icon>
-          </ion-chip>
+        <ion-chip *ngIf="esOrdenAZIcon">
+          <ion-icon name="arrow-down-outline"></ion-icon>
+          <ion-label>A-Z</ion-label>
+          <ion-icon name="close" (click)="cerrarIcono('az')"></ion-icon>
+        </ion-chip>
 
-          <ion-chip (click)="filtroClick()">
-            <ion-icon name="funnel-outline"></ion-icon>
-            <ion-label>Filtrar</ion-label>
-          </ion-chip>
-          
-        </div>
+        <ion-chip (click)="filtroClick()">
+          <ion-icon name="funnel-outline"></ion-icon>
+          <ion-label>Filtrar</ion-label>
+        </ion-chip>
+
+      </div>
 
     </div>
 
@@ -69,11 +69,10 @@
         <p class="autorLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.autor, 19)}}</p>
 
         <div class="libroNoDisponible" *ngIf="!libro.disponible">
-          <div class="divNoDisponible" (click)="libroClick(libro)">
-            <ion-icon name="warning-outline"></ion-icon>
-            <p>Libro no disponible</p>
+          <div class="divBotonReservar">
+            <span title="No Disponible"><ion-icon name="warning-outline" ></ion-icon></span>
+            <div class="centerBoto"><button class="botonReservar"(click)="reservarClick()">Reservar</button></div>
           </div>
-          <div class="divBotonReservar"><button class="botonReservar" (click)="reservarClick()">Reservar</button></div>
         </div>
 
         <div class="divBotonPedir"><button class="botonPedir" (click)="pedirClick(libro)"
@@ -100,11 +99,10 @@
         <p class="autorLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.autor, 19)}}</p>
 
         <div class="libroNoDisponible" *ngIf="!libro.disponible">
-          <div class="divNoDisponible">
-            <ion-icon name="warning-outline"></ion-icon>
-            <p>Libro no disponible</p>
+          <div class="divBotonReservar">
+            <span title="No Disponible"><ion-icon name="warning-outline" ></ion-icon></span>
+            <button class="botonReservar"(click)="reservarClick()">Reservar</button>
           </div>
-          <div class="divBotonReservar"><button class="botonReservar" (click)="reservarClick()">Reservar</button></div>
         </div>
 
         <div class="divBotonPedir"><button class="botonPedir" (click)="pedirClick(libro)"

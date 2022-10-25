@@ -6,24 +6,26 @@ import { Capacitor } from '@capacitor/core';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-
   // Autorizacion
-  user:any;
+  user: any;
 
   // Localstorage
-  name?:string;
-  email?:string;
-  phone?:string;
-  photo?:any;
+  name?: string;
+  email?: string;
+  phone?: string;
+  photo?: any;
 
-  constructor(private router: Router, private zone: NgZone, /*private autenticacionService:AutenticacionService*/) { 
+  constructor(
+    private router: Router,
+    private zone: NgZone /*private autenticacionService:AutenticacionService*/
+  ) {
     //this.user = this.autenticacionService.getUser();
 
     // Local Storage
-    if(!this.user){
+    if (!this.user) {
       this.name = localStorage.getItem('userName')!;
       this.email = localStorage.getItem('userEmail')!;
       this.phone = localStorage.getItem('userPhone')!;
@@ -31,36 +33,35 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  esAndroid():boolean{
-    if(Capacitor.getPlatform() === 'android'){return true;}
-    else{
+  esAndroid(): boolean {
+    if (Capacitor.getPlatform() === 'android') {
+      return true;
+    } else {
       return false;
     }
   }
 
-  clickLogo(){
+  clickLogo() {
     window.location.reload();
   }
 
-  perfilClick(){
+  perfilClick() {
     this.zone.run(() => {
       this.router.navigate(['/perfil']);
     });
   }
 
-  esHome():boolean{
-    if(this.router.url === ('/home')){
+  esHome(): boolean {
+    if (this.router.url === '/home') {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
 
-  menuAbierto(){
+  menuAbierto() {
     console.log('Se abbrio');
   }
 }
-
