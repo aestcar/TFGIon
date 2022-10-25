@@ -1,25 +1,58 @@
-<ion-content> 
- <!-- ------ GENERAL ------ -->
-  <div *ngIf="!subirLibroActivado && !borrarLibroActivado &&
-              !subirEventoActivado && !borrarEventoActivado
-              && !gestionActivado && !erroresActivado"
-              id="main">
+<ion-content>
+  <!-- ------ GENERAL ------ -->
+  <div
+    *ngIf="
+      !subirLibroActivado &&
+      !borrarLibroActivado &&
+      !subirEventoActivado &&
+      !borrarEventoActivado &&
+      !gestionActivado &&
+      !erroresActivado
+    "
+    id="main"
+  >
+    <p>ADMINISTRACIÓN</p>
 
-      <p>ADMINISTRACIÓN</p>         
+    <div id="divButtons">
+      <button
+        id="botoSubirLibro"
+        title="Subir Libro"
+        class="botoIconos"
+        (click)="activarSubirLibro()"
+      ></button>
+      <button
+        id="botoBajarLibro"
+        title="Dar de Baja Libro"
+        class="botoIconos"
+        (click)="activarBorrarLibro()"
+      ></button>
 
-      <div id="divButtons">
-          <button id="botoSubirLibro" title="Subir Libro" class="botoIconos" (click)="activarSubirLibro()"></button>
-          <button id="botoBajarLibro" title="Dar de Baja Libro" class="botoIconos" (click)="activarBorrarLibro()"></button>
+      <button
+        id="botoSubirEvento"
+        title="Subir Evento"
+        class="botoIconos"
+        (click)="activarSubirEvento()"
+      ></button>
+      <button
+        id="botoBajarEvento"
+        title="Dar de Baja Evento"
+        class="botoIconos"
+        (click)="activarBorrarEvento()"
+      ></button>
 
-          <button id="botoSubirEvento" title="Subir Evento" class="botoIconos" (click)="activarSubirEvento()"></button>
-          <button id="botoBajarEvento" title="Dar de Baja Evento" class="botoIconos"  (click)="activarBorrarEvento()"></button>
-
-          <button id="botoErrores" title="Gestión Errores" class="botoIconos" (click)="activarGestionErrores()"></button>
-          <button id="botoGestion" title="Gestión Reservas" class="botoIconos" (click)="activarGestion()"></button>
-
-
-      </div>
-
+      <button
+        id="botoErrores"
+        title="Gestión Errores"
+        class="botoIconos"
+        (click)="activarGestionErrores()"
+      ></button>
+      <button
+        id="botoGestion"
+        title="Gestión Reservas"
+        class="botoIconos"
+        (click)="activarGestion()"
+      ></button>
+    </div>
   </div>
 
   <!-- ------ SUBIR LIBRO ------ -->
@@ -31,7 +64,6 @@
   <div *ngIf="borrarLibroActivado">
     <app-admin-borrar-libro></app-admin-borrar-libro>
   </div>
-
 
   <!-- ------ SUBIR EVENTO ------ -->
   <div *ngIf="subirEventoActivado">

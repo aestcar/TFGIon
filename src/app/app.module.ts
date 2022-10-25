@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 
 import { MatIconModule } from '@angular/material/icon';
-import { AdminComponent } from './pages/admin/admin.component'
+import { AdminComponent } from './pages/admin/admin.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
@@ -34,14 +34,14 @@ import { MatInputModule } from '@angular/material/input';
 
 import { NgxFileDropModule } from 'ngx-file-drop';
 
-import { MatCardModule} from '@angular/material/card';
-import { MatDialogModule} from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MisReservasComponent } from './pages/mis-reservas/mis-reservas.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MatTableModule } from '@angular/material/table';
-import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { MatListModule} from '@angular/material/list';
-import { MatNativeDateModule} from '@angular/material/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatListModule } from '@angular/material/list';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReportesComponent } from './pages/reportes/reportes.component';
 import { AdminSubirLibroComponent } from './pages/admin-subir-libro/admin-subir-libro.component';
@@ -55,11 +55,9 @@ import { InfoLibroComponent } from './pages/info-libro/info-libro.component';
 import { EventosComponent } from './components/eventos/eventos.component';
 import { ConocenosComponent } from './components/conocenos/conocenos.component';
 
-
-
 @NgModule({
   declarations: [
-    AppComponent, 
+    AppComponent,
     HomeComponent,
     AdminComponent,
     PerfilComponent,
@@ -76,7 +74,7 @@ import { ConocenosComponent } from './components/conocenos/conocenos.component';
     AdminGestionErroresComponent,
     HeaderComponent,
     NotFoundComponent,
-    MisReservasComponent
+    MisReservasComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,15 +92,15 @@ import { ConocenosComponent } from './components/conocenos/conocenos.component';
     MatFormFieldModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    MatTableModule, 
+    MatTableModule,
     MatListModule,
-    MatInputModule, 
-    MatSelectModule, 
-    MatSliderModule, 
+    MatInputModule,
+    MatSelectModule,
+    MatSliderModule,
     MatProgressSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxFileDropModule
+    NgxFileDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

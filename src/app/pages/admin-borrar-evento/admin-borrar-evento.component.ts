@@ -8,23 +8,26 @@ import { AdminComponent } from '../admin/admin.component';
 @Component({
   selector: 'app-admin-borrar-evento',
   templateUrl: './admin-borrar-evento.component.html',
-  styleUrls: ['./admin-borrar-evento.component.css']
+  styleUrls: ['./admin-borrar-evento.component.css'],
 })
 export class AdminBorrarEventoComponent implements OnInit {
-
-  eventos:Observable<Evento[]>;
+  eventos: Observable<Evento[]>;
   displayedColumnsEv: string[] = ['nombre', 'descripcion'];
-  filaEvABorrar:any;
-  idABorrar:string;
+  filaEvABorrar: any;
+  idABorrar: string;
 
-  constructor(private eventoServicio:EventosService, private adminComponent:AdminComponent, private tituloService:TitulosService) { }
+  constructor(
+    private eventoServicio: EventosService,
+    private adminComponent: AdminComponent,
+    private tituloService: TitulosService
+  ) {}
 
   ngOnInit(): void {
     // Instanciar tabla eventos
     this.eventos = this.eventoServicio.getEventos();
   }
 
-  async clickBorrarEvento(){
+  async clickBorrarEvento() {
     this.eventoServicio.borrarEvento(this.idABorrar);
 
     alert('Se ha borrado el evento con éxito');
@@ -34,25 +37,24 @@ export class AdminBorrarEventoComponent implements OnInit {
     this.idABorrar = '';
   }
 
-  atrasDesdeBorrarEv(){
+  atrasDesdeBorrarEv() {
     this.adminComponent.borrarEventoActivado = false;
   }
 
-  filaEvClick(row:any){
+  filaEvClick(row: any) {
     this.filaEvABorrar = row;
     this.idABorrar = row.nombre;
   }
 
-  aplicarNombreEstetico(s:any, i:number){
-    if(typeof s === 'string'){
+  aplicarNombreEstetico(s: any, i: number) {
+    if (typeof s === 'string') {
       return this.tituloService.aplicarNombreEstetico(s, i);
-    }else{
+    } else {
       return '';
     }
   }
 
-  nombreAMayus(s:string){
+  nombreAMayus(s: string) {
     return this.tituloService.aplicarNombreEsteticoSimplificado(s);
   }
-
 }

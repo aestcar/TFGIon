@@ -9,8 +9,8 @@ describe('AdminGestionReservasComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminGestionReservasComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [AdminGestionReservasComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminGestionReservasComponent);

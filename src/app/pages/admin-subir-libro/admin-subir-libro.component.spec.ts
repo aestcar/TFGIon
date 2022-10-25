@@ -9,8 +9,8 @@ describe('AdminSubirLibroComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminSubirLibroComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [AdminSubirLibroComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminSubirLibroComponent);

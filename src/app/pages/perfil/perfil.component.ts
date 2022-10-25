@@ -6,26 +6,29 @@ import { AutenticacionService } from '../../services/autentication.service';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css']
+  styleUrls: ['./perfil.component.css'],
 })
 export class PerfilComponent implements OnInit {
-
-  currentUser?:User;
+  currentUser?: User;
 
   // Localstorage
-  name?:string;
-  email?:string;
-  phone?:string;
-  photo?:any;
-  bibliotecaFav?:string;
-  segBibliotecaFav?:string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  photo?: any;
+  bibliotecaFav?: string;
+  segBibliotecaFav?: string;
 
-  constructor(private autenticacionService:AutenticacionService, private router: Router, private zone: NgZone) { 
+  constructor(
+    private autenticacionService: AutenticacionService,
+    private router: Router,
+    private zone: NgZone
+  ) {
     // no va a hacer nada
     this.currentUser = this.autenticacionService.getUser();
 
     // Local Storage
-    if(!this.currentUser){
+    if (!this.currentUser) {
       this.name = localStorage.getItem('userName')!;
       this.email = localStorage.getItem('userEmail')!;
       this.phone = localStorage.getItem('userPhone')!;
@@ -35,41 +38,39 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
-
-  async onClickGoogle(){
+  async onClickGoogle() {
     const user = await this.autenticacionService.getAutenticacion();
     this.currentUser = user;
 
     this.comprobarAutenticacion(user);
   }
 
-  async onClickFacebook(){
+  async onClickFacebook() {
     const user = await this.autenticacionService.getAutenticacionFacebook();
     this.currentUser = user;
 
     this.comprobarAutenticacion(user);
   }
 
-  comprobarAutenticacion(user: User | null | undefined){
-    if(user === null || user === undefined){
+  comprobarAutenticacion(user: User | null | undefined) {
+    if (user === null || user === undefined) {
       this.autenticacionCorrecta(false);
       console.log('Autenticacion Incorrecta');
-    }else{
+    } else {
       this.autenticacionCorrecta(true);
       console.log('Autenticacion Correcta');
     }
   }
 
-  autenticacionCorrecta(b : boolean){
-    if(b){
+  autenticacionCorrecta(b: boolean) {
+    if (b) {
       this.zone.run(() => {
         this.router.navigate(['/']);
       });
-    } else{
-      alert("Error en la autenticación de usuario");
+    } else {
+      alert('Error en la autenticación de usuario');
       this.zone.run(() => {
         this.router.navigate(['/perfil']);
       });
@@ -77,35 +78,35 @@ export class PerfilComponent implements OnInit {
   }
 
   // HTML
-  obtenerTelefono(){
-    if(this.currentUser?.phoneNumber != undefined){
+  obtenerTelefono() {
+    if (this.currentUser?.phoneNumber != undefined) {
       return this.currentUser.phoneNumber;
-    }else if(this.phone != 'null'){
+    } else if (this.phone != 'null') {
       return this.phone;
-    }else{
+    } else {
       return '?';
     }
   }
 
-  obtenerBibliotecaFav(){
-    if(this.bibliotecaFav != 'null'){
+  obtenerBibliotecaFav() {
+    if (this.bibliotecaFav != 'null') {
       return this.bibliotecaFav;
-    }else{
+    } else {
       return '?';
     }
   }
 
-  clickMisReservas(){
+  clickMisReservas() {
     this.zone.run(() => {
       this.router.navigate(['/mis-reservas']);
     });
   }
 
-  cerrarSesion(){
-    if(this.currentUser){
+  cerrarSesion() {
+    if (this.currentUser) {
       this.autenticacionService.hacerSignOut();
-    }else{
-      // Borrar los valores 
+    } else {
+      // Borrar los valores
       this.name = '';
       this.email = '';
       this.phone = '';
@@ -113,14 +114,12 @@ export class PerfilComponent implements OnInit {
       this.bibliotecaFav = '';
       this.segBibliotecaFav = '';
 
-      localStorage.setItem('userName','null');
-      localStorage.setItem('userEmail','null');
-      localStorage.setItem('userPhone','null');
-      localStorage.setItem('userPhoto','null');
-      localStorage.setItem('userBibio','null');
-      localStorage.setItem('userBiblioFav','null');
-
+      localStorage.setItem('userName', 'null');
+      localStorage.setItem('userEmail', 'null');
+      localStorage.setItem('userPhone', 'null');
+      localStorage.setItem('userPhoto', 'null');
+      localStorage.setItem('userBibio', 'null');
+      localStorage.setItem('userBiblioFav', 'null');
     }
   }
-
 }

@@ -9,34 +9,37 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-admin-borrar-libro',
   templateUrl: './admin-borrar-libro.component.html',
-  styleUrls: ['./admin-borrar-libro.component.css']
+  styleUrls: ['./admin-borrar-libro.component.css'],
 })
 export class AdminBorrarLibroComponent implements OnInit {
-
-  libros:Observable<Libro[]>;
-  librosAUX:Observable<Libro[]>;
+  libros: Observable<Libro[]>;
+  librosAUX: Observable<Libro[]>;
   displayedColumns: string[] = ['título', 'autor', 'isbn', 'editorial'];
-  cargado:boolean;
-  filaABorrar:any;
-  isbnABorrar:any;
+  cargado: boolean;
+  filaABorrar: any;
+  isbnABorrar: any;
 
-  constructor(private libroService:LibrosService, private adminComponent:AdminComponent, private tituloService:TitulosService) { }
+  constructor(
+    private libroService: LibrosService,
+    private adminComponent: AdminComponent,
+    private tituloService: TitulosService
+  ) {}
 
   ngOnInit(): void {
     // Instanciar tabla libros
     this.libros = this.libroService.getLibros();
-    if(this.libros){
+    if (this.libros) {
       this.cargado = true;
     }
     // Guardamos la lista en AUX
     this.librosAUX = this.libros;
   }
 
-  async clickBorrarLibro(){
+  async clickBorrarLibro() {
     // TODO BORRARLO DE LA BD
-    this.libros = this.libros.pipe(map(
-      libros => libros.filter(libro => libro.isbn != (this.isbnABorrar)
-    )));
+    this.libros = this.libros.pipe(
+      map((libros) => libros.filter((libro) => libro.isbn != this.isbnABorrar))
+    );
     this.libroService.borrarLibro(this.isbnABorrar);
 
     alert('Se ha borrado el libro con éxito');
@@ -45,40 +48,41 @@ export class AdminBorrarLibroComponent implements OnInit {
     this.filaABorrar = '';
   }
 
-  atrasDesdeBorrar(){
+  atrasDesdeBorrar() {
     this.adminComponent.borrarLibroActivado = false;
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    if(filterValue == ''){
+    if (filterValue == '') {
       this.libros = this.librosAUX;
-    }else{
-    this.libros = this.libros.pipe(map(
-      libros => libros.filter(libro => libro.isbn.includes(filterValue)
-    ))); //= filterValue.trim().toLowerCase();
+    } else {
+      this.libros = this.libros.pipe(
+        map((libros) =>
+          libros.filter((libro) => libro.isbn.includes(filterValue))
+        )
+      ); //= filterValue.trim().toLowerCase();
     }
   }
 
-  filaClick(row:any){
+  filaClick(row: any) {
     console.log(row.isbn);
     this.filaABorrar = row;
     this.isbnABorrar = row.isbn;
     //this.libros = this.libros.pipe(map(
-      //libros => libros.filter(libro => libro.isbn.includes(filterValue)
+    //libros => libros.filter(libro => libro.isbn.includes(filterValue)
     //)));
   }
 
-  aplicarNombreEstetico(s:any, i:number){
-    if(typeof s === 'string'){
+  aplicarNombreEstetico(s: any, i: number) {
+    if (typeof s === 'string') {
       return this.tituloService.aplicarNombreEstetico(s, i);
-    }else{
+    } else {
       return '';
     }
   }
 
-  nombreAMayus(s:string){
+  nombreAMayus(s: string) {
     return this.tituloService.aplicarNombreEsteticoSimplificado(s);
   }
-
 }

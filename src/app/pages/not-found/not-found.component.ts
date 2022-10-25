@@ -4,19 +4,16 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-not-found',
   templateUrl: './not-found.component.html',
-  styleUrls: ['./not-found.component.css']
+  styleUrls: ['./not-found.component.css'],
 })
 export class NotFoundComponent implements OnInit {
+  constructor(private router: Router, private zone: NgZone) {}
 
-  constructor(private router: Router, private zone: NgZone) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  clickHome(){
+  clickHome() {
     this.zone.run(() => {
       this.router.navigate(['/home']);
     });
   }
-
 }

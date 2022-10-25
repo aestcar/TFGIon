@@ -9,8 +9,8 @@ describe('AdminGestionErroresComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminGestionErroresComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [AdminGestionErroresComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminGestionErroresComponent);

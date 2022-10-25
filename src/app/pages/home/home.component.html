@@ -2,28 +2,36 @@
   <app-header></app-header>
 
   <div *ngIf="isAdmin == true" id="divAdmin">
-    <p>Visualizando vista del usuario... </p>
+    <p>Visualizando vista del usuario...</p>
     <button (click)="adminClick()">Acceder a Administración</button>
   </div>
 
   <div id="divPrincipal">
-
     <div id="buscadoryfiltro">
       <div>
-        <p id="tituloPrincipal">Busca y pide entre nuestros <span>más de {{contadorLibros}} espectaculares libros</span>
-        <p>
+        <p id="tituloPrincipal">
+          Busca y pide entre nuestros
+          <span>más de {{ contadorLibros }} espectaculares libros</span>
+        </p>
+        <p></p>
       </div>
 
       <div id="buscador" tabindex="0">
         <ion-icon name="search-outline"></ion-icon>
-        <input type="text" placeholder="Buscar" id="input" (keyup)="onEnter()">
+        <input
+          type="text"
+          placeholder="Buscar"
+          id="input"
+          (keyup)="onEnter()"
+        />
       </div>
 
       <div id="filtro">
-
         <ion-chip *ngIf="categoria">
-          <ion-icon name={{iconCat}}></ion-icon>
-          <ion-label>{{aplicarNombreEsteticoSimplificado(quitarNumsYGuion(categoria))}}</ion-label>
+          <ion-icon name="{{ iconCat }}"></ion-icon>
+          <ion-label>{{
+            aplicarNombreEsteticoSimplificado(quitarNumsYGuion(categoria))
+          }}</ion-label>
           <ion-icon name="close" (click)="cerrarIcono('cat')"></ion-icon>
         </ion-chip>
 
@@ -49,67 +57,117 @@
           <ion-icon name="funnel-outline"></ion-icon>
           <ion-label>Filtrar</ion-label>
         </ion-chip>
-
       </div>
-
     </div>
 
     <div *ngIf="!esOrdenAZ" class="tabla">
       <div *ngFor="let libro of (lista | async)?.reverse()" class="card">
-
         <div class="divImgLibro" (click)="libroClick(libro)">
           <!-- Tiene o no imagen de portada? -->
-          <img *ngIf="!libro.portadaImgPath" class="imgLibro" alt="libro"
-            src="../assets/images/principales/portadanodisp.png" height="230px" width="153px"> <!-- por defecto -->
-          <img *ngIf="libro.portadaImgPath" class="imgLibro" alt="libro" src="{{libro.portadaImgPath}}" height="230px"
-            width="153px">
+          <img
+            *ngIf="!libro.portadaImgPath"
+            class="imgLibro"
+            alt="libro"
+            src="../assets/images/principales/portadanodisp.png"
+            height="230px"
+            width="153px"
+          />
+          <!-- por defecto -->
+          <img
+            *ngIf="libro.portadaImgPath"
+            class="imgLibro"
+            alt="libro"
+            src="{{ libro.portadaImgPath }}"
+            height="230px"
+            width="153px"
+          />
         </div>
 
-        <p class="tituloLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.titulo, 17)}}</p>
-        <p class="autorLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.autor, 19)}}</p>
+        <p class="tituloLibro" (click)="libroClick(libro)">
+          {{ aplicarNombreEstetico(libro.titulo, 17) }}
+        </p>
+        <p class="autorLibro" (click)="libroClick(libro)">
+          {{ aplicarNombreEstetico(libro.autor, 19) }}
+        </p>
 
         <div class="libroNoDisponible" *ngIf="!libro.disponible">
           <div class="divBotonReservar">
-            <span title="No Disponible"><ion-icon name="warning-outline" ></ion-icon></span>
-            <div class="centerBoto"><button class="botonReservar"(click)="reservarClick()">Reservar</button></div>
+            <span title="No Disponible"
+              ><ion-icon name="warning-outline"></ion-icon
+            ></span>
+            <div class="centerBoto">
+              <button class="botonReservar" (click)="reservarClick()">
+                Reservar
+              </button>
+            </div>
           </div>
         </div>
 
-        <div class="divBotonPedir"><button class="botonPedir" (click)="pedirClick(libro)"
-            *ngIf="libro.disponible">Pedir</button></div>
-
+        <div class="divBotonPedir">
+          <button
+            class="botonPedir"
+            (click)="pedirClick(libro)"
+            *ngIf="libro.disponible"
+          >
+            Pedir
+          </button>
+        </div>
       </div>
-
     </div>
 
     <!----------------------------------------------------------------------------------------------------------------->
     <!-- Si el orden es A-Z hay que hacer reverse() a la lista, por tanto se debe duplicar-->
     <div *ngIf="esOrdenAZ" class="tabla">
       <div *ngFor="let libro of lista | async" class="card">
-
         <div class="divImgLibro" (click)="libroClick(libro)">
           <!-- Tiene o no imagen de portada? -->
-          <img *ngIf="!libro.portadaImgPath" class="imgLibro" alt="libro"
-            src="../assets/images/principales/portadanodisp.png" height="230px" width="153px"> <!-- por defecto -->
-          <img *ngIf="libro.portadaImgPath" class="imgLibro" alt="libro" src="{{libro.portadaImgPath}}" height="230px"
-            width="153px">
+          <img
+            *ngIf="!libro.portadaImgPath"
+            class="imgLibro"
+            alt="libro"
+            src="../assets/images/principales/portadanodisp.png"
+            height="230px"
+            width="153px"
+          />
+          <!-- por defecto -->
+          <img
+            *ngIf="libro.portadaImgPath"
+            class="imgLibro"
+            alt="libro"
+            src="{{ libro.portadaImgPath }}"
+            height="230px"
+            width="153px"
+          />
         </div>
 
-        <p class="tituloLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.titulo, 17)}}</p>
-        <p class="autorLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.autor, 19)}}</p>
+        <p class="tituloLibro" (click)="libroClick(libro)">
+          {{ aplicarNombreEstetico(libro.titulo, 17) }}
+        </p>
+        <p class="autorLibro" (click)="libroClick(libro)">
+          {{ aplicarNombreEstetico(libro.autor, 19) }}
+        </p>
 
         <div class="libroNoDisponible" *ngIf="!libro.disponible">
           <div class="divBotonReservar">
-            <span title="No Disponible"><ion-icon name="warning-outline" ></ion-icon></span>
-            <button class="botonReservar"(click)="reservarClick()">Reservar</button>
+            <span title="No Disponible"
+              ><ion-icon name="warning-outline"></ion-icon
+            ></span>
+            <button class="botonReservar" (click)="reservarClick()">
+              Reservar
+            </button>
           </div>
         </div>
 
-        <div class="divBotonPedir"><button class="botonPedir" (click)="pedirClick(libro)"
-            *ngIf="libro.disponible">Pedir</button></div>
-
+        <div class="divBotonPedir">
+          <button
+            class="botonPedir"
+            (click)="pedirClick(libro)"
+            *ngIf="libro.disponible"
+          >
+            Pedir
+          </button>
+        </div>
       </div>
-
     </div>
 
     <!----------------------------------------------------------------------------------------------------------------->
@@ -121,11 +179,9 @@
     <!-- Testeo -->
     <!-- <button (click)="addLibro()">Holaa</button> -->
     <!-- <button (click)="addEvento()">Añadir evento</button> -->
-
   </div>
 
   <app-eventos></app-eventos>
 
   <app-conocenos></app-conocenos>
-
 </ion-content>

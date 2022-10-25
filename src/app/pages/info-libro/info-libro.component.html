@@ -1,37 +1,65 @@
 <app-header></app-header>
 <div id="main" *ngIf="libroSeleccionado">
   <div id="divImagen">
-      <img *ngIf="libroSeleccionado.portadaImgPath" src="{{libroSeleccionado.portadaImgPath}}">
-      <img *ngIf="!libroSeleccionado.portadaImgPath" src="../assets/images/principales/portadanodisp.png">
+    <img
+      *ngIf="libroSeleccionado.portadaImgPath"
+      src="{{ libroSeleccionado.portadaImgPath }}"
+    />
+    <img
+      *ngIf="!libroSeleccionado.portadaImgPath"
+      src="../assets/images/principales/portadanodisp.png"
+    />
   </div>
 
   <div id="divDetalles">
-      <p><span>Titulo:</span> {{aplicarEsteticos(libroSeleccionado.titulo, 21)}}</p>
-      <p><span>Autor: </span>{{aplicarEsteticos(libroSeleccionado.autor, 23)}}</p>
-      <p><span>ISBN: </span>{{aplicarEsteticos(libroSeleccionado.isbn, 20)}}</p>
-      <p *ngIf="libroSeleccionado.editorial"><span>Editorial: </span>{{aplicarEsteticos(libroSeleccionado.editorial, 20)}}</p>
-      <p *ngIf="libroSeleccionado.paginas"><span>Nº.Páginas: </span>{{aplicarEsteticos(libroSeleccionado.paginas.toString(), 20)}}</p>
-      <p><span>Categoria: </span>{{aplicarEsteticos(quitarNumsYGuion(libroSeleccionado.categoria), 20)}}</p>
-      <p><span>Tipo: </span>{{aplicarEsteticos(quitarNumsYGuion(libroSeleccionado.tipo), 20)}}</p>
+    <p>
+      <span>Titulo:</span> {{ aplicarEsteticos(libroSeleccionado.titulo, 21) }}
+    </p>
+    <p>
+      <span>Autor: </span>{{ aplicarEsteticos(libroSeleccionado.autor, 23) }}
+    </p>
+    <p><span>ISBN: </span>{{ aplicarEsteticos(libroSeleccionado.isbn, 20) }}</p>
+    <p *ngIf="libroSeleccionado.editorial">
+      <span>Editorial: </span
+      >{{ aplicarEsteticos(libroSeleccionado.editorial, 20) }}
+    </p>
+    <p *ngIf="libroSeleccionado.paginas">
+      <span>Nº.Páginas: </span
+      >{{ aplicarEsteticos(libroSeleccionado.paginas.toString(), 20) }}
+    </p>
+    <p>
+      <span>Categoria: </span
+      >{{ aplicarEsteticos(quitarNumsYGuion(libroSeleccionado.categoria), 20) }}
+    </p>
+    <p>
+      <span>Tipo: </span
+      >{{ aplicarEsteticos(quitarNumsYGuion(libroSeleccionado.tipo), 20) }}
+    </p>
 
-      <button *ngIf="libroSeleccionado.disponible" (click)="clickPedir()">Pedir</button>
+    <button *ngIf="libroSeleccionado.disponible" (click)="clickPedir()">
+      Pedir
+    </button>
 
-      <div class="libroNoDisponible" *ngIf="!libroSeleccionado.disponible">
-        <div class="divNoDisponible">
-          <mat-icon> warning </mat-icon>
-          <p class="noMarginBottom noDisponP">Libro no disponible</p>
-        </div>
-        <div class="divBotonReservar"><button class="botonReservar">Reservar</button></div>
+    <div class="libroNoDisponible" *ngIf="!libroSeleccionado.disponible">
+      <div class="divNoDisponible">
+        <mat-icon> warning </mat-icon>
+        <p class="noMarginBottom noDisponP">Libro no disponible</p>
       </div>
-
+      <div class="divBotonReservar">
+        <button class="botonReservar">Reservar</button>
+      </div>
+    </div>
   </div>
-
 </div>
 
 <div id="error" *ngIf="!libroSeleccionado">
-  <img src="../assets/images/principales/aliens.png">
-  <p id="tituloErr">¡Oh no! Parece que los aliens han abducido el libro que querias</p>
-  <p>Debes volver atrás y seleccionarlo otra vez. Esperamos que ya se hayan ido cuando vuelvas...</p>
+  <img src="../assets/images/principales/aliens.png" />
+  <p id="tituloErr">
+    ¡Oh no! Parece que los aliens han abducido el libro que querias
+  </p>
+  <p>
+    Debes volver atrás y seleccionarlo otra vez. Esperamos que ya se hayan ido
+    cuando vuelvas...
+  </p>
   <button>Volver atrás</button>
 </div>
-

@@ -4,7 +4,7 @@ const config: CapacitorConfig = {
   appId: 'com.example.app',
   appName: 'bibliotecapp',
   webDir: 'www',
-  bundledWebRuntime: false
+  bundledWebRuntime: false,
 };
 
 export default config;

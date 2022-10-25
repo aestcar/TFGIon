@@ -1,5 +1,4 @@
 <div id="main">
-
   <div id="imgGestionRes">
     <button (click)="atrasDesdeGestion()">Atrás</button>
   </div>
@@ -7,22 +6,37 @@
   <div id="inputNewUser">
     <mat-form-field appearance="fill">
       <mat-label>ID del usuario</mat-label>
-      <input matInput [(ngModel)]="valorInputUser" id="inputNombreUser">
+      <input matInput [(ngModel)]="valorInputUser" id="inputNombreUser" />
     </mat-form-field>
-    <button ngDefaultControl  (click)="buscarUsuario()" [disabled]="!valorInputUser">Buscar</button>
+    <button
+      ngDefaultControl
+      (click)="buscarUsuario()"
+      [disabled]="!valorInputUser"
+    >
+      Buscar
+    </button>
   </div>
 
   <p *ngIf="usuarioEncontrado == false">Usuario no encontrado</p>
-  <p *ngIf="usuarioEncontrado == true" >Usuario encontrado ({{resUsuario.email}}) </p>
+  <p *ngIf="usuarioEncontrado == true">
+    Usuario encontrado ({{ resUsuario.email }})
+  </p>
 
   <p>Consultar Disponibilidad:</p>
 
   <div id="inputNewReserva">
     <mat-form-field appearance="fill">
       <mat-label>ISBN del libro</mat-label>
-      <input matInput type="nunmber" [(ngModel)]="valorInputGR" id="inputISBNReserva">
+      <input
+        matInput
+        type="nunmber"
+        [(ngModel)]="valorInputGR"
+        id="inputISBNReserva"
+      />
     </mat-form-field>
-    <button (click)="buscarDisponibilidadLibro()" [disabled]="!valorInputGR">Buscar</button>
+    <button (click)="buscarDisponibilidadLibro()" [disabled]="!valorInputGR">
+      Buscar
+    </button>
   </div>
 
   <div *ngIf="existeLibro == false">
@@ -30,30 +44,48 @@
   </div>
 
   <div *ngIf="existeLibro == true">
-    <p>{{resDisponibilidad.estado}}</p>
-    <p>{{resDisponibilidad.localizacion}}</p>
+    <p>{{ resDisponibilidad.estado }}</p>
+    <p>{{ resDisponibilidad.localizacion }}</p>
   </div>
 
-  <div id="hayResDisponibilidad" *ngIf="resDisponibilidad"> 
+  <div id="hayResDisponibilidad" *ngIf="resDisponibilidad">
     <!-- Disponibilidad -->
     <!-- PEDIR LIBRO -->
-    <button *ngIf="resDisponibilidad.estado == 'Disponible' && resDisponibilidad.localizacion == 'En Biblioteca' "
-            (click)="pedirLibro(valorInputGR)" [disabled]=" !valorInputUser || !valorInputGR">
+    <button
+      *ngIf="
+        resDisponibilidad.estado == 'Disponible' &&
+        resDisponibilidad.localizacion == 'En Biblioteca'
+      "
+      (click)="pedirLibro(valorInputGR)"
+      [disabled]="!valorInputUser || !valorInputGR"
+    >
       Pedir
     </button>
 
-    <button *ngIf="resDisponibilidad.estado == 'No Disponible' && resDisponibilidad.localizacion == 'En Biblioteca' "
-            (click)="seHaDevuelto(valorInputGR)">
+    <button
+      *ngIf="
+        resDisponibilidad.estado == 'No Disponible' &&
+        resDisponibilidad.localizacion == 'En Biblioteca'
+      "
+      (click)="seHaDevuelto(valorInputGR)"
+    >
       Se ha Devuelto
     </button>
-    <button id="reservas" *ngIf="resDisponibilidad.estado == 'No Disponible' && resDisponibilidad.localizacion == 'En Biblioteca' "
-            (click)="reservarLibro(valorInputGR)" [disabled]=" !valorInputUser || !valorInputGR">
+    <button
+      id="reservas"
+      *ngIf="
+        resDisponibilidad.estado == 'No Disponible' &&
+        resDisponibilidad.localizacion == 'En Biblioteca'
+      "
+      (click)="reservarLibro(valorInputGR)"
+      [disabled]="!valorInputUser || !valorInputGR"
+    >
       Reservar Libro
     </button>
 
     <!-- RESERVAR LIBRO -->
 
     <!-- PEDIR TRANSPORTE LIBRO -->
-  <div>
-
+    <div></div>
+  </div>
 </div>

@@ -9,8 +9,8 @@ describe('AdminBorrarEventoComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminBorrarEventoComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [AdminBorrarEventoComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminBorrarEventoComponent);

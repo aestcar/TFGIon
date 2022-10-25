@@ -9,8 +9,8 @@ describe('EventosComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventosComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [EventosComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(EventosComponent);

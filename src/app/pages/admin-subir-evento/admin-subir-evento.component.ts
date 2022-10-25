@@ -9,55 +9,62 @@ import { EventosService } from '../../services/eventos.service';
 @Component({
   selector: 'app-admin-subir-evento',
   templateUrl: './admin-subir-evento.component.html',
-  styleUrls: ['./admin-subir-evento.component.css']
+  styleUrls: ['./admin-subir-evento.component.css'],
 })
 export class AdminSubirEventoComponent implements OnInit {
-
-  fileSeleccionado:any;
+  fileSeleccionado: any;
   public files: NgxFileDropEntry[] = [];
 
   // Validadores
   textFormControl = new FormControl('', [Validators.required]);
   textFormControl2 = new FormControl('', [Validators.required]);
 
-  constructor(private eventoServicio:EventosService, private adminComponent:AdminComponent) { }
+  constructor(
+    private eventoServicio: EventosService,
+    private adminComponent: AdminComponent
+  ) {}
 
   ngOnInit(): void {}
 
-  async clickSubirEvento(){
-
-    const titulo = (<HTMLInputElement>document.getElementById("inputTituloEv")).value.toLowerCase();
-    const descripcion = (<HTMLInputElement>document.getElementById("inputDescrip")).value;
+  async clickSubirEvento() {
+    const titulo = (<HTMLInputElement>(
+      document.getElementById('inputTituloEv')
+    )).value.toLowerCase();
+    const descripcion = (<HTMLInputElement>(
+      document.getElementById('inputDescrip')
+    )).value;
     const date = new Date();
 
     // Imagen
     // Referencias a storage
-    let evento:Evento;
-    if(this.fileSeleccionado){
+    let evento: Evento;
+    if (this.fileSeleccionado) {
       const storage = getStorage();
-      const storageRef = ref(storage, 'images/'+titulo);
+      const storageRef = ref(storage, 'images/' + titulo);
 
       // Esperamos a obtener respuesta
-      const res = await uploadBytes(storageRef, this.fileSeleccionado).then(() => {
-        console.log('Imagen de evento subida');
-      });
+      const res = await uploadBytes(storageRef, this.fileSeleccionado).then(
+        () => {
+          console.log('Imagen de evento subida');
+        }
+      );
 
       let portadaImgPath = await getDownloadURL(storageRef);
 
       evento = {
-        id:date.toISOString(),
-        nombre:titulo,
-        descripcion:descripcion,
-        fecha:date,
-        portadaImgPath:portadaImgPath
-      }
-    }else{
+        id: date.toISOString(),
+        nombre: titulo,
+        descripcion: descripcion,
+        fecha: date,
+        portadaImgPath: portadaImgPath,
+      };
+    } else {
       evento = {
-        id:date.toISOString(),
-        nombre:titulo,
-        descripcion:descripcion,
-        fecha:date,
-      }
+        id: date.toISOString(),
+        nombre: titulo,
+        descripcion: descripcion,
+        fecha: date,
+      };
     }
 
     this.eventoServicio.addEventoHTTP(evento);
@@ -65,28 +72,25 @@ export class AdminSubirEventoComponent implements OnInit {
     // Libro Subido
     alert('Se ha subido el evento con éxito');
 
-     // Borrar inputs
-     (<HTMLInputElement>document.getElementById("inputTituloEv")).value = '';
-     (<HTMLInputElement>document.getElementById("inputDescrip")).value = '';
-     this.fileSeleccionado= '';
-     this.files = [];
+    // Borrar inputs
+    (<HTMLInputElement>document.getElementById('inputTituloEv')).value = '';
+    (<HTMLInputElement>document.getElementById('inputDescrip')).value = '';
+    this.fileSeleccionado = '';
+    this.files = [];
   }
 
-  atrasDesdeSubirEv(){
+  atrasDesdeSubirEv() {
     this.adminComponent.subirEventoActivado = false;
   }
 
   public dropped(files: NgxFileDropEntry[]) {
     this.files = files;
     for (const droppedFile of files) {
-
       // Is it a file?
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-
           this.fileSeleccionado = file;
-
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)
@@ -97,12 +101,11 @@ export class AdminSubirEventoComponent implements OnInit {
     }
   }
 
-  public fileOver(event: any){
+  public fileOver(event: any) {
     console.log(event);
   }
 
-  public fileLeave(event: any){
+  public fileLeave(event: any) {
     console.log(event);
   }
-
 }

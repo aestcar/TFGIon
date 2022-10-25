@@ -9,8 +9,8 @@ describe('InfoLibroComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ InfoLibroComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [InfoLibroComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(InfoLibroComponent);

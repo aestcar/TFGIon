@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Libro } from '../../interfaces/Libro';
 import { LibrosService } from '../../services/libros.service';
-import { getDownloadURL, getStorage, ref, uploadBytes, uploadString } from "firebase/storage";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytes,
+  uploadString,
+} from 'firebase/storage';
 import { Evento } from '../../interfaces/Evento';
 import { EventosService } from '../../services/eventos.service';
 import { Observable } from 'rxjs';
@@ -14,22 +20,20 @@ import { AutenticacionService } from '../../services/autentication.service';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
 })
-
 export class AdminComponent implements OnInit {
-
   // General
-  subirLibroActivado:boolean;
-  borrarLibroActivado:boolean;
-  subirEventoActivado:boolean;
-  borrarEventoActivado:boolean;
-  subirPersActivado:boolean;
-  bajarPersActivado:boolean;
-  gestionActivado:boolean;
-  erroresActivado:boolean;
+  subirLibroActivado: boolean;
+  borrarLibroActivado: boolean;
+  subirEventoActivado: boolean;
+  borrarEventoActivado: boolean;
+  subirPersActivado: boolean;
+  bajarPersActivado: boolean;
+  gestionActivado: boolean;
+  erroresActivado: boolean;
 
-  constructor() { 
+  constructor() {
     this.subirLibroActivado = false;
     this.borrarLibroActivado = false;
     this.subirEventoActivado = false;
@@ -43,28 +47,28 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {}
 
   /* --------------- GENERAL ---------------*/
-  activarSubirLibro(){
+  activarSubirLibro() {
     this.subirLibroActivado = true;
   }
 
-  activarBorrarLibro(){
+  activarBorrarLibro() {
     this.borrarLibroActivado = true;
   }
 
-  activarSubirEvento(){
+  activarSubirEvento() {
     this.subirEventoActivado = true;
   }
 
-  activarBorrarEvento(){
+  activarBorrarEvento() {
     console.log('Borrar Evento');
     this.borrarEventoActivado = true;
   }
 
-  activarGestion(){
+  activarGestion() {
     this.gestionActivado = true;
   }
 
-  activarGestionErrores(){
+  activarGestionErrores() {
     this.erroresActivado = true;
   }
 }

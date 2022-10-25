@@ -9,8 +9,8 @@ describe('DialogoComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogoComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [DialogoComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DialogoComponent);

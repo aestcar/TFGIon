@@ -9,8 +9,8 @@ describe('MisReservasComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MisReservasComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [MisReservasComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MisReservasComponent);

@@ -9,8 +9,8 @@ describe('AdminBorrarLibroComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminBorrarLibroComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [AdminBorrarLibroComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminBorrarLibroComponent);

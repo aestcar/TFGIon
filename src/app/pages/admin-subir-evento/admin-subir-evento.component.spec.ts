@@ -9,8 +9,8 @@ describe('AdminSubirEventoComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminSubirEventoComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [AdminSubirEventoComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminSubirEventoComponent);

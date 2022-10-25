@@ -12,18 +12,18 @@ import { ReportesComponent } from './pages/reportes/reportes.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'perfil', component:PerfilComponent},
-  { path: 'detalles-libro', component:InfoLibroComponent},
-  { path: 'admin', component:AdminComponent},
-  { path: 'mis-reservas', component:MisReservasComponent},
-  { path: 'reportes', component:ReportesComponent},
-  { path: 'conocenos', component:ConocenosComponent},
-  { path: 'eventos', component:EventosComponent},
-  { path: '**', component: NotFoundComponent }
+  { path: 'perfil', component: PerfilComponent },
+  { path: 'detalles-libro', component: InfoLibroComponent },
+  { path: 'admin', component: AdminComponent },
+  { path: 'mis-reservas', component: MisReservasComponent },
+  { path: 'reportes', component: ReportesComponent },
+  { path: 'conocenos', component: ConocenosComponent },
+  { path: 'eventos', component: EventosComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

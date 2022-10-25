@@ -1,18 +1,22 @@
 <div>
   <app-header></app-header>
   <div id="main">
+    <h1>Reportar Errores</h1>
 
-      <h1>Reportar Errores</h1>
+    <mat-form-field appearance="standard">
+      <mat-label>Describe aquí tu problema</mat-label>
+      <input
+        matInput
+        placeholder="Ej. No puedo cerrar sesión"
+        #input
+        [(ngModel)]="inputText"
+      />
+    </mat-form-field>
 
-      <mat-form-field appearance="standard">
-          <mat-label>Describe aquí tu problema</mat-label>
-          <input matInput placeholder="Ej. No puedo cerrar sesión" #input [(ngModel)]="inputText">
-        </mat-form-field>
+    <button (click)="enviarClick()">Enviar</button>
 
-      <button (click)="enviarClick()">Enviar</button>
-
-      <img src="../assets/images/principales/gracias.png">
-      <p class="titulo">Gracias por usar esta herraminta.</p>
-      <p>Al reportar nuestros errores ayudas muchísimo a mejorar Bibliotecapp.</p>
-  </div>   
-</div> 
+    <img src="../assets/images/principales/gracias.png" />
+    <p class="titulo">Gracias por usar esta herraminta.</p>
+    <p>Al reportar nuestros errores ayudas muchísimo a mejorar Bibliotecapp.</p>
+  </div>
+</div>
