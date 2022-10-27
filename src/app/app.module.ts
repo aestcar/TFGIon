@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 
 import { MatIconModule } from '@angular/material/icon';
+
 import { AdminComponent } from './pages/admin/admin.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -19,13 +20,11 @@ import { DatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
-//import { CalendarModule } from 'primeng/calendar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { DialogoComponent } from './components/dialogo/dialogo.component';
 
-import { RouteReuseStrategy } from '@angular/router';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';

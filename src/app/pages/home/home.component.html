@@ -1,11 +1,20 @@
-<ion-content>
-  <app-header></app-header>
+ <!-- Header Android -->
+ <app-header *ngIf="esAndroid()"></app-header>
 
-  <div *ngIf="isAdmin == true" id="divAdmin">
+  <div *ngIf="isAdmin == true && esAndroid()" id="divAdmin">
     <p>Visualizando vista del usuario...</p>
     <button (click)="adminClick()">Acceder a Administración</button>
   </div>
 
+   <!-- Header Web -->
+ <app-header *ngIf="!esAndroid()"></app-header>
+
+ <div *ngIf="isAdmin == true && !esAndroid()" id="divAdmin">
+   <p>Visualizando vista del usuario...</p>
+   <button (click)="adminClick()">Acceder a Administración</button>
+ </div>
+
+<ion-content>
   <div id="divPrincipal">
     <div id="buscadoryfiltro">
       <div>
@@ -175,10 +184,6 @@
     <div id="divBotonCargarMas">
       <button id="botonCargarMas" (click)="cargarMas()">Cargar Más...</button>
     </div>
-
-    <!-- Testeo -->
-    <!-- <button (click)="addLibro()">Holaa</button> -->
-    <!-- <button (click)="addEvento()">Añadir evento</button> -->
   </div>
 
   <app-eventos></app-eventos>

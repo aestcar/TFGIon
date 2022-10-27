@@ -13,6 +13,7 @@ import { Admin } from '../../interfaces/Admin';
 
 import { ReservasService } from '../../services/reservas.service';
 import { TitulosService } from '../../services/titulos.service';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-home',
@@ -296,5 +297,13 @@ export class HomeComponent implements OnInit {
 
   quitarNumsYGuion(s: string) {
     return this.tituloService.quitarNumsYGuion(s);
+  }
+
+  esAndroid(): boolean {
+    if (Capacitor.getPlatform() === 'android') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
