@@ -9,23 +9,14 @@ import { Capacitor } from '@capacitor/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  // Autorizacion
+  //   // Localstorage
   user: any;
-
-  // Localstorage
-  name?: string;
-  email?: string;
-  phone?: string;
-  photo?: any;
 
   constructor(
     private router: Router,
     private zone: NgZone /*private autenticacionService:AutenticacionService*/
   ) {
-    this.name = localStorage.getItem('userName')!;
-    this.email = localStorage.getItem('userEmail')!;
-    this.phone = localStorage.getItem('userPhone')!;
-    this.photo = localStorage.getItem('userPhoto')!;
+    this.user = JSON.parse(localStorage.getItem('user')!);
   }
 
   ngOnInit(): void {}

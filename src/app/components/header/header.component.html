@@ -24,12 +24,12 @@
 
     <div id="perfil" (click)="perfilClick()">
       <!-- No está registrado -->
-      <mat-icon *ngIf="!photo"> account_circle </mat-icon>
+      <mat-icon *ngIf="!user"> account_circle </mat-icon>
       <img
         id="iconoPerfil"
-        *ngIf="photo"
+        *ngIf="user.photoURL"
         alt="foto del usuario"
-        src="{{ photo }}"
+        src="{{ user.photoURL }}"
       />
     </div>
   </div>

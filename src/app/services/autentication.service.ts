@@ -14,6 +14,8 @@ import { environment } from 'src/environments/environment';
 import { FacebookAuthProvider } from 'firebase/auth';
 import { HttpClient } from '@angular/common/http';
 import { Admin } from '../interfaces/Admin';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +25,11 @@ export class AutenticacionService {
 
   adminGlobal: any;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
+
+  getLocalUser(){
+    return window.localStorage.getItem('user');
+  }
 
   /* -----------------------  GOOGLE  ---------------------------------- */
 
@@ -52,14 +58,8 @@ export class AutenticacionService {
 
     this.userData = user;
 
-    console.log(user);
-
     // Local Storage
-    localStorage.setItem('userName', user.displayName!);
-    localStorage.setItem('userEmail', user.email!);
-    localStorage.setItem('userUID', user.uid!);
-    localStorage.setItem('userPhone', user.phoneNumber!);
-    localStorage.setItem('userPhoto', user.photoURL!);
+    localStorage.setItem('user', JSON.stringify(user));
 
     return user;
   }
@@ -88,14 +88,8 @@ export class AutenticacionService {
     const credential = FacebookAuthProvider.credentialFromResult(result);
     const accessToken = credential!.accessToken;
 
-    console.log(user);
-
     // Local Storage
-    localStorage.setItem('userName', user.displayName!);
-    localStorage.setItem('userEmail', user.email!);
-    localStorage.setItem('userUID', user.uid!);
-    localStorage.setItem('userPhone', user.phoneNumber!);
-    localStorage.setItem('userPhoto', user.photoURL!);
+    localStorage.setItem('user', JSON.stringify(user));
 
     return user;
   }
@@ -107,6 +101,8 @@ export class AutenticacionService {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        localStorage.clear()
+        this.router.navigate(['/']);
       })
       .catch((error) => {
         // An error happened.

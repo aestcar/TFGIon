@@ -12,8 +12,8 @@ export class InicialComponent implements OnInit {
   ngOnInit() {}
 
   estaRegistrado():boolean{
-    let userName = localStorage.getItem('userName')!
-    if(userName){
+    let user = JSON.parse(localStorage.getItem('user'));
+    if(user){
       return true
     }else{
       return false;

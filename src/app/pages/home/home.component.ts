@@ -10,7 +10,8 @@ import { DialogoComponent } from '../../components/dialogo/dialogo.component';
 import { AutenticacionService } from '../../services/autentication.service';
 import { User } from 'firebase/auth';
 import { Admin } from '../../interfaces/Admin';
-
+import { catchError, map } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { ReservasService } from '../../services/reservas.service';
 import { TitulosService } from '../../services/titulos.service';
 import { Capacitor } from '@capacitor/core';
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
   // Administracion
   currentUser?: User;
   observer: Observable<Admin>;
-  isAdmin?: boolean;
+  isAdmin: Observable<boolean>;
 
   // Listas
   lista: Observable<Array<Libro>>;
@@ -41,11 +42,7 @@ export class HomeComponent implements OnInit {
   totalLibros: number;
 
   // Localstorage
-  name?: string;
-  email?: string;
-  phone?: string;
-  photo?: any;
-  uid?: string;
+  user: any;
 
   // Orden
   esOrdenAZ: boolean; // Controla el reverse
@@ -84,24 +81,31 @@ export class HomeComponent implements OnInit {
     this.funcionContadorLibros();
 
     // Autenticacion
-    let localUID = localStorage.getItem('userUID');
+    this.user = JSON.parse(localStorage.getItem('user'));
 
-    if (localUID) {
-      this.getEsAdmin(localUID);
+    if (this.user) {
+      this.isAdmin = this.getEsAdmin(this.user.uid);
     }
   }
 
   // ADMIN
-  async getEsAdmin(localUID: string | null): Promise<boolean> {
-    let res = await this.autorizacionService.esAdminLocalStorage(localUID);
-    res.subscribe((r) => {
-      if (r == null) {
-        this.isAdmin = false;
-      } else {
-        this.isAdmin = true;
+  getEsAdmin(localUID: string):Observable<boolean> {
+    return  this.autorizacionService.esAdminLocalStorage(localUID).pipe(
+      map(r => {
+      if(r) {
+        return true
       }
-    });
-    return false;
+      else {
+        alert('No tienes permiso para acceder a este sitio');
+        this.router.navigate(['/']);
+        return false;
+      }
+    }),
+    catchError((err) =>{
+      alert('No tienes permiso para acceder a este sitio');
+      this.router.navigate(['/']);
+      return of(false);
+  }));
   }
 
   adminClick() {

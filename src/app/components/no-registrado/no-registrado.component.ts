@@ -39,12 +39,12 @@ export class NoRegistradoComponent implements OnInit {
   autenticacionCorrecta(b: boolean) {
     if (b) {
       this.zone.run(() => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       });
     } else {
       alert('Error en la autenticación de usuario');
       this.zone.run(() => {
-        this.router.navigate(['/perfil']);
+        this.router.navigate(['/']);
       });
     }
   }

@@ -1,21 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Libro } from '../../interfaces/Libro';
-import { LibrosService } from '../../services/libros.service';
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytes,
-  uploadString,
-} from 'firebase/storage';
-import { Evento } from '../../interfaces/Evento';
-import { EventosService } from '../../services/eventos.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { _isNumberValue } from '@angular/cdk/coercion';
-import { Reserva } from '../../interfaces/Reserva';
-import { ReservasService } from '../../services/reservas.service';
-import { AutenticacionService } from '../../services/autentication.service';
 
 @Component({
   selector: 'app-admin',

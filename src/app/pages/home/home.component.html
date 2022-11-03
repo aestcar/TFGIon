@@ -1,7 +1,7 @@
  <!-- Header Android -->
  <app-header *ngIf="esAndroid()"></app-header>
 
-  <div *ngIf="isAdmin == true && esAndroid()" id="divAdmin">
+  <div *ngIf="esAndroid() && isAdmin | async " id="divAdmin">
     <p>Visualizando vista del usuario...</p>
     <button (click)="adminClick()">Acceder a Administración</button>
   </div>
@@ -9,7 +9,7 @@
    <!-- Header Web -->
  <app-header *ngIf="!esAndroid()"></app-header>
 
- <div *ngIf="isAdmin == true && !esAndroid()" id="divAdmin">
+ <div *ngIf="!esAndroid() && !isAdmn | async " id="divAdmin">
    <p>Visualizando vista del usuario...</p>
    <button (click)="adminClick()">Acceder a Administración</button>
  </div>

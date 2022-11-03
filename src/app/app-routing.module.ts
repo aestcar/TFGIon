@@ -10,14 +10,18 @@ import { MisReservasComponent } from './pages/mis-reservas/mis-reservas.componen
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
+import { GuardAuthGuard } from './guards/guard-auth.guard';
+import { GuardAdminGuard } from './guards/guard-admin.guard';
+import { NoRegistradoComponent } from './components/no-registrado/no-registrado.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'perfil', component: PerfilComponent },
+  { path: 'perfil', component: PerfilComponent, canActivate: [GuardAuthGuard] },
+  { path: 'registrarse', component: NoRegistradoComponent },
   { path: 'detalles-libro', component: InfoLibroComponent },
-  { path: 'admin', component: AdminComponent },
-  { path: 'mis-reservas', component: MisReservasComponent },
-  { path: 'reportes', component: ReportesComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [GuardAdminGuard] },
+  { path: 'mis-reservas', component: MisReservasComponent, canActivate: [GuardAuthGuard]},
+  { path: 'reportes', component: ReportesComponent, canActivate: [GuardAuthGuard] },
   { path: 'conocenos', component: ConocenosComponent },
   { path: 'eventos', component: EventosComponent },
   { path: '', component: InicialComponent },

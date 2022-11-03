@@ -1,23 +1,23 @@
 <ion-content>
-  <div *ngIf="name" id="registrado">
+  <div *ngIf="user" id="registrado">
     <mat-card class="example-card" id="cartaPrincipal">
       <mat-card-header id="tituloHeader">
-        <mat-card-title *ngIf="name" id="titulo">{{ name }}</mat-card-title>
+        <mat-card-title *ngIf="user" id="titulo">{{ user.displayName }}</mat-card-title>
       </mat-card-header>
 
       <div id="divImg">
         <img
-          *ngIf="name"
+          *ngIf="user"
           id="mat-card-image"
-          src="{{ photo }}"
-          alt="Foto de {{ name }}"
+          src="{{ user.photoURL }}"
+          alt="Foto de {{ user.displayName }}"
         />
       </div>
 
       <mat-card-content>
-        <p *ngIf="name"><span>Nombre: </span>{{ name }}</p>
+        <p *ngIf="user"><span>Nombre: </span>{{ user.displayName }}</p>
 
-        <p *ngIf="name"><span>Correo: </span>{{ email }}</p>
+        <p *ngIf="user"><span>Correo: </span>{{ user.email }}</p>
 
         <p><span>Teléfono: </span>{{ obtenerTelefono() }}</p>
 
@@ -29,9 +29,5 @@
         <button mat-button class="botonNaranja" (click)="cerrarSesion()">CERRAR SESIÓN</button>
       </mat-card-actions>
     </mat-card>
-  </div>
-
-  <div *ngIf="!name" id="noRegistrado">
-    <app-no-registrado></app-no-registrado>
   </div>
 </ion-content>
