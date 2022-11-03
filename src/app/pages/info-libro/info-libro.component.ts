@@ -22,9 +22,6 @@ export class InfoLibroComponent implements OnInit {
     private autorizacionService: AutenticacionService
   ) {
     this.libroSeleccionado = this.libroService.getLibroSeleccionado();
-
-    // Autenticacion
-    this.currentUser = this.autorizacionService.getUser();
   }
 
   ngOnInit(): void {}
@@ -35,9 +32,7 @@ export class InfoLibroComponent implements OnInit {
     let lector;
     let localUID = localStorage.getItem('userUID');
 
-    if (this.currentUser) {
-      lector = this.currentUser.uid;
-    } else if (localUID) {
+    if (localUID) {
       lector = localUID;
     }
 

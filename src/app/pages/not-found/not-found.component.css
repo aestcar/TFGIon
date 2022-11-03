@@ -39,39 +39,3 @@
   display: flex;
   justify-content: center;
 }
-
-button {
-  margin: 0;
-  display: inline-flex;
-  cursor: pointer;
-  user-select: none;
-  align-items: center;
-  vertical-align: bottom;
-  text-align: center;
-  overflow: hidden;
-  position: relative;
-
-  color: #ffffff;
-  background: #006d77;
-  border: 1px solid #000;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
-    box-shadow 0.2s;
-  border-radius: 3px;
-
-  overflow: hidden;
-  position: relative;
-}
-
-button:enabled:hover {
-  background: #83c5be;
-  color: #ffffff;
-  border-color: #000;
-}
-
-button:disabled {
-  background: #dddddd;
-  color: #ffffff;
-  border-color: #dddddd;
-}

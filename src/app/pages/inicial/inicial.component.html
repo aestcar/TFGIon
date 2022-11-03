@@ -1,0 +1,25 @@
+<div id="main">
+  <mat-card id="card">
+    <mat-card-header>
+      <mat-card-title> ¡Bienvenido a Bibliotecapp! </mat-card-title>
+      <mat-card-subtitle
+        >La plataforma donde podrás acceder a los libros de tu
+        biblioteca</mat-card-subtitle
+      >
+      <mat-card-subtitle class="center underline" *ngIf="estaRegistrado()">Parece que estás Registrado</mat-card-subtitle>
+      <mat-card-subtitle class="center underline" *ngIf="!estaRegistrado()">Parece que no estás Registrado</mat-card-subtitle>
+
+    </mat-card-header>
+    <mat-card-content>
+      <button *ngIf="estaRegistrado()" class="botonVerde">
+        <a routerLink="/home">Iniciar Sesión</a>
+      </button>
+      <button *ngIf="!estaRegistrado()" class="botonVerde">
+        <a routerLink="/perfil">Registrarse</a>
+      </button>
+      <button class="botonNaranja">
+        <a routerLink="/home">Entrar como invitado</a>
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>

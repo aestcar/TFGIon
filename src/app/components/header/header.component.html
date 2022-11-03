@@ -4,7 +4,7 @@
     <p>Bibliotecapp</p>
   </div>
 
-  <div *ngIf="esAndroid()" id="menuHam">
+  <div *ngIf="esMovil()" id="menuHam">
     <div id="main-content">
       <ion-menu-toggle>
         <ion-icon name="menu-outline"></ion-icon>
@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div *ngIf="!esAndroid()" id="navBar">
+  <div *ngIf="!esMovil()" id="navBar">
     <p><a routerLink="/conocenos" routerLinkActive="active">Conócenos</a></p>
     <p><a routerLink="/eventos" routerLinkActive="active">Eventos</a></p>
     <p>
@@ -23,17 +23,11 @@
     </p>
 
     <div id="perfil" (click)="perfilClick()">
-      <mat-icon *ngIf="!user && !photo"> account_circle </mat-icon>
+      <!-- No está registrado -->
+      <mat-icon *ngIf="!photo"> account_circle </mat-icon>
       <img
         id="iconoPerfil"
-        *ngIf="user && !photo"
-        alt="foto del usuario"
-        src="{{ user.photoURL }}"
-      />
-      <!-- Si el usuario no se ha registrado hoy, miramos en el storage a ver si lo está -->
-      <img
-        id="iconoPerfil"
-        *ngIf="!user && photo"
+        *ngIf="photo"
         alt="foto del usuario"
         src="{{ photo }}"
       />

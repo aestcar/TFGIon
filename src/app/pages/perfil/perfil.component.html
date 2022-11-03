@@ -1,26 +1,13 @@
 <ion-content>
-  <div *ngIf="currentUser || name" id="registrado">
+  <div *ngIf="name" id="registrado">
     <mat-card class="example-card" id="cartaPrincipal">
       <mat-card-header id="tituloHeader">
-        <!-- Si no se acaba de registrar miramos si está en el storage -->
-        <mat-card-title *ngIf="currentUser" id="titulo">{{
-          currentUser.displayName
-        }}</mat-card-title>
-        <mat-card-title *ngIf="!currentUser && name" id="titulo">{{
-          name
-        }}</mat-card-title>
+        <mat-card-title *ngIf="name" id="titulo">{{ name }}</mat-card-title>
       </mat-card-header>
 
       <div id="divImg">
-        <!-- Si no se acaba de registrar miramos si está en el storage -->
         <img
-          *ngIf="currentUser"
-          id="mat-card-image"
-          src="{{ currentUser.photoURL }}"
-          alt="Foto de {{ currentUser.displayName }}"
-        />
-        <img
-          *ngIf="!currentUser && name"
+          *ngIf="name"
           id="mat-card-image"
           src="{{ photo }}"
           alt="Foto de {{ name }}"
@@ -28,14 +15,9 @@
       </div>
 
       <mat-card-content>
-        <!-- Si no se acaba de registrar miramos si está en el storage -->
-        <p *ngIf="currentUser">
-          <span>Nombre: </span>{{ currentUser.displayName }}
-        </p>
-        <p *ngIf="!currentUser && name"><span>Nombre: </span>{{ name }}</p>
+        <p *ngIf="name"><span>Nombre: </span>{{ name }}</p>
 
-        <p *ngIf="currentUser"><span>Correo: </span>{{ currentUser.email }}</p>
-        <p *ngIf="!currentUser && name"><span>Correo: </span>{{ email }}</p>
+        <p *ngIf="name"><span>Correo: </span>{{ email }}</p>
 
         <p><span>Teléfono: </span>{{ obtenerTelefono() }}</p>
 
@@ -43,60 +25,13 @@
         <p><span>Segunda Biblioteca Fav.: </span>?</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>EDITAR PERFIL</button>
-        <button mat-button (click)="cerrarSesion()">CERRAR SESIÓN</button>
+        <button mat-button class="botonNaranja">EDITAR PERFIL</button>
+        <button mat-button class="botonNaranja" (click)="cerrarSesion()">CERRAR SESIÓN</button>
       </mat-card-actions>
     </mat-card>
   </div>
 
-  <div *ngIf="!currentUser && !name" id="noRegistrado">
-    <h1>Parece que no estás registrado</h1>
-    <p>Si no tienes una cuenta puedes registrarte aquí</p>
-    <!-- <button (click)="onClickGoogle()">ENTRAR CON GOOGLE</button>
-    <button (click)="onClickFacebook()" class="fb connect">Entra con Facebook</button> -->
-
-    <!-- Google -->
-    <div class="col s12 m6 offset-m3 center-align">
-      <button
-        class="oauth-container btn darken-4 white black-text"
-        (click)="onClickGoogle()"
-        style="text-transform: none"
-      >
-        <div class="left">
-          <img
-            width="20px"
-            style="margin-top: 7px; margin-right: 8px"
-            alt="Google sign-in"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
-          />
-        </div>
-        Registrarse con Google
-      </button>
-    </div>
-
-    <!-- Facebook -->
-    <div class="col s12 m6 offset-m3 center-align">
-      <button
-        class="oauth-container btn darken-4 white black-text"
-        (click)="onClickFacebook()"
-        style="text-transform: none"
-      >
-        <div class="left">
-          <img
-            width="20px"
-            style="margin-top: 7px; margin-right: 8px"
-            alt="Google sign-in"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/330px-2021_Facebook_icon.svg.png"
-          />
-        </div>
-        Registrarse con Facebook
-      </button>
-    </div>
-
-    <!-- Compiled and minified CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"
-    />
+  <div *ngIf="!name" id="noRegistrado">
+    <app-no-registrado></app-no-registrado>
   </div>
 </ion-content>

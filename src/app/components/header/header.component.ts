@@ -22,21 +22,18 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private zone: NgZone /*private autenticacionService:AutenticacionService*/
   ) {
-    //this.user = this.autenticacionService.getUser();
-
-    // Local Storage
-    if (!this.user) {
-      this.name = localStorage.getItem('userName')!;
-      this.email = localStorage.getItem('userEmail')!;
-      this.phone = localStorage.getItem('userPhone')!;
-      this.photo = localStorage.getItem('userPhoto')!;
-    }
+    this.name = localStorage.getItem('userName')!;
+    this.email = localStorage.getItem('userEmail')!;
+    this.phone = localStorage.getItem('userPhone')!;
+    this.photo = localStorage.getItem('userPhoto')!;
   }
 
   ngOnInit(): void {}
 
-  esAndroid(): boolean {
-    if (Capacitor.getPlatform() === 'android') {
+  esMovil(): boolean {
+    if (Capacitor.getPlatform() === 'android' || Capacitor.getPlatform() === 'ios') {
+      return true;
+    }else if(window.screen.width < 650){
       return true;
     } else {
       return false;

@@ -1,0 +1,36 @@
+#main{
+    background: url("src\assets\images\principales\portadaMain.jpg");
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#card{
+    padding: 20px;
+}
+
+mat-card-header, mat-card-title, mat-card-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+mat-card-content{
+    flex-wrap: wrap;
+    gap:10px
+}
+
+a{
+    color: white;
+    text-decoration: none
+}
+
+.center{
+    text-align: center;
+}
+
+.underline{
+    text-decoration: underline
+}

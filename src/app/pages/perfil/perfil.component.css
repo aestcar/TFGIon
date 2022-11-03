@@ -55,42 +55,6 @@ mat-card-content > p > span {
   background-color: #edf6f9;
 }
 
-button {
-  margin: 0;
-  display: inline-flex;
-  cursor: pointer;
-  user-select: none;
-  align-items: center;
-  vertical-align: bottom;
-  text-align: center;
-  overflow: hidden;
-  position: relative;
-
-  color: #ffffff;
-  background: #e29578;
-  border: 1px solid #e29578;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.8rem;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
-    box-shadow 0.2s;
-  border-radius: 3px;
-
-  overflow: hidden;
-  position: relative;
-}
-
-button:enabled:hover {
-  background: #ffddd2;
-  color: #ffffff;
-  border-color: #ffddd2;
-}
-
-button:disabled {
-  background: #dddddd;
-  color: #ffffff;
-  border-color: #dddddd;
-}
-
 mat-card-actions {
   display: flex;
   justify-content: space-around;

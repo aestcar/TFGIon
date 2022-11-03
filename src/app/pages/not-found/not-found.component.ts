@@ -13,7 +13,7 @@ export class NotFoundComponent implements OnInit {
 
   clickHome() {
     this.zone.run(() => {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
     });
   }
 }

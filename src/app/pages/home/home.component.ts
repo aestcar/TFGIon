@@ -84,12 +84,9 @@ export class HomeComponent implements OnInit {
     this.funcionContadorLibros();
 
     // Autenticacion
-    this.currentUser = this.autorizacionService.getUser();
     let localUID = localStorage.getItem('userUID');
 
-    if (this.currentUser) {
-      this.getEsAdmin(this.currentUser!.uid);
-    } else if (localUID) {
+    if (localUID) {
       this.getEsAdmin(localUID);
     }
   }
@@ -301,6 +298,8 @@ export class HomeComponent implements OnInit {
 
   esAndroid(): boolean {
     if (Capacitor.getPlatform() === 'android') {
+      return true;
+    } else if (window.screen.width < 650) {
       return true;
     } else {
       return false;

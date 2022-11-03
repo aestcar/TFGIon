@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ConocenosComponent } from './components/conocenos/conocenos.component';
 import { EventosComponent } from './components/eventos/eventos.component';
+import { InicialComponent } from './pages/inicial/inicial.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { HomeComponent } from './pages/home/home.component';
 import { InfoLibroComponent } from './pages/info-libro/info-libro.component';
@@ -11,7 +12,7 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'detalles-libro', component: InfoLibroComponent },
   { path: 'admin', component: AdminComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'reportes', component: ReportesComponent },
   { path: 'conocenos', component: ConocenosComponent },
   { path: 'eventos', component: EventosComponent },
-  { path: '**', component: NotFoundComponent },
+  { path: '', component: InicialComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

@@ -23,10 +23,9 @@ export class MisReservasComponent implements OnInit {
     private reservasService: ReservasService
   ) {
     // Autenticacion - Obtener el usuario
-    this.currentUserID = this.autenticationService.getUser()?.uid;
     let localUID = localStorage.getItem('userUID');
 
-    if (!this.currentUserID) {
+    if (localUID) {
       this.currentUserID = localUID;
     }
 
@@ -35,14 +34,6 @@ export class MisReservasComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  /*comprobarReservasPasadas(){
-    // reservasPasadas es un observable, hay que pasarlo a array
-    this.reservasPasadas = this.reservas.pipe(map(
-      reserva => reserva.filter(
-        res => this.esMenorAActual(res.fechaFin))));
-    this.reservasPasadas.subscribe((r) => this.reservasPasadasArray = r);
-  }*/
-
   esMenorAActual(row: any): boolean {
     // fecha actual = 'mes/dia/año'
     let aux = new Date();
@@ -50,9 +41,6 @@ export class MisReservasComponent implements OnInit {
 
     let fechaActualArray = fechaActual.split('/');
     let fechaFinArray = row.fechaFin.split('/');
-
-    console.log('Fecha Actual = ' + fechaActual);
-    console.log('Fecha Fin = ' + row.fechaFin);
 
     if (fechaActualArray[2] > fechaFinArray[2]) {
       // El año actual es mayor que el año de devolución

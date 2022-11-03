@@ -24,3 +24,74 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.botonVerde {
+    margin: 0;
+    display: inline-flex;
+    cursor: pointer;
+    user-select: none;
+    align-items: center;
+    vertical-align: bottom;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+  
+    color: #ffffff;
+    background: #006d77;
+    border: 1px solid #006d77;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+    box-shadow 0.2s;
+    border-radius: 3px;
+  
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .botonVerde:enabled:hover {
+    background: #b4dcd8;
+    color: #ffffff;
+    border-color: #b4dcd8;
+  }
+  
+  .botonVerde:disabled {
+    background: #dddddd;
+    color: #ffffff;
+    border-color: #dddddd;
+  }
+
+  .botonNaranja {
+    margin: 0;
+    display: inline-flex;
+    cursor: pointer;
+    user-select: none;
+    align-items: center;
+    vertical-align: bottom;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #ba7b63;
+    color: #ffffff;
+    background: #e29578;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+    box-shadow 0.2s;
+    border-radius: 3px;
+  
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .botonNaranja:enabled:hover {
+    background: #ffddd2;
+    color: #ffffff;
+    border-color: #ffddd2;
+  }
+  
+  .botonNaranja:disabled {
+    background: #dddddd;
+    color: #ffffff;
+    border-color: #dddddd;
+  }

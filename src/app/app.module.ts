@@ -53,6 +53,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { InfoLibroComponent } from './pages/info-libro/info-libro.component';
 import { EventosComponent } from './components/eventos/eventos.component';
 import { ConocenosComponent } from './components/conocenos/conocenos.component';
+import { NoRegistradoComponent } from './components/no-registrado/no-registrado.component';
+import { InicialComponent } from './pages/inicial/inicial.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import { ConocenosComponent } from './components/conocenos/conocenos.component';
     HeaderComponent,
     NotFoundComponent,
     MisReservasComponent,
+    NoRegistradoComponent, 
+    InicialComponent
   ],
   imports: [
     BrowserModule,

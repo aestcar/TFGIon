@@ -25,11 +25,6 @@ export class AutenticacionService {
 
   constructor(private httpClient: HttpClient) {}
 
-  // No funcoina porque no son persistentes los servicios
-  getUser() {
-    return this.userData;
-  }
-
   /* -----------------------  GOOGLE  ---------------------------------- */
 
   async getAutenticacion() {
