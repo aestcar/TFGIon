@@ -70,3 +70,8 @@ p > span {
 #postfooder {
   padding-bottom: 10px;
 }
+
+#divCalendario > mat-card > mat-calendar > mat-month-view > table > thead > tbody > tr > td > button {
+  background-color: red;
+  border-radius: 10px;
+}

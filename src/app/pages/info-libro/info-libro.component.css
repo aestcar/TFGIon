@@ -1,13 +1,15 @@
 .noMarginBottom {
   margin-bottom: 0px;
+  margin-top: 0px;
 }
 
 p {
-  margin-bottom: 8px;
+  margin-bottom: 0px;
 }
 
 #main {
   display: flex;
+  justify-content: center;
 }
 
 #divImagen {
@@ -23,10 +25,10 @@ p {
 
 #divDetalles {
   flex: 50%;
+
 }
 
 #divDetalles > p {
-  padding: 20px;
   font-size: 22px;
 }
 
@@ -47,8 +49,6 @@ p {
 
 .divNoDisponible > mat-icon {
   color: #d90429;
-  margin-right: 5px;
-  margin-left: 20px;
 }
 
 .noDisponP {
