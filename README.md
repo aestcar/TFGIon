@@ -1,4 +1,4 @@
-🔱Aplicación para la gestión de biblioteca de forma virtual🔱
+🔱<b>Aplicación para la gestión de biblioteca de forma virtual</b>🔱
 
 Inicializar -> ionic serve (web), Aplicación en Google Play Store
 
