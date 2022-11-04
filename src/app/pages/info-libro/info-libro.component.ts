@@ -30,10 +30,10 @@ export class InfoLibroComponent implements OnInit {
     console.log('Pedir click');
     let libro = this.libroSeleccionado;
     let lector;
-    let localUID = localStorage.getItem('userUID');
+    let user = JSON.parse(localStorage.getItem('user'));
 
-    if (localUID) {
-      lector = localUID;
+    if (user) {
+      lector = user.uid;
     }
 
     if (lector) {

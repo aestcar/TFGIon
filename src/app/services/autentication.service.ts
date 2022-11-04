@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore/lite';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import {
   getAuth,
   signInWithPopup,
@@ -25,7 +26,7 @@ export class AutenticacionService {
 
   adminGlobal: any;
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(private httpClient: HttpClient, private router: Router, private googlePlus:GooglePlus) {}
 
   getLocalUser(){
     return window.localStorage.getItem('user');
@@ -92,6 +93,21 @@ export class AutenticacionService {
     localStorage.setItem('user', JSON.stringify(user));
 
     return user;
+  }
+
+    /* -----------------------  CÓRDOVA - Google  ---------------------------------- */
+
+  async getAutorizacionCordova(){
+    console.log('Entra en getAuth Cordova');
+    await this.googlePlus.login({ })
+      .then(res => {
+
+        return res;
+      })
+      .catch(err => {return null});
+
+        return undefined;
+  
   }
 
   /* -----------------------  LOGOUT (Arreglar)  ---------------------------------- */

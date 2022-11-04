@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ConocenosComponent } from './components/conocenos/conocenos.component';
 import { EventosComponent } from './components/eventos/eventos.component';
 import { InicialComponent } from './pages/inicial/inicial.component';
@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'registrarse', component: NoRegistradoComponent },
   { path: 'detalles-libro', component: InfoLibroComponent },
   { path: 'admin', component: AdminComponent, canActivate: [GuardAdminGuard] },
-  { path: 'mis-reservas', component: MisReservasComponent, canActivate: [GuardAuthGuard]},
+  { path: 'mis-reservas', component:MisReservasComponent ,canActivate: [GuardAuthGuard]},
   { path: 'reportes', component: ReportesComponent, canActivate: [GuardAuthGuard] },
   { path: 'conocenos', component: ConocenosComponent },
   { path: 'eventos', component: EventosComponent },
@@ -29,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

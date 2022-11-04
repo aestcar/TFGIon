@@ -11,7 +11,6 @@ export interface Reserva {
     */
 
   //estado:string;
-  //localizacion:string; // Estan en disponibilidad
 
   fechaIni: string;
   fechaFin: string;

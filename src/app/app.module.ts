@@ -55,6 +55,7 @@ import { EventosComponent } from './components/eventos/eventos.component';
 import { ConocenosComponent } from './components/conocenos/conocenos.component';
 import { NoRegistradoComponent } from './components/no-registrado/no-registrado.component';
 import { InicialComponent } from './pages/inicial/inicial.component';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,7 @@ import { InicialComponent } from './pages/inicial/inicial.component';
     ReactiveFormsModule,
     NgxFileDropModule,
   ],
-  providers: [],
+  providers: [GooglePlus],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

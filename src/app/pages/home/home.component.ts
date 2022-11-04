@@ -96,14 +96,10 @@ export class HomeComponent implements OnInit {
         return true
       }
       else {
-        alert('No tienes permiso para acceder a este sitio');
-        this.router.navigate(['/']);
         return false;
       }
     }),
     catchError((err) =>{
-      alert('No tienes permiso para acceder a este sitio');
-      this.router.navigate(['/']);
       return of(false);
   }));
   }
@@ -126,7 +122,8 @@ export class HomeComponent implements OnInit {
     }, duracion);
   }
 
-  cargarMas() {}
+  cargarMas() {
+  }
 
   // Eventos
   onEnter() {
@@ -178,8 +175,8 @@ export class HomeComponent implements OnInit {
         this.lista = this.libroService.getLibrosPorCategoria(cat);
 
         // El orden da igual siempre es A-Z
-        if (!orden) {
-        }
+        if (!orden) {}
+        
         if (orden.includes('0')) {
           this.esOrdenAZ = false;
           this.esOrdenAZIcon = true;
@@ -196,16 +193,21 @@ export class HomeComponent implements OnInit {
   }
 
   cerrarIcono(s: string) {
-    if (s == 'za') {
-      this.esOrdenZA = false;
-    } else if (s == 'az') {
-      this.esOrdenAZIcon = false;
-    } else if (s == 'new') {
-      this.esOrdenNew = false;
-      this.lista = this.libroService.getLibros();
-    } else if (s == 'cat') {
-      this.categoria = '';
-      this.lista = this.libroService.getLibrosOrdenadosAZ();
+    switch (s){
+      case 'za':
+        this.esOrdenZA = false;
+        break;
+      case 'az':
+        this.esOrdenAZIcon = false;
+        break;
+      case 'new':
+        this.esOrdenNew = false;
+        this.lista = this.libroService.getLibros();
+        break;
+      case 'cat':
+        this.categoria = '';
+        this.lista = this.libroService.getLibrosOrdenadosAZ();
+        break;
     }
   }
 
@@ -262,11 +264,11 @@ export class HomeComponent implements OnInit {
   pedirClick(libro: Libro) {
     console.log('Pedir click');
     let lector;
-    let localUID = localStorage.getItem('userUID');
+    let user = JSON.parse(localStorage.getItem('user'));
     if (this.currentUser) {
       lector = this.currentUser.uid;
-    } else if (localUID) {
-      lector = localUID;
+    } else if (user) {
+      lector = user.uid;
     }
 
     if (lector) {

@@ -2,6 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
 import { AutenticacionService } from 'src/app/services/autentication.service';
+import { isPlatform } from '@ionic/angular';
 
 @Component({
   selector: 'app-no-registrado',
@@ -15,9 +16,13 @@ export class NoRegistradoComponent implements OnInit {
   ngOnInit() {}
 
   async onClickGoogle() {
-    const user = await this.autenticacionService.getAutenticacion();
-
-    this.comprobarAutenticacion(user);
+    if(isPlatform('mobile')){
+      const user = await this.autenticacionService.getAutorizacionCordova();
+      this.comprobarAutenticacion(user);
+    }else{
+      const user = await this.autenticacionService.getAutenticacion();
+      this.comprobarAutenticacion(user);
+    }
   }
 
   async onClickFacebook() {

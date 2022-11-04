@@ -9,12 +9,12 @@ import { Capacitor } from '@capacitor/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  //   // Localstorage
+  // Localstorage
   user: any;
 
   constructor(
     private router: Router,
-    private zone: NgZone /*private autenticacionService:AutenticacionService*/
+    private zone: NgZone
   ) {
     this.user = JSON.parse(localStorage.getItem('user')!);
   }

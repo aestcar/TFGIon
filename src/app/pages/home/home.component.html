@@ -1,18 +1,19 @@
- <!-- Header Android -->
- <app-header *ngIf="esAndroid()"></app-header>
+<!-- Header Android -->
+<app-header></app-header>
 
-  <div *ngIf="esAndroid() && isAdmin | async " id="divAdmin">
+<div *ngIf="esAndroid()">
+  <div id="divAdmin" *ngIf="isAdmin | async">
     <p>Visualizando vista del usuario...</p>
     <button (click)="adminClick()">Acceder a Administración</button>
   </div>
+</div>
 
-   <!-- Header Web -->
- <app-header *ngIf="!esAndroid()"></app-header>
-
- <div *ngIf="!esAndroid() && !isAdmn | async " id="divAdmin">
-   <p>Visualizando vista del usuario...</p>
-   <button (click)="adminClick()">Acceder a Administración</button>
- </div>
+<div *ngIf="!esAndroid()">
+  <div id="divAdmin" *ngIf="isAdmin | async">
+    <p>Visualizando vista del usuario...</p>
+    <button (click)="adminClick()">Acceder a Administración</button>
+  </div>
+</div>
 
 <ion-content>
   <div id="divPrincipal">

@@ -23,10 +23,10 @@ export class MisReservasComponent implements OnInit {
     private reservasService: ReservasService
   ) {
     // Autenticacion - Obtener el usuario
-    let localUID = localStorage.getItem('userUID');
+    let user = JSON.parse(localStorage.getItem('user'));
 
-    if (localUID) {
-      this.currentUserID = localUID;
+    if (user) {
+      this.currentUserID = user.uid;
     }
 
     this.reservas = this.reservasService.getReservas(this.currentUserID);
