@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
 import { AutenticacionService } from 'src/app/services/autentication.service';
 import { isPlatform } from '@ionic/angular';
+import { MobileUser } from '../../interfaces/MobileUser';
 
 @Component({
   selector: 'app-no-registrado',
@@ -31,13 +32,13 @@ export class NoRegistradoComponent implements OnInit {
     this.comprobarAutenticacion(user);
   }
 
-  comprobarAutenticacion(user: User | null | undefined) {
+  comprobarAutenticacion(user: User | null | undefined | MobileUser) {
     if (user === null || user === undefined) {
       this.autenticacionCorrecta(false);
-      console.log('Autenticacion Incorrecta');
+      alert('Autenticacion Incorrecta');
     } else {
       this.autenticacionCorrecta(true);
-      console.log('Autenticacion Correcta');
+      alert('Autenticacion Correcta');
     }
   }
 

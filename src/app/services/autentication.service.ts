@@ -17,6 +17,7 @@ import { HttpClient } from '@angular/common/http';
 import { Admin } from '../interfaces/Admin';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MobileUser } from '../interfaces/MobileUser';
 
 @Injectable({
   providedIn: 'root',
@@ -98,15 +99,17 @@ export class AutenticacionService {
     /* -----------------------  CÓRDOVA - Google  ---------------------------------- */
 
   async getAutorizacionCordova(){
-    console.log('Entra en getAuth Cordova');
-    await this.googlePlus.login({ })
-      .then(res => {
+    let resLogin:MobileUser = await this.googlePlus.login({});
+    return resLogin;
 
+    /*await this.googlePlus.login({ })
+      .then(res => {
+        console.log(res);
         return res;
       })
       .catch(err => {return null});
-
-        return undefined;
+        console.log(err);
+        return undefined;*/
   
   }
 
