@@ -6,7 +6,7 @@ import { Evento } from '../../interfaces/Evento';
 import { Libro } from '../../interfaces/Libro';
 import { EventosService } from '../../services/eventos.service';
 import { LibrosService } from '../../services/libros.service';
-import { DialogoComponent } from '../../components/dialogo/dialogo.component';
+import { DialogoComponent } from '../../components/dialogo-filtro/dialogo-filtro.component';
 import { AutenticacionService } from '../../services/autentication.service';
 import { User } from 'firebase/auth';
 import { Admin } from '../../interfaces/Admin';

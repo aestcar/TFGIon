@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   }
 
   clickLogo() {
-    window.location.reload();
+    this.router.navigate(['/home']);
   }
 
   perfilClick() {

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-dialogo',
-  templateUrl: './dialogo.component.html',
-  styleUrls: ['./dialogo.component.css'],
+  selector: 'app-dialogo-filtro',
+  templateUrl: './dialogo-filtro.component.html',
+  styleUrls: ['./dialogo-filtro.component.css'],
 })
 export class DialogoComponent implements OnInit {
   ordenSeleccionado: string;

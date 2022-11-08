@@ -85,30 +85,6 @@ ion-icon {
   cursor: pointer;
 }
 
-/* ----------- NEW HEADER -----------*/
-#logo {
-  flex: 40%;
-  display: flex;
-  align-items: center;
-  margin-left: 5px;
-  cursor: pointer;
-}
-
-#logo > img {
-  width: 7%;
-  background-color: black;
-  border-radius: 30px;
-  padding: 5px;
-}
-
-#logo > p {
-  font-family: mrdafoe;
-  font-size: 34px;
-  margin-bottom: 0px;
-  margin-left: 5px;
-  color: aliceblue;
-}
-
 /* ---------------  BUSCADOR ----------------------- */
 
 input {
@@ -329,6 +305,3 @@ ion-chip {
   color: white !important;
 }
 
-/* ----------------------------------- MEDIA QUERYS ----------------------------------- */
-@media (max-width: 400px) {
-}

@@ -1,14 +1,7 @@
 <!-- Header Android -->
 <app-header></app-header>
 
-<div *ngIf="esAndroid()">
-  <div id="divAdmin" *ngIf="isAdmin | async">
-    <p>Visualizando vista del usuario...</p>
-    <button (click)="adminClick()">Acceder a Administración</button>
-  </div>
-</div>
-
-<div *ngIf="!esAndroid()">
+<div>
   <div id="divAdmin" *ngIf="isAdmin | async">
     <p>Visualizando vista del usuario...</p>
     <button (click)="adminClick()">Acceder a Administración</button>

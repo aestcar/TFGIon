@@ -22,7 +22,8 @@ p {
 }
 
 #logo > img {
-  width: 7%;
+  width: 34px;
+  height: 34px;
   background-color: black;
   border-radius: 30px;
   padding: 5px;
@@ -145,4 +146,11 @@ ion-title {
 
 .textCenter {
   text-align: center;
+}
+
+/* ----------------------------------- MEDIA QUERYS ----------------------------------- */
+@media (max-width: 650px) {
+  #logo > img{
+    /*width: 20%;*/
+  }
 }

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { DialogoComponent } from './dialogo.component';
+import { DialogoComponent } from './dialogo-filtro.component';
 
 describe('DialogoComponent', () => {
   let component: DialogoComponent;

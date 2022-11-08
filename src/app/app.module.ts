@@ -23,7 +23,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfilComponent } from './pages/perfil/perfil.component';
-import { DialogoComponent } from './components/dialogo/dialogo.component';
+import { DialogoComponent } from './components/dialogo-filtro/dialogo-filtro.component';
 
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -57,6 +57,7 @@ import { NoRegistradoComponent } from './components/no-registrado/no-registrado.
 import { InicialComponent } from './pages/inicial/inicial.component';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { ErrorEnLibroComponent } from './components/error-en-libro/error-en-libro.component';
+import { DialogoConfirmarReservaComponent } from './components/dialogo-confirmar-reserva/dialogo-confirmar-reserva.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { ErrorEnLibroComponent } from './components/error-en-libro/error-en-libr
     AdminComponent,
     PerfilComponent,
     DialogoComponent,
+    DialogoConfirmarReservaComponent,
     EventosComponent,
     ConocenosComponent,
     InfoLibroComponent,

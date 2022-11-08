@@ -64,3 +64,13 @@ button:disabled {
   color: #ffffff;
   border-color: #dddddd;
 }
+
+/* ----------------------------------- MEDIA QUERYS ----------------------------------- */
+@media (max-width: 650px) {
+  img{
+    width: 70%;
+  }
+  mat-form-field{
+    width: 70%;
+  }
+}
