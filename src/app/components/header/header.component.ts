@@ -36,9 +36,15 @@ export class HeaderComponent implements OnInit {
   }
 
   perfilClick() {
-    this.zone.run(() => {
-      this.router.navigate(['/perfil']);
-    });
+    if(!this.user){
+      this.zone.run(() => {
+        this.router.navigate(['/registrarse']);
+      });
+    }else{
+      this.zone.run(() => {
+        this.router.navigate(['/perfil']);
+      });
+    }
   }
 
   esHome(): boolean {

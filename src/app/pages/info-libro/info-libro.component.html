@@ -1,5 +1,5 @@
 <app-header></app-header>
-<ion-content id="main" *ngIf="libroSeleccionado">
+<div id="main" *ngIf="libroSeleccionado">
   <div id="divImagen">
     <img
       *ngIf="libroSeleccionado.portadaImgPath"
@@ -36,30 +36,22 @@
       >{{ aplicarEsteticos(quitarNumsYGuion(libroSeleccionado.tipo), 100) }}
     </p>
 
-    <button *ngIf="libroSeleccionado.disponible" (click)="clickPedir()">
+    <button *ngIf="libroSeleccionado.disponible" (click)="clickPedir()" class="botonVerde"> 
       Pedir
     </button>
 
     <div class="libroNoDisponible" *ngIf="!libroSeleccionado.disponible">
       <div class="divNoDisponible">
         <mat-icon> warning </mat-icon>
-        <p class="noMarginBottom noDisponP">Libro no disponible</p>
+        <p class="noMarginBottom noDisponP botonVerde">Libro no disponible</p>
       </div>
       <div class="divBotonReservar">
-        <button class="botonReservar">Reservar</button>
+        <button class="botonReservar botonVerde">Reservar</button>
       </div>
     </div>
   </div>
-</ion-content>
+</div>
 
-<div id="error" *ngIf="!libroSeleccionado">
-  <img src="../assets/images/principales/aliens.png" />
-  <p id="tituloErr">
-    ¡Oh no! Parece que los aliens han abducido el libro que querias
-  </p>
-  <p>
-    Debes volver atrás y seleccionarlo otra vez. Esperamos que ya se hayan ido
-    cuando vuelvas...
-  </p>
-  <button>Volver atrás</button>
+<div *ngIf="!libroSeleccionado">
+  <app-error-en-libro></app-error-en-libro>
 </div>

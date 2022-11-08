@@ -56,6 +56,7 @@ import { ConocenosComponent } from './components/conocenos/conocenos.component';
 import { NoRegistradoComponent } from './components/no-registrado/no-registrado.component';
 import { InicialComponent } from './pages/inicial/inicial.component';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { ErrorEnLibroComponent } from './components/error-en-libro/error-en-libro.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
     NotFoundComponent,
     MisReservasComponent,
     NoRegistradoComponent, 
-    InicialComponent
+    InicialComponent,
+    ErrorEnLibroComponent
   ],
   imports: [
     BrowserModule,

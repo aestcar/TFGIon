@@ -20,7 +20,6 @@ export class StorageAndroidService {
   
   async getUser():Promise<string> {
     const { value } = await Preferences.get({ key: 'user' });
-    alert(value);
     return value;
   };
   

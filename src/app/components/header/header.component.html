@@ -24,10 +24,10 @@
 
     <div id="perfil" (click)="perfilClick()">
       <!-- No está registrado -->
-      <mat-icon *ngIf="!user"> account_circle </mat-icon>
+      <ion-icon *ngIf="!user" name="person-circle-outline"></ion-icon>
       <img
         id="iconoPerfil"
-        *ngIf="user.photoURL"
+        *ngIf="user"
         alt="foto del usuario"
         src="{{ user.photoURL }}"
       />

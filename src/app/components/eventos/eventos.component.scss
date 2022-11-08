@@ -4,6 +4,12 @@
   background-color: #ffddd2;
   padding-top: 30px;
   padding-bottom: 10px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  padding-top: 40px;
+  flex-direction: column;
 }
 
 #tablaEventos {
@@ -18,8 +24,8 @@
 h2 {
   text-align: center;
   color: black;
-  font-size: 30px;
-  margin-bottom: 20px;
+  font-size: 50px;
+  margin-bottom: 40px;
 }
 
 .nombreEvento {
