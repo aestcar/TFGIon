@@ -4,6 +4,7 @@ import { User } from 'firebase/auth';
 import { AutenticacionService } from 'src/app/services/autentication.service';
 import { isPlatform } from '@ionic/angular';
 import { MobileUser } from '../../interfaces/MobileUser';
+import { StorageAndroidService } from 'src/app/services/storage-android.service';
 
 @Component({
   selector: 'app-no-registrado',
@@ -12,13 +13,14 @@ import { MobileUser } from '../../interfaces/MobileUser';
 })
 export class NoRegistradoComponent implements OnInit {
 
-  constructor(private autenticacionService: AutenticacionService, private router: Router, private zone: NgZone) { }
+  constructor(private autenticacionService: AutenticacionService, private router: Router, private zone: NgZone, private storage: StorageAndroidService) { }
 
   ngOnInit() {}
 
   async onClickGoogle() {
     if(isPlatform('mobile')){
       const user = await this.autenticacionService.getAutorizacionCordova();
+      this.storage.setUser(user);
       this.comprobarAutenticacion(user);
     }else{
       const user = await this.autenticacionService.getAutenticacion();
@@ -28,17 +30,16 @@ export class NoRegistradoComponent implements OnInit {
 
   async onClickFacebook() {
     const user = await this.autenticacionService.getAutenticacionFacebook();
-
     this.comprobarAutenticacion(user);
   }
 
   comprobarAutenticacion(user: User | null | undefined | MobileUser) {
     if (user === null || user === undefined) {
       this.autenticacionCorrecta(false);
-      alert('Autenticacion Incorrecta');
+      console.log('Autenticacion Incorrecta');
     } else {
       this.autenticacionCorrecta(true);
-      alert('Autenticacion Correcta');
+      console.log('Autenticacion Correcta');
     }
   }
 

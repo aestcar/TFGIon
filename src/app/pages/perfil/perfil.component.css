@@ -34,11 +34,15 @@ div {
 
 #mat-card-image {
   width: 50%;
+  padding: 10px;
+}
+
+#divBoton{
+  background-color: #83c5be;
 }
 
 #registrado {
   background-color: #83c5be;
-  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,7 +55,6 @@ mat-card-content > p > span {
 }
 
 #cartaPrincipal {
-  width: 50%;
   background-color: #edf6f9;
 }
 
