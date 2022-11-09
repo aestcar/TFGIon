@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private zone: NgZone
   ) {
-    this.user = JSON.parse(localStorage.getItem('user')!);
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   ngOnInit(): void {}

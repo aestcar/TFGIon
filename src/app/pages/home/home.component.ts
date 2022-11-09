@@ -15,6 +15,7 @@ import { of } from 'rxjs';
 import { ReservasService } from '../../services/reservas.service';
 import { TitulosService } from '../../services/titulos.service';
 import { Capacitor } from '@capacitor/core';
+import { DialogoConfirmarReservaComponent } from 'src/app/components/dialogo-confirmar-reserva/dialogo-confirmar-reserva.component';
 
 @Component({
   selector: 'app-home',
@@ -279,7 +280,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  reservarClick() {}
+  reservarClick() {
+    // Abre el dialogo selector
+    const dialogo = this.dialog.open(DialogoConfirmarReservaComponent, {
+      width: '50%',
+    });
+  }
 
   libroClick(libro: any) {
     this.libroSeleccionado = libro;

@@ -18,7 +18,10 @@ export class NoRegistradoComponent implements OnInit {
   ngOnInit() {}
 
   async onClickGoogle() {
-    if(isPlatform('mobile')){
+    if(isPlatform('mobileweb')){
+      const user = await this.autenticacionService.getAutenticacion();
+      this.comprobarAutenticacion(user);
+    }else if(isPlatform('mobile')){
       const user = await this.autenticacionService.getAutorizacionCordova();
       this.storage.setUser(user);
       this.comprobarAutenticacion(user);
@@ -46,7 +49,9 @@ export class NoRegistradoComponent implements OnInit {
   autenticacionCorrecta(b: boolean) {
     if (b) {
       this.zone.run(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home']).then(() => {
+          window.location.reload();
+        });      
       });
     } else {
       alert('Error en la autenticación de usuario');

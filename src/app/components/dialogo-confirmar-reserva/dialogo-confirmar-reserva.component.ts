@@ -11,4 +11,7 @@ export class DialogoConfirmarReservaComponent implements OnInit {
 
   ngOnInit() {}
 
+  clickReservar(){
+    
+  }
 }
