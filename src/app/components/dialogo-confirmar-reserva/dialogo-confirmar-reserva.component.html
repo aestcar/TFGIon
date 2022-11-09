@@ -2,15 +2,17 @@
   <mat-card-subtitle>(El libro no está disponible)</mat-card-subtitle>
   <mat-card-title>Confirmación de Reserva</mat-card-title>
   <mat-card-content>
-    <p>El libro que buscas está pedido por otro lector.
+    <p>Has escogido: {{darFormatoNombre(data.libro.titulo)}}.
+    El libro que buscas está pedido por otro lector.
     Si lo reservas, en estar disponible, se te asignará
     a ti y tendrás un periodo de 3 días laborables para ir a recogerlo.
+    Deberás recogerlo en la biblioteca: {{data.biblioteca}} cuando se te indique.
     (Puede que haya cola de espera).
     ¿Deseas Reservar el libro?</p>
   </mat-card-content>
   <mat-divider inset></mat-divider>
   <mat-card-actions>
     <button mat-button mat-dialog-close class="botonVerde">Cerrar</button>
-    <button mat-button mat-dialog-close cdkFocusInitial class="botonVerde" (click)="clickReservar()">Reservar</button>
+    <button mat-button mat-dialog-close class="botonVerde" [mat-dialog-close]="true">Reservar</button>
   </mat-card-actions>
 </mat-card>

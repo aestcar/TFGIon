@@ -1,0 +1,17 @@
+<mat-card class="example-card">
+  <mat-card-title>Confirmación del Pedido</mat-card-title>
+  <mat-card-content>
+    <p>Has escogido: {{darFormatoNombre(data.libro.titulo)}}.
+    El libro que buscas está disponible.
+    Al pedirlo, tendrás un periodo de 3 días laborables
+    para ir a recogerlo a {{data.biblioteca}}.
+    Pasados estos días si el libro no ha
+    sido recogido, ¡perderás tu reserva!.
+    ¿Deseas Pedir el libro?</p>
+  </mat-card-content>
+  <mat-divider inset></mat-divider>
+  <mat-card-actions>
+    <button mat-button mat-dialog-close class="botonVerde">Cerrar</button>
+    <button mat-button mat-dialog-close class="botonVerde" [mat-dialog-close]="true" >Pedir</button>
+  </mat-card-actions>
+</mat-card>

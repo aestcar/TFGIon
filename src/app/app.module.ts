@@ -58,6 +58,7 @@ import { InicialComponent } from './pages/inicial/inicial.component';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { ErrorEnLibroComponent } from './components/error-en-libro/error-en-libro.component';
 import { DialogoConfirmarReservaComponent } from './components/dialogo-confirmar-reserva/dialogo-confirmar-reserva.component';
+import { DialogoConfirmarPedirComponent } from './components/dialogo-confirmar-pedir/dialogo-confirmar-pedir.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { DialogoConfirmarReservaComponent } from './components/dialogo-confirmar
     PerfilComponent,
     DialogoComponent,
     DialogoConfirmarReservaComponent,
+    DialogoConfirmarPedirComponent,
     EventosComponent,
     ConocenosComponent,
     InfoLibroComponent,

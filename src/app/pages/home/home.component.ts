@@ -16,6 +16,10 @@ import { ReservasService } from '../../services/reservas.service';
 import { TitulosService } from '../../services/titulos.service';
 import { Capacitor } from '@capacitor/core';
 import { DialogoConfirmarReservaComponent } from 'src/app/components/dialogo-confirmar-reserva/dialogo-confirmar-reserva.component';
+import { DialogoConfirmarPedirComponent } from 'src/app/components/dialogo-confirmar-pedir/dialogo-confirmar-pedir.component';
+import { isPlatform } from '@ionic/angular';
+import { StorageAndroidService } from 'src/app/services/storage-android.service';
+import { ColaReservasService } from 'src/app/services/cola-reservas.service';
 
 @Component({
   selector: 'app-home',
@@ -65,7 +69,9 @@ export class HomeComponent implements OnInit {
     public dialog: MatDialog,
     private autorizacionService: AutenticacionService,
     private reservasService: ReservasService,
-    private tituloService: TitulosService
+    private tituloService: TitulosService,
+    private storageService: StorageAndroidService,
+    private colaService: ColaReservasService
   ) {
     this.lista = this.libroService.getLibros();
     this.listaEventos = this.eventoService.getEventos();
@@ -90,19 +96,19 @@ export class HomeComponent implements OnInit {
   }
 
   // ADMIN
-  getEsAdmin(localUID: string):Observable<boolean> {
-    return  this.autorizacionService.esAdminLocalStorage(localUID).pipe(
-      map(r => {
-      if(r) {
-        return true
-      }
-      else {
-        return false;
-      }
-    }),
-    catchError((err) =>{
-      return of(false);
-  }));
+  getEsAdmin(localUID: string): Observable<boolean> {
+    return this.autorizacionService.esAdminLocalStorage(localUID).pipe(
+      map((r) => {
+        if (r) {
+          return true;
+        } else {
+          return false;
+        }
+      }),
+      catchError((err) => {
+        return of(false);
+      })
+    );
   }
 
   adminClick() {
@@ -123,8 +129,7 @@ export class HomeComponent implements OnInit {
     }, duracion);
   }
 
-  cargarMas() {
-  }
+  cargarMas() {}
 
   // Eventos
   onEnter() {
@@ -176,8 +181,9 @@ export class HomeComponent implements OnInit {
         this.lista = this.libroService.getLibrosPorCategoria(cat);
 
         // El orden da igual siempre es A-Z
-        if (!orden) {}
-        
+        if (!orden) {
+        }
+
         if (orden.includes('0')) {
           this.esOrdenAZ = false;
           this.esOrdenAZIcon = true;
@@ -194,7 +200,7 @@ export class HomeComponent implements OnInit {
   }
 
   cerrarIcono(s: string) {
-    switch (s){
+    switch (s) {
       case 'za':
         this.esOrdenZA = false;
         break;
@@ -213,6 +219,7 @@ export class HomeComponent implements OnInit {
   }
 
   asignarIcono() {
+    // No se puede hacer un switch ya que conitene includes
     if (!this.categoria) {
     } else if (this.categoria.includes('acción')) {
       console.log('cambiado');
@@ -263,27 +270,77 @@ export class HomeComponent implements OnInit {
   buscar() {}
 
   pedirClick(libro: Libro) {
-    console.log('Pedir click');
-    let lector;
-    let user = JSON.parse(localStorage.getItem('user'));
-    if (this.currentUser) {
-      lector = this.currentUser.uid;
-    } else if (user) {
-      lector = user.uid;
-    }
+    const dialogo = this.dialog.open(DialogoConfirmarPedirComponent, {
+      width: '50%',
+      data: { libro: libro, biblioteca: 'Biblioteca 66' },
+    });
 
-    if (lector) {
-      this.reservasService.addNuevaReserva(libro.isbn, lector);
-      this.reservasService.cambiarEstadoaND(libro.isbn, lector);
-    } else {
-      alert('No se ha podido completar la operación, no se detecta el usuario');
-    }
+    dialogo.afterClosed().subscribe((result) => {
+      if (result == true) {
+        let lector;
+        let lectorID;
+        if (isPlatform('mobileweb')) {
+          lector = JSON.parse(localStorage.getItem('user'));
+          lectorID = lector.uid;
+        } else if (isPlatform('mobile')) {
+          lector = this.storageService.getUser();
+          lectorID = lector.userId;
+        } else {
+          // Web
+          lector = JSON.parse(localStorage.getItem('user'));
+          lectorID = lector.uid;
+        }
+
+        if (lector && lectorID) {
+          this.reservasService.addNuevaReserva(libro.isbn, lectorID);
+          this.reservasService.cambiarEstadoaND(libro.isbn, lectorID);
+        } else {
+          alert(
+            'No se ha podido completar la operación, no se detecta el usuario'
+          );
+        }
+      }
+    });
   }
 
-  reservarClick() {
+  reservarClick(libro: Libro) {
     // Abre el dialogo selector
     const dialogo = this.dialog.open(DialogoConfirmarReservaComponent, {
       width: '50%',
+      data: { libro: libro, biblioteca: 'Biblioteca 66' },
+    });
+
+    dialogo.afterClosed().subscribe((result) => {
+      if (result == true) {
+        // Obtener lector
+        let lector;
+        let lectorID;
+        if (isPlatform('mobileweb')) {
+          lector = JSON.parse(localStorage.getItem('user'));
+          lectorID = lector.uid;
+        } else if (isPlatform('mobile')) {
+          lector = this.storageService.getUser();
+          lectorID = lector.userId;
+        } else {
+          // Web
+          lector = JSON.parse(localStorage.getItem('user'));
+          lectorID = lector.uid;
+        }
+
+        // Obtener cola
+        let res = this.colaService.getColaHTTP();
+        res.subscribe((r) => {
+          try {
+            if(lector && lectorID){
+              this.colaService.addReservaCola(libro.isbn, lectorID, r);
+            }else{
+              alert('ERROR, no se ha podido encontrar al usuario');
+            }
+          } catch (e) {
+            alert('Ha habido un error en la reserva');
+          }
+        });
+      }
     });
   }
 
