@@ -275,20 +275,29 @@ export class HomeComponent implements OnInit {
       data: { libro: libro, biblioteca: 'Biblioteca 66' },
     });
 
-    dialogo.afterClosed().subscribe((result) => {
+    dialogo.afterClosed().subscribe(async (result) => {
       if (result == true) {
         let lector;
         let lectorID;
         if (isPlatform('mobileweb')) {
           lector = JSON.parse(localStorage.getItem('user'));
-          lectorID = lector.uid;
+          try {
+            lectorID = lector.uid;
+          } catch (e) {
+            alert('Usuario no encontrado');
+          }
         } else if (isPlatform('mobile')) {
-          lector = this.storageService.getUser();
-          lectorID = lector.userId;
+          lector = await this.storageService.getUser();
+          let aux = await JSON.parse(lector);
+          lectorID = aux.userId;
         } else {
           // Web
           lector = JSON.parse(localStorage.getItem('user'));
-          lectorID = lector.uid;
+          try {
+            lectorID = lector.uid;
+          } catch (e) {
+            alert('Usuario no encontrado');
+          }
         }
 
         if (lector && lectorID) {
@@ -317,23 +326,31 @@ export class HomeComponent implements OnInit {
         let lectorID;
         if (isPlatform('mobileweb')) {
           lector = JSON.parse(localStorage.getItem('user'));
-          lectorID = lector.uid;
+          try {
+            lectorID = lector.uid;
+          } catch (e) {
+            alert('Usuario no encontrado');
+          }
         } else if (isPlatform('mobile')) {
           lector = this.storageService.getUser();
           lectorID = lector.userId;
         } else {
           // Web
           lector = JSON.parse(localStorage.getItem('user'));
-          lectorID = lector.uid;
+          try {
+            lectorID = lector.uid;
+          } catch (e) {
+            alert('Usuario no encontrado');
+          }
         }
 
         // Obtener cola
         let res = this.colaService.getColaHTTP();
         res.subscribe((r) => {
           try {
-            if(lector && lectorID){
+            if (lector && lectorID) {
               this.colaService.addReservaCola(libro.isbn, lectorID, r);
-            }else{
+            } else {
               alert('ERROR, no se ha podido encontrar al usuario');
             }
           } catch (e) {

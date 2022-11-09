@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { isPlatform } from '@ionic/angular';
 import { User } from 'firebase/auth';
+import { DialogoConfirmarPedirComponent } from 'src/app/components/dialogo-confirmar-pedir/dialogo-confirmar-pedir.component';
+import { DialogoConfirmarReservaComponent } from 'src/app/components/dialogo-confirmar-reserva/dialogo-confirmar-reserva.component';
+import { ColaReservasService } from 'src/app/services/cola-reservas.service';
+import { StorageAndroidService } from 'src/app/services/storage-android.service';
 import { Libro } from '../../interfaces/Libro';
 import { AutenticacionService } from '../../services/autentication.service';
 import { LibrosService } from '../../services/libros.service';
@@ -19,31 +25,114 @@ export class InfoLibroComponent implements OnInit {
     private libroService: LibrosService,
     private tituloService: TitulosService,
     private reservasService: ReservasService,
-    private autorizacionService: AutenticacionService
+    private storageService: StorageAndroidService,
+    private colaService: ColaReservasService,
+    public dialog: MatDialog
   ) {
     this.libroSeleccionado = this.libroService.getLibroSeleccionado();
   }
 
   ngOnInit(): void {}
 
-  clickPedir() {
-    console.log('Pedir click');
+  async clickPedir() {
     let libro = this.libroSeleccionado;
-    let lector;
-    let user = JSON.parse(localStorage.getItem('user'));
 
-    if (user) {
-      lector = user.uid;
-    }
+    const dialogo = this.dialog.open(DialogoConfirmarPedirComponent, {
+      width: '50%',
+      data: { libro: libro, biblioteca: 'Biblioteca 66' },
+    });
 
-    if (lector) {
-      this.reservasService.addNuevaReserva(libro.isbn, lector);
-      this.reservasService.cambiarEstadoaND(libro.isbn, lector);
-      this.libroSeleccionado.disponible = false;
-      alert('Libro pedido');
-    } else {
-      alert('No se ha podido completar la operación, no se detecta el usuario');
-    }
+    dialogo.afterClosed().subscribe(async (result) => {
+      if (result == true) {
+        let lector;
+        let lectorID;
+        if (isPlatform('mobileweb')) {
+          lector = JSON.parse(localStorage.getItem('user'));
+          try {
+            lectorID = lector.uid;
+          } catch (e) {
+            alert('Usuario no encontrado');
+          }
+        } else if (isPlatform('mobile')) {
+          lector = await this.storageService.getUser();
+          let aux = await JSON.parse(lector);
+          lectorID = aux.userId;
+        } else {
+          lector = JSON.parse(localStorage.getItem('user'));
+          try {
+            lectorID = lector.uid;
+          } catch (e) {
+            alert('Usuario no encontrado');
+          }
+        }
+
+        if (lector && lectorID) {
+          this.reservasService.addNuevaReserva(libro.isbn, lectorID);
+          this.reservasService.cambiarEstadoaND(libro.isbn, lectorID);
+          this.libroSeleccionado.disponible = false;
+          alert('Se ha pedido el libro con éxito');
+        } else {
+          alert(
+            'No se ha podido completar la operación, no se detecta el usuario'
+          );
+        }
+      }
+    });
+  }
+
+  async clickReservar() {
+    let libro = this.libroSeleccionado;
+    // Abre el dialogo selector
+    const dialogo = this.dialog.open(DialogoConfirmarReservaComponent, {
+      width: '50%',
+      data: { libro: libro, biblioteca: 'Biblioteca 66' },
+    });
+
+    dialogo.afterClosed().subscribe(async (result) => {
+      if (result == true) {
+        let lector;
+        let lectorID;
+        if (isPlatform('mobileweb')) {
+          lector = JSON.parse(localStorage.getItem('user'));
+          try {
+            lectorID = lector.uid;
+          } catch (e) {
+            alert('Usuario no encontrado');
+          }
+        } else if (isPlatform('mobile')) {
+          lector = await this.storageService.getUser();
+          let aux = await JSON.parse(lector);
+          lectorID = aux.userId;
+        } else {
+          lector = JSON.parse(localStorage.getItem('user'));
+          try {
+            lectorID = lector.uid;
+          } catch (e) {
+            alert('Usuario no encontrado');
+          }
+        }
+
+        if (lector && lectorID) {
+          // Obtener cola
+          let res = this.colaService.getColaHTTP();
+          res.subscribe((r) => {
+            try {
+              if (lector && lectorID) {
+                this.colaService.addReservaCola(libro.isbn, lectorID, r);
+              } else {
+                alert('ERROR, no se ha podido encontrar al usuario');
+              }
+            } catch (e) {
+              alert('Ha habido un error en la reserva');
+            }
+          });
+        } else {
+          alert(
+            'No se ha podido completar la operación, no se detecta el usuario'
+          );
+        }
+      }
+    });
   }
 
   aplicarEsteticos(s: string, i: number) {
