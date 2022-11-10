@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.funcionContadorLibros();
+    //this.funcionContadorLibros();
 
     // Autenticacion
     this.user = JSON.parse(localStorage.getItem('user'));
