@@ -74,6 +74,7 @@ export class HomeComponent implements OnInit {
     private colaService: ColaReservasService
   ) {
     this.lista = this.libroService.getLibros();
+    this.lista.subscribe(r => console.log(r))
     this.listaEventos = this.eventoService.getEventos();
 
     // Calendario

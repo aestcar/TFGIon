@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicialComponent implements OnInit {
 
+  currentUser : any; 
+
+  // TODO
+
   constructor() { }
 
   ngOnInit() {}
@@ -14,6 +18,7 @@ export class InicialComponent implements OnInit {
   estaRegistrado():boolean{
     let user = JSON.parse(localStorage.getItem('user'));
     if(user){
+      this.currentUser = user;
       return true
     }else{
       return false;

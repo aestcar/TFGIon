@@ -19,11 +19,11 @@ const routes: Routes = [
   { path: 'perfil', component: PerfilComponent, canActivate: [GuardAuthGuard] },
   { path: 'registrarse', component: NoRegistradoComponent },
   { path: 'detalles-libro', component: InfoLibroComponent },
+  { path: 'eventos', component: EventosComponent },
+  { path: 'conocenos', component: ConocenosComponent },
   { path: 'admin', component: AdminComponent, canActivate: [GuardAdminGuard] },
   { path: 'mis-reservas', component:MisReservasComponent ,canActivate: [GuardAuthGuard]},
   { path: 'reportes', component: ReportesComponent, canActivate: [GuardAuthGuard] },
-  { path: 'conocenos', component: ConocenosComponent },
-  { path: 'eventos', component: EventosComponent },
   { path: '', component: InicialComponent },
   { path: '**', component: NotFoundComponent }
 ];

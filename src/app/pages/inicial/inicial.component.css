@@ -34,3 +34,15 @@ a{
 .underline{
     text-decoration: underline
 }
+
+/* ----------------------------------- MEDIA QUERYS ----------------------------------- */
+@media (min-width: 650px) {
+    .titulo{
+        padding-bottom: 10px;
+        font-size: 25px;
+    }
+
+    mat-card-subtitle{
+        font-size: 18px;
+    }
+}

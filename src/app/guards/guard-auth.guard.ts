@@ -19,8 +19,6 @@ export class GuardAuthGuard implements CanActivate {
         alert('No estás logueado');
         this.router.navigate(['/']);
         return false;
-      }else{
-        alert(this.authService.getLocalUser());
       }
     }
     else if(isPlatform('android') || isPlatform('ios')){
@@ -35,8 +33,6 @@ export class GuardAuthGuard implements CanActivate {
         alert('No estás logueado');
         this.router.navigate(['/']);
         return false;
-      }else{
-        alert(this.authService.getLocalUser());
       }
     }
 
