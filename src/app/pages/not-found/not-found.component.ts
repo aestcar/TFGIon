@@ -7,13 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./not-found.component.css'],
 })
 export class NotFoundComponent implements OnInit {
-  constructor(private router: Router, private zone: NgZone) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
   clickHome() {
-    this.zone.run(() => {
-      this.router.navigate(['/']);
-    });
+    this.router.navigate(['/home']);
   }
 }

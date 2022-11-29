@@ -145,6 +145,4 @@ export class AutenticacionService {
         '.json'
     );
   }
-
-  /* -----------------------  Más información de usuarios  ---------------------------------- */
 }

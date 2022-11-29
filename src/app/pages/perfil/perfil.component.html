@@ -1,10 +1,14 @@
 <div id="content">
   <app-header></app-header>
-  <div id="divBoton"><button class="botonVerde atras" (click)="clickAtras()">Atrás</button></div>
+  <div id="divBoton">
+    <button class="botonVerde atras" (click)="clickAtras()">Atrás</button>
+  </div>
   <div *ngIf="user" id="registrado">
     <mat-card class="example-card" id="cartaPrincipal">
       <mat-card-header id="tituloHeader">
-        <mat-card-title *ngIf="user" id="titulo">{{ user.displayName }}</mat-card-title>
+        <mat-card-title *ngIf="user" id="titulo">{{
+          user.displayName
+        }}</mat-card-title>
       </mat-card-header>
 
       <div id="divImg">
@@ -27,8 +31,10 @@
         <p><span>Segunda Biblioteca Fav.: </span>?</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button class="botonNaranja">EDITAR PERFIL</button>
-        <button mat-button class="botonNaranja" (click)="cerrarSesion()">CERRAR SESIÓN</button>
+        <button mat-button class="botonNaranja" (click)="editarPerfil()">EDITAR PERFIL</button>
+        <button mat-button class="botonNaranja" (click)="cerrarSesion()">
+          CERRAR SESIÓN
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>

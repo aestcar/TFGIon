@@ -13,6 +13,7 @@ import { ReportesComponent } from './pages/reportes/reportes.component';
 import { GuardAuthGuard } from './guards/guard-auth.guard';
 import { GuardAdminGuard } from './guards/guard-admin.guard';
 import { NoRegistradoComponent } from './components/no-registrado/no-registrado.component';
+import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [GuardAdminGuard] },
   { path: 'mis-reservas', component:MisReservasComponent ,canActivate: [GuardAuthGuard]},
   { path: 'reportes', component: ReportesComponent, canActivate: [GuardAuthGuard] },
+  { path: 'editar-perfil', component: EditarPerfilComponent },
   { path: '', component: InicialComponent },
   { path: '**', component: NotFoundComponent }
 ];

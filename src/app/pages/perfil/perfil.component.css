@@ -65,6 +65,7 @@ mat-card-content > p > span {
 
 #cartaPrincipal {
   background-color: #edf6f9;
+  width: 70%;
 }
 
 mat-card-actions {

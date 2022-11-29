@@ -1,0 +1,109 @@
+<div id="content">
+  <app-header></app-header>
+  <div id="divBoton">
+    <button class="botonVerde atras" (click)="clickAtras()">Atrás</button>
+  </div>
+  <div id="registrado">
+    <mat-card class="example-card" id="cartaPrincipal">
+      <mat-card-header id="tituloHeader">
+        <mat-card-title *ngIf="user" id="titulo">{{
+          user.displayName
+        }}</mat-card-title>
+      </mat-card-header>
+
+      <div id="divImg">
+        <img
+          id="mat-card-image"
+          src="{{ user.photoURL }}"
+          alt="Foto de {{ user.displayName }}"
+        />
+      </div>
+
+      <mat-card-content>
+        <p><span>Nombre: </span>{{ user.displayName }}</p>
+
+        <p><span>Correo: </span>{{ user.email }}</p>
+
+        <div class="inputBlock">
+          <p><span>Teléfono: </span></p>
+          <form class="input">
+            <mat-form-field class="example-full-width">
+              <mat-label>Telephone</mat-label>
+              <span matPrefix>+34 &nbsp;</span>
+              <input
+                type="number"
+                matInput
+                [formControl]="telefFormControl"
+                placeholder="612345678"
+                [(ngModel)]="inputTelefonoValue"
+                name = "telefonoPersonal"
+              />
+              <mat-hint align="start"
+                ><strong
+                  >Usaremos este número para avisarte cuando esté disponible
+                  para recoger tu libro</strong
+                >
+              </mat-hint>
+              <mat-error
+                *ngIf="
+                  telefFormControl.hasError('min') ||
+                  telefFormControl.hasError('max')
+                "
+              >
+                El formato del número de teléfono <strong>no es válido</strong>
+              </mat-error>
+              <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+          </form>
+        </div>
+
+        <div class="inputBlock" id="inputBiblioteca">
+          <p><span>Biblioteca Fav.: </span></p>
+          <form class="input">
+            <mat-form-field class="example-full-width">
+              <mat-label>Biblioteca de preferencia</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Biblioteca Municipal"
+                [(ngModel)]="inputBibliotecaPrimValue"
+                name = "primeraBibliteca"
+                [formControl]="bibliotecaFav"
+              />
+              <mat-error *ngIf="bibliotecaFav.hasError('required')">
+                La biblioteca primaria es <strong>obligatoria</strong>
+              </mat-error>
+              <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+          </form>
+        </div>
+        <div class="inputBlock">
+          <p><span>Segunda Biblioteca: </span></p>
+          <form class="input">
+            <mat-form-field class="example-full-width">
+              <mat-label>Segunda Biblioteca de preferencia</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Biblioteca de las Palmas"
+                [(ngModel)]="inputBibliotecaSecValue"
+                name = "segundaBibliteca"
+                [formControl]="secBibliotecaFav"
+              />
+              <mat-error *ngIf="secBibliotecaFav.hasError('required')">
+                La biblioteca secundaia es <strong>obligatoria</strong>
+              </mat-error>
+              <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+          </form>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button class="botonNaranja">RECHAZAR CAMBIOS</button>
+        <button mat-button class="botonNaranja" (click)="aplicarCambios()">
+          APLICAR CAMBIOS
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

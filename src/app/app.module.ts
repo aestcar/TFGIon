@@ -59,6 +59,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { ErrorEnLibroComponent } from './components/error-en-libro/error-en-libro.component';
 import { DialogoConfirmarReservaComponent } from './components/dialogo-confirmar-reserva/dialogo-confirmar-reserva.component';
 import { DialogoConfirmarPedirComponent } from './components/dialogo-confirmar-pedir/dialogo-confirmar-pedir.component';
+import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { DialogoConfirmarPedirComponent } from './components/dialogo-confirmar-p
     AdminBorrarEventoComponent,
     AdminGestionReservasComponent,
     AdminGestionErroresComponent,
+    EditarPerfilComponent,
     HeaderComponent,
     NotFoundComponent,
     MisReservasComponent,
