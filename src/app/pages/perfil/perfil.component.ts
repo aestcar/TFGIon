@@ -16,8 +16,7 @@ export class PerfilComponent implements OnInit {
 
   // Localstorage
   user: any;
-  phone: string;
-  bibliotecaFav: string;
+  userData: any;
 
   constructor(
     private autenticacionService: AutenticacionService,
@@ -32,6 +31,8 @@ export class PerfilComponent implements OnInit {
   async obtenerUsuario() {
     // Local Storage
     this.user = JSON.parse(localStorage.getItem('user')!);
+    this.userData = JSON.parse(localStorage.getItem('userData')!);
+
     if (!this.user) {
       // Probar si es android
       let res = await this.storage.getUser();
@@ -47,16 +48,24 @@ export class PerfilComponent implements OnInit {
   }
 
   obtenerTelefono() {
-    if (this.phone) {
-      return this.phone;
+    if (this.userData) {
+      return this.userData.phone;
     } else {
       return '?';
     }
   }
 
   obtenerBibliotecaFav() {
-    if (this.bibliotecaFav) {
-      return this.bibliotecaFav;
+    if (this.userData) {
+      return this.userData.biblioPrinc;
+    } else {
+      return '?';
+    }
+  }
+
+  obtenerSecBibliotecaFav(){
+    if (this.userData) {
+      return this.userData.biblioSec;
     } else {
       return '?';
     }
