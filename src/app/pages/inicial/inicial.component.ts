@@ -9,8 +9,6 @@ export class InicialComponent implements OnInit {
 
   currentUser : any; 
 
-  // TODO
-
   constructor() { }
 
   ngOnInit() {}

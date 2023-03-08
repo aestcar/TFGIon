@@ -1,7 +1,6 @@
 <div id="main">
   <mat-card id="card">
     <mat-card-header>
-
       <mat-card-title *ngIf="!estaRegistrado()" class="titulo">
         ¡Bienvenido a Bibliotecapp!
       </mat-card-title>
@@ -11,7 +10,7 @@
       >
 
       <mat-card-title *ngIf="estaRegistrado()" class="titulo">
-        ¡Bienvenid@ {{currentUser.displayName}}!
+        ¡Bienvenid@ {{ currentUser.displayName }}!
       </mat-card-title>
       <mat-card-subtitle *ngIf="estaRegistrado()"
         >Es un placer tenerte de vuelta</mat-card-subtitle
