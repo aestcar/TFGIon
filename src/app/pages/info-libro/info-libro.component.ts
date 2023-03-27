@@ -29,7 +29,7 @@ export class InfoLibroComponent implements OnInit {
     private colaService: ColaReservasService,
     public dialog: MatDialog
   ) {
-    this.libroSeleccionado = this.libroService.getLibroSeleccionado();
+    // this.libroSeleccionado = this.libroService.getLibroSeleccionado();
   }
 
   ngOnInit(): void {}

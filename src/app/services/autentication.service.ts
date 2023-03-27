@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore/lite';
-import { GooglePlus } from '@ionic-native/google-plus/ngx';
+// import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import {
   getAuth,
   signInWithPopup,
@@ -12,12 +12,11 @@ import {
 } from 'firebase/auth';
 import { environment } from 'src/environments/environment';
 
+
 import { FacebookAuthProvider } from 'firebase/auth';
 import { HttpClient } from '@angular/common/http';
 import { Admin } from '../interfaces/Admin';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { MobileUser } from '../interfaces/MobileUser';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +26,7 @@ export class AutenticacionService {
 
   adminGlobal: any;
 
-  constructor(private httpClient: HttpClient, private router: Router, private googlePlus:GooglePlus) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   getLocalUser(){
     return window.localStorage.getItem('user');
@@ -41,21 +40,9 @@ export class AutenticacionService {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
 
-    const db = getFirestore(app);
-
     const res = await signInWithPopup(auth, provider);
-    const res2 = await this.getAutenticacion2(res);
 
-    return res2;
-  }
 
-  getAutenticacion2(res: UserCredential) {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(res);
-
-    const token = credential!.accessToken;
-
-    // The signed-in user info.
     const user = res.user;
 
     this.userData = user;
@@ -63,8 +50,11 @@ export class AutenticacionService {
     // Local Storage
     localStorage.setItem('user', JSON.stringify(user));
 
+    console.log(user);
+
     return user;
   }
+
 
   /* -----------------------  FACEBOOK  ---------------------------------- */
 
@@ -98,20 +88,20 @@ export class AutenticacionService {
 
     /* -----------------------  CÓRDOVA - Google  ---------------------------------- */
 
-  async getAutorizacionCordova(){
-    let resLogin:MobileUser = await this.googlePlus.login({});
-    return resLogin;
+  // async getAutorizacionCordova(){
+  //   let resLogin:MobileUser = await this.googlePlus.login({});
+  //   return resLogin;
 
-    /*await this.googlePlus.login({ })
-      .then(res => {
-        console.log(res);
-        return res;
-      })
-      .catch(err => {return null});
-        console.log(err);
-        return undefined;*/
+  //   /*await this.googlePlus.login({ })
+  //     .then(res => {
+  //       console.log(res);
+  //       return res;
+  //     })
+  //     .catch(err => {return null});
+  //       console.log(err);
+  //       return undefined;*/
   
-  }
+  // }
 
   /* -----------------------  LOGOUT (Arreglar)  ---------------------------------- */
 

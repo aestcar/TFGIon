@@ -12,15 +12,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { AdminComponent } from './pages/admin/admin.component';
 import { HttpClientModule } from '@angular/common/http';
 
-import { environment } from '../environments/environment';
-import { provideFirebaseApp } from '@angular/fire/app';
-import { initializeApp } from 'firebase/app';
-import { DatabaseModule } from '@angular/fire/database';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfilComponent } from './pages/perfil/perfil.component';
@@ -56,11 +47,15 @@ import { EventosComponent } from './components/eventos/eventos.component';
 import { ConocenosComponent } from './components/conocenos/conocenos.component';
 import { NoRegistradoComponent } from './components/no-registrado/no-registrado.component';
 import { InicialComponent } from './pages/inicial/inicial.component';
-import { GooglePlus } from '@ionic-native/google-plus/ngx';
+// import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { ErrorEnLibroComponent } from './components/error-en-libro/error-en-libro.component';
 import { DialogoConfirmarReservaComponent } from './components/dialogo-confirmar-reserva/dialogo-confirmar-reserva.component';
 import { DialogoConfirmarPedirComponent } from './components/dialogo-confirmar-pedir/dialogo-confirmar-pedir.component';
 import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
@@ -96,12 +91,6 @@ import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.
     MatIconModule,
     IonicModule.forRoot(),
     HttpClientModule,
-    DatabaseModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    AngularFireStorageModule,
     MatDialogModule,
     MatCardModule,
     MatFormFieldModule,
@@ -116,8 +105,11 @@ import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.
     FormsModule,
     ReactiveFormsModule,
     NgxFileDropModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
   ],
-  providers: [GooglePlus],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

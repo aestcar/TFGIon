@@ -56,11 +56,12 @@ export class ReservasService {
       ref.orderByChild('id')
     );
 
-    return this.reservasDB
-      .snapshotChanges()
-      .pipe(
-        map((changes) => changes.map((c) => this.getUserFromPayload(c.payload)))
-      );
+    // return this.reservasDB
+    //   .snapshotChanges()
+    //   .pipe(
+    //     map((changes) => changes.map((c) => this.getUserFromPayload(c.payload)))
+    //   );
+    return null;
   }
 
   getUserFromPayload(payload: any): Reserva {

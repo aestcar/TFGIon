@@ -12,20 +12,24 @@ import { StorageAndroidService } from 'src/app/services/storage-android.service'
   styleUrls: ['./no-registrado.component.scss'],
 })
 export class NoRegistradoComponent implements OnInit {
-
-  constructor(private autenticacionService: AutenticacionService, private router: Router, private zone: NgZone, private storage: StorageAndroidService) { }
+  constructor(
+    private autenticacionService: AutenticacionService,
+    private router: Router,
+    private zone: NgZone,
+    private storage: StorageAndroidService
+  ) {}
 
   ngOnInit() {}
 
   async onClickGoogle() {
-    if(isPlatform('mobileweb')){
+    if (isPlatform('mobileweb')) {
       const user = await this.autenticacionService.getAutenticacion();
       this.comprobarAutenticacion(user);
-    }else if(isPlatform('mobile')){
-      const user = await this.autenticacionService.getAutorizacionCordova();
-      this.storage.setUser(user);
-      this.comprobarAutenticacion(user);
-    }else{
+    } else if (isPlatform('mobile')) {
+      // const user = await this.autenticacionService.getAutorizacionCordova();
+      // this.storage.setUser(user);
+      // this.comprobarAutenticacion(user);
+    } else {
       const user = await this.autenticacionService.getAutenticacion();
       this.comprobarAutenticacion(user);
     }
@@ -48,10 +52,8 @@ export class NoRegistradoComponent implements OnInit {
 
   autenticacionCorrecta(b: boolean) {
     if (b) {
-      this.zone.run(() => {
-        this.router.navigate(['/home']).then(() => {
-          window.location.reload();
-        });      
+      this.router.navigate(['/home']).then(() => {
+        window.location.reload();
       });
     } else {
       alert('Error en la autenticación de usuario');
@@ -60,5 +62,4 @@ export class NoRegistradoComponent implements OnInit {
       });
     }
   }
-
 }

@@ -13,19 +13,19 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class EventosService {
-  private eventosDB: AngularFireList<Evento>;
+  // private eventosDB: AngularFireList<Evento>;
 
   constructor(
-    private db: AngularFireDatabase,
-    private dbFire: Database,
+    // private db: AngularFireDatabase,
+    // private dbFire: Database,
     private httpClient: HttpClient
   ) {
-    this.eventosDB = this.db.list('/eventos', (ref) => ref.orderByChild('id'));
+    // this.eventosDB = this.db.list('/eventos', (ref) => ref.orderByChild('id'));
   }
 
   addEvento(evento: Evento) {
-    const doc = ref(this.dbFire, 'eventos'); // Doc = referencia a la BD + test = path
-    push(doc, evento).then((r) => console.log('evento posteado'));
+    // const doc = ref(this.dbFire, 'eventos'); // Doc = referencia a la BD + test = path
+    // push(doc, evento).then((r) => console.log('evento posteado'));
   }
 
   addEventoHTTP(evento: Evento) {
@@ -50,11 +50,12 @@ export class EventosService {
   }
 
   getEventos(): Observable<Evento[]> {
-    return this.eventosDB
-      .snapshotChanges()
-      .pipe(
-        map((changes) => changes.map((c) => this.getUserFromPayload(c.payload)))
-      );
+    // return this.eventosDB
+    //   .snapshotChanges()
+    //   .pipe(
+    //     map((changes) => changes.map((c) => this.getUserFromPayload(c.payload)))
+    //   );
+    return null;
   }
 
   getUserFromPayload(payload: any): Evento {

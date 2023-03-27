@@ -28,11 +28,12 @@ export class ErroresService {
   }
 
   getErrores(): Observable<Problema[]> {
-    return this.erroresDB
-      .snapshotChanges()
-      .pipe(
-        map((changes) => changes.map((c) => this.getUserFromPayload(c.payload)))
-      );
+    // return this.erroresDB
+    //   .snapshotChanges()
+    //   .pipe(
+    //     map((changes) => changes.map((c) => this.getUserFromPayload(c.payload)))
+    //   );
+    return null;
   }
 
   getUserFromPayload(payload: any): Problema {

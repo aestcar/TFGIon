@@ -62,61 +62,60 @@ export class HomeComponent implements OnInit {
   libroSeleccionado: Libro;
 
   constructor(
-    private libroService: LibrosService,
-    private eventoService: EventosService,
+    // private libroService: LibrosService,
+    // private eventoService: EventosService,
     private router: Router,
-    private zone: NgZone,
     public dialog: MatDialog,
-    private autorizacionService: AutenticacionService,
-    private reservasService: ReservasService,
-    private tituloService: TitulosService,
-    private storageService: StorageAndroidService,
-    private colaService: ColaReservasService
+    // private autorizacionService: AutenticacionService,
+    // private reservasService: ReservasService,
+    // private tituloService: TitulosService,
+    // private storageService: StorageAndroidService,
+    // private colaService: ColaReservasService
   ) {
-    this.lista = this.libroService.getLibros();
-    this.lista.subscribe(r => console.log(r))
-    this.listaEventos = this.eventoService.getEventos();
+    // this.lista = this.libroService.getLibros();
+    // this.lista.subscribe(r => console.log(r))
+    // this.listaEventos = this.eventoService.getEventos();
 
-    // Calendario
-    this.monday = 1;
+    // // Calendario
+    // this.monday = 1;
 
-    // HTML
-    this.contadorLibros = 0;
-    this.totalLibros = 60;
+    // // HTML
+    // this.contadorLibros = 0;
+    // this.totalLibros = 60;
   }
 
   ngOnInit(): void {
+    console.log('se carga home');
     //this.funcionContadorLibros();
 
     // Autenticacion
-    this.user = JSON.parse(localStorage.getItem('user'));
+    // this.user = JSON.parse(localStorage.getItem('user'));
 
-    if (this.user) {
-      this.isAdmin = this.getEsAdmin(this.user.uid);
-    }
+    // if (this.user) {
+    //   this.isAdmin = this.getEsAdmin(this.user.uid);
+    // }
   }
 
   // ADMIN
   getEsAdmin(localUID: string): Observable<boolean> {
-    return this.autorizacionService.esAdminLocalStorage(localUID).pipe(
-      map((r) => {
-        if (r) {
-          return true;
-        } else {
-          return false;
-        }
-      }),
-      catchError((err) => {
-        return of(false);
-      })
-    );
+    // return this.autorizacionService.esAdminLocalStorage(localUID).pipe(
+    //   map((r) => {
+    //     if (r) {
+    //       return true;
+    //     } else {
+    //       return false;
+    //     }
+    //   }),
+    //   catchError((err) => {
+    //     return of(false);
+    //   })
+    // );
+    return null;
   }
 
   adminClick() {
     if (this.isAdmin) {
-      this.zone.run(() => {
-        this.router.navigate(['/admin']);
-      });
+      this.router.navigate(['/admin']);
     }
   }
 
@@ -136,7 +135,7 @@ export class HomeComponent implements OnInit {
   onEnter() {
     console.log('ha pulsado enter');
     const aBuscar = (<HTMLInputElement>document.getElementById('input')).value;
-    this.lista = this.libroService.buscarLibros(aBuscar);
+    // this.lista = this.libroService.buscarLibros(aBuscar);
   }
 
   // Filtros...
@@ -159,19 +158,19 @@ export class HomeComponent implements OnInit {
         if (!orden) {
         } else if (orden.includes('0')) {
           console.log('entra por 0');
-          this.lista = this.libroService.getLibrosOrdenadosAZ();
+          // this.lista = this.libroService.getLibrosOrdenadosAZ();
           this.esOrdenAZ = true;
           this.esOrdenAZIcon = true;
         } else if (orden.includes('1')) {
           // Solo cambia el boolean y por tanto el HTML asociado
-          this.lista = this.libroService.getLibrosOrdenadosAZ();
+          // this.lista = this.libroService.getLibrosOrdenadosAZ();
           console.log('es orden 1');
           this.esOrdenAZ = false;
           this.esOrdenZA = true;
         } else if (orden.includes('2')) {
           console.log('entra por 2');
           this.esOrdenNew = true;
-          this.lista = this.libroService.getLibrosNuevos();
+          // this.lista = this.libroService.getLibrosNuevos();
         }
       }
 
@@ -179,7 +178,7 @@ export class HomeComponent implements OnInit {
       if (cat) {
         this.categoria = cat;
         this.asignarIcono();
-        this.lista = this.libroService.getLibrosPorCategoria(cat);
+        // this.lista = this.libroService.getLibrosPorCategoria(cat);
 
         // El orden da igual siempre es A-Z
         if (!orden) {
@@ -201,22 +200,22 @@ export class HomeComponent implements OnInit {
   }
 
   cerrarIcono(s: string) {
-    switch (s) {
-      case 'za':
-        this.esOrdenZA = false;
-        break;
-      case 'az':
-        this.esOrdenAZIcon = false;
-        break;
-      case 'new':
-        this.esOrdenNew = false;
-        this.lista = this.libroService.getLibros();
-        break;
-      case 'cat':
-        this.categoria = '';
-        this.lista = this.libroService.getLibrosOrdenadosAZ();
-        break;
-    }
+    // switch (s) {
+    //   case 'za':
+    //     this.esOrdenZA = false;
+    //     break;
+    //   case 'az':
+    //     this.esOrdenAZIcon = false;
+    //     break;
+    //   case 'new':
+    //     this.esOrdenNew = false;
+    //     this.lista = this.libroService.getLibros();
+    //     break;
+    //   case 'cat':
+    //     this.categoria = '';
+    //     // this.lista = this.libroService.getLibrosOrdenadosAZ();
+    //     break;
+    // }
   }
 
   asignarIcono() {
@@ -271,116 +270,116 @@ export class HomeComponent implements OnInit {
   buscar() {}
 
   pedirClick(libro: Libro) {
-    const dialogo = this.dialog.open(DialogoConfirmarPedirComponent, {
-      width: '50%',
-      data: { libro: libro, biblioteca: 'Biblioteca 66' },
-    });
+    // const dialogo = this.dialog.open(DialogoConfirmarPedirComponent, {
+    //   width: '50%',
+    //   data: { libro: libro, biblioteca: 'Biblioteca 66' },
+    // });
 
-    dialogo.afterClosed().subscribe(async (result) => {
-      if (result == true) {
-        let lector;
-        let lectorID;
-        if (isPlatform('mobileweb')) {
-          lector = JSON.parse(localStorage.getItem('user'));
-          try {
-            lectorID = lector.uid;
-          } catch (e) {
-            alert('Usuario no encontrado');
-          }
-        } else if (isPlatform('mobile')) {
-          lector = await this.storageService.getUser();
-          let aux = await JSON.parse(lector);
-          lectorID = aux.userId;
-        } else {
-          // Web
-          lector = JSON.parse(localStorage.getItem('user'));
-          try {
-            lectorID = lector.uid;
-          } catch (e) {
-            alert('Usuario no encontrado');
-          }
-        }
+    // dialogo.afterClosed().subscribe(async (result) => {
+    //   if (result == true) {
+    //     let lector;
+    //     let lectorID;
+    //     if (isPlatform('mobileweb')) {
+    //       lector = JSON.parse(localStorage.getItem('user'));
+    //       try {
+    //         lectorID = lector.uid;
+    //       } catch (e) {
+    //         alert('Usuario no encontrado');
+    //       }
+    //     } else if (isPlatform('mobile')) {
+    //       lector = await this.storageService.getUser();
+    //       let aux = await JSON.parse(lector);
+    //       lectorID = aux.userId;
+    //     } else {
+    //       // Web
+    //       lector = JSON.parse(localStorage.getItem('user'));
+    //       try {
+    //         lectorID = lector.uid;
+    //       } catch (e) {
+    //         alert('Usuario no encontrado');
+    //       }
+    //     }
 
-        if (lector && lectorID) {
-          this.reservasService.addNuevaReserva(libro.isbn, lectorID);
-          this.reservasService.cambiarEstadoaND(libro.isbn, lectorID);
-        } else {
-          alert(
-            'No se ha podido completar la operación, no se detecta el usuario'
-          );
-        }
-      }
-    });
+    //     if (lector && lectorID) {
+    //       this.reservasService.addNuevaReserva(libro.isbn, lectorID);
+    //       this.reservasService.cambiarEstadoaND(libro.isbn, lectorID);
+    //     } else {
+    //       alert(
+    //         'No se ha podido completar la operación, no se detecta el usuario'
+    //       );
+    //     }
+    //   }
+    // });
   }
 
   reservarClick(libro: Libro) {
-    // Abre el dialogo selector
-    const dialogo = this.dialog.open(DialogoConfirmarReservaComponent, {
-      width: '50%',
-      data: { libro: libro, biblioteca: 'Biblioteca 66' },
-    });
+    // // Abre el dialogo selector
+    // const dialogo = this.dialog.open(DialogoConfirmarReservaComponent, {
+    //   width: '50%',
+    //   data: { libro: libro, biblioteca: 'Biblioteca 66' },
+    // });
 
-    dialogo.afterClosed().subscribe((result) => {
-      if (result == true) {
-        // Obtener lector
-        let lector;
-        let lectorID;
-        if (isPlatform('mobileweb')) {
-          lector = JSON.parse(localStorage.getItem('user'));
-          try {
-            lectorID = lector.uid;
-          } catch (e) {
-            alert('Usuario no encontrado');
-          }
-        } else if (isPlatform('mobile')) {
-          lector = this.storageService.getUser();
-          lectorID = lector.userId;
-        } else {
-          // Web
-          lector = JSON.parse(localStorage.getItem('user'));
-          try {
-            lectorID = lector.uid;
-          } catch (e) {
-            alert('Usuario no encontrado');
-          }
-        }
+    // dialogo.afterClosed().subscribe((result) => {
+    //   if (result == true) {
+    //     // Obtener lector
+    //     let lector;
+    //     let lectorID;
+    //     if (isPlatform('mobileweb')) {
+    //       lector = JSON.parse(localStorage.getItem('user'));
+    //       try {
+    //         lectorID = lector.uid;
+    //       } catch (e) {
+    //         alert('Usuario no encontrado');
+    //       }
+    //     } else if (isPlatform('mobile')) {
+    //       lector = this.storageService.getUser();
+    //       lectorID = lector.userId;
+    //     } else {
+    //       // Web
+    //       lector = JSON.parse(localStorage.getItem('user'));
+    //       try {
+    //         lectorID = lector.uid;
+    //       } catch (e) {
+    //         alert('Usuario no encontrado');
+    //       }
+    //     }
 
-        // Obtener cola
-        let res = this.colaService.getColaHTTP();
-        res.subscribe((r) => {
-          try {
-            if (lector && lectorID) {
-              this.colaService.addReservaCola(libro.isbn, lectorID, r);
-            } else {
-              alert('ERROR, no se ha podido encontrar al usuario');
-            }
-          } catch (e) {
-            alert('Ha habido un error en la reserva');
-          }
-        });
-      }
-    });
+    //     // Obtener cola
+    //     let res = this.colaService.getColaHTTP();
+    //     res.subscribe((r) => {
+    //       try {
+    //         if (lector && lectorID) {
+    //           this.colaService.addReservaCola(libro.isbn, lectorID, r);
+    //         } else {
+    //           alert('ERROR, no se ha podido encontrar al usuario');
+    //         }
+    //       } catch (e) {
+    //         alert('Ha habido un error en la reserva');
+    //       }
+    //     });
+    //   }
+    // });
   }
 
   libroClick(libro: any) {
-    this.libroSeleccionado = libro;
-    this.libroService.setLibroSeleccionado(libro);
-    this.zone.run(() => {
-      this.router.navigate(['/detalles-libro']);
-    });
+    // this.libroSeleccionado = libro;
+    // this.libroService.setLibroSeleccionado(libro);
+    // this.zone.run(() => {
+    //   this.router.navigate(['/detalles-libro']);
+    // });
   }
 
   // Esteticos
   aplicarNombreEstetico(s: string, i: number) {
-    return this.tituloService.aplicarNombreEstetico(s, i);
+    // return this.tituloService.aplicarNombreEstetico(s, i);
   }
 
   aplicarNombreEsteticoSimplificado(s: string) {
-    return this.tituloService.aplicarNombreEsteticoSimplificado(s);
+    // return this.tituloService.aplicarNombreEsteticoSimplificado(s);
   }
 
   quitarNumsYGuion(s: string) {
-    return this.tituloService.quitarNumsYGuion(s);
+    // return this.tituloService.quitarNumsYGuion(s);
   }
 
   esAndroid(): boolean {
