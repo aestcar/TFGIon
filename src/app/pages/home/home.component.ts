@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   isAdmin: Observable<boolean>;
 
   // Listas
-  lista: Observable<Array<Libro>>;
+  lista: any;
   listaEventos: Observable<Array<Evento>>;
 
   //Calendario
@@ -62,30 +62,29 @@ export class HomeComponent implements OnInit {
   libroSeleccionado: Libro;
 
   constructor(
-    // private libroService: LibrosService,
+    private libroService: LibrosService,
     // private eventoService: EventosService,
     private router: Router,
     public dialog: MatDialog,
-    // private autorizacionService: AutenticacionService,
-    // private reservasService: ReservasService,
-    // private tituloService: TitulosService,
-    // private storageService: StorageAndroidService,
-    // private colaService: ColaReservasService
+    private autorizacionService: AutenticacionService,
+    //  
+    private tituloService: TitulosService // private storageService: StorageAndroidService, // private colaService: ColaReservasService
   ) {
-    // this.lista = this.libroService.getLibros();
-    // this.lista.subscribe(r => console.log(r))
     // this.listaEventos = this.eventoService.getEventos();
-
     // // Calendario
     // this.monday = 1;
-
     // // HTML
     // this.contadorLibros = 0;
     // this.totalLibros = 60;
   }
 
-  ngOnInit(): void {
-    console.log('se carga home');
+  async ngOnInit() {
+    this.libroService.getLibros().then((lista$) => {
+      lista$.subscribe((lista) => {
+        this.lista = lista;
+      });
+    });
+
     //this.funcionContadorLibros();
 
     // Autenticacion
@@ -274,7 +273,6 @@ export class HomeComponent implements OnInit {
     //   width: '50%',
     //   data: { libro: libro, biblioteca: 'Biblioteca 66' },
     // });
-
     // dialogo.afterClosed().subscribe(async (result) => {
     //   if (result == true) {
     //     let lector;
@@ -299,7 +297,6 @@ export class HomeComponent implements OnInit {
     //         alert('Usuario no encontrado');
     //       }
     //     }
-
     //     if (lector && lectorID) {
     //       this.reservasService.addNuevaReserva(libro.isbn, lectorID);
     //       this.reservasService.cambiarEstadoaND(libro.isbn, lectorID);
@@ -318,7 +315,6 @@ export class HomeComponent implements OnInit {
     //   width: '50%',
     //   data: { libro: libro, biblioteca: 'Biblioteca 66' },
     // });
-
     // dialogo.afterClosed().subscribe((result) => {
     //   if (result == true) {
     //     // Obtener lector
@@ -343,7 +339,6 @@ export class HomeComponent implements OnInit {
     //         alert('Usuario no encontrado');
     //       }
     //     }
-
     //     // Obtener cola
     //     let res = this.colaService.getColaHTTP();
     //     res.subscribe((r) => {
@@ -371,7 +366,7 @@ export class HomeComponent implements OnInit {
 
   // Esteticos
   aplicarNombreEstetico(s: string, i: number) {
-    // return this.tituloService.aplicarNombreEstetico(s, i);
+    return this.tituloService.aplicarNombreEstetico(s, i);
   }
 
   aplicarNombreEsteticoSimplificado(s: string) {

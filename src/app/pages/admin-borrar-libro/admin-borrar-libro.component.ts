@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./admin-borrar-libro.component.css'],
 })
 export class AdminBorrarLibroComponent implements OnInit {
-  libros: Observable<Libro[]>;
+  libros: any;
   librosAUX: Observable<Libro[]>;
   displayedColumns: string[] = ['título', 'autor', 'isbn', 'editorial'];
   cargado: boolean;
@@ -37,10 +37,10 @@ export class AdminBorrarLibroComponent implements OnInit {
 
   async clickBorrarLibro() {
     // TODO BORRARLO DE LA BD
-    this.libros = this.libros.pipe(
-      map((libros) => libros.filter((libro) => libro.isbn != this.isbnABorrar))
-    );
-    this.libroService.borrarLibro(this.isbnABorrar);
+    // this.libros = this.libros.pipe(
+    //   map((libros) => libros.filter((libro) => libro.isbn != this.isbnABorrar))
+    // );
+    // this.libroService.borrarLibro(this.isbnABorrar);
 
     alert('Se ha borrado el libro con éxito');
 
@@ -57,11 +57,11 @@ export class AdminBorrarLibroComponent implements OnInit {
     if (filterValue == '') {
       this.libros = this.librosAUX;
     } else {
-      this.libros = this.libros.pipe(
-        map((libros) =>
-          libros.filter((libro) => libro.isbn.includes(filterValue))
-        )
-      ); //= filterValue.trim().toLowerCase();
+      // this.libros = this.libros.pipe(
+      //   map((libros) =>
+      //     libros.filter((libro) => libro.isbn.includes(filterValue))
+      //   )
+      // ); //= filterValue.trim().toLowerCase();
     }
   }
 

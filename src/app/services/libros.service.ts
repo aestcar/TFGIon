@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { from } from 'rxjs';
 import { Libro } from '../interfaces/Libro';
-import {
-  AngularFireDatabase,
-  AngularFireList,
-} from '@angular/fire/compat/database';
-import { Database, push, ref } from '@angular/fire/database';
+import { getDatabase, ref, child, get } from 'firebase/database';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -18,11 +14,7 @@ export class LibrosService {
 
   // private libroSeleccionado: Libro;
 
-  constructor(
-    // private db: AngularFireDatabase,
-    // private dbFire: Database,
-    // private httpClient: HttpClient
-  ) {
+  constructor() { // private httpClient: HttpClient // private dbFire: Database, // private db: AngularFireDatabase,
     // this.librosDB = this.db.list('/libros', (ref) => ref.orderByChild('id'));
   }
 
@@ -54,13 +46,21 @@ export class LibrosService {
     //   });
   }
 
-  getLibros(): Observable<Libro[]> {
-    // return this.librosDB
-    //   .snapshotChanges()
-    //   .pipe(
-    //     map((changes) => changes.map((c) => this.getUserFromPayload(c.payload)))
-    //   );
-    return null;
+  async getLibros(): Promise<Observable<any>> {
+    const dbRef = ref(getDatabase());
+    try {
+      const snapshot = await get(child(dbRef, `libros/`));
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+        return from(Promise.resolve(snapshot.val()));
+      } else {
+        console.log('No data available');
+        return from(Promise.resolve(null));
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   getUserFromPayload(payload: any): Libro {
@@ -98,7 +98,6 @@ export class LibrosService {
     // this.librosDBOrdenadosAZ = this.db.list('/libros', (ref) =>
     //   ref.orderByChild('titulo')
     // );
-
     // return this.librosDBOrdenadosAZ
     //   .snapshotChanges()
     //   .pipe(
@@ -110,7 +109,6 @@ export class LibrosService {
     // this.librosDBOrdenadosAZ = this.db.list('/libros', (ref) =>
     //   ref.orderByChild('categoria').startAt('nuevo-15').endAt('nuevo-15')
     // );
-
     // return this.librosDBOrdenadosAZ
     //   .snapshotChanges()
     //   .pipe(
@@ -122,7 +120,6 @@ export class LibrosService {
     // this.librosDBOrdenadosAZ = this.db.list('/libros', (ref) =>
     //   ref.orderByChild('categoria').startAt(id).endAt(id)
     // );
-
     // return this.librosDBOrdenadosAZ
     //   .snapshotChanges()
     //   .pipe(
@@ -133,16 +130,13 @@ export class LibrosService {
   // -------------------------------------------------------------------------------------------
   buscarLibros(aBuscar: string) {
     // console.log('Buscando ' + aBuscar);
-
     // this.librosDB = this.db.list('/libros', (ref) =>
     //   ref
     //     .orderByChild('titulo')
     //     .startAt(aBuscar.toLowerCase())
     //     .endAt(aBuscar.toLowerCase() + '\uf8ff')
     // );
-
     // console.log(this.librosDB);
-
     // return this.getLibros();
   }
 

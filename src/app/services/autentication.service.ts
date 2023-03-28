@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore/lite';
 // import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import {
   getAuth,
@@ -10,7 +8,6 @@ import {
   signOut,
   UserCredential,
 } from 'firebase/auth';
-import { environment } from 'src/environments/environment';
 
 
 import { FacebookAuthProvider } from 'firebase/auth';
@@ -35,8 +32,6 @@ export class AutenticacionService {
   /* -----------------------  GOOGLE  ---------------------------------- */
 
   async getAutenticacion() {
-    const app = initializeApp(environment.firebase);
-
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
 
