@@ -34,19 +34,11 @@ export class AutenticacionService {
   async getAutenticacion() {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
-
     const res = await signInWithPopup(auth, provider);
-
-
     const user = res.user;
-
     this.userData = user;
-
     // Local Storage
     localStorage.setItem('user', JSON.stringify(user));
-
-    console.log(user);
-
     return user;
   }
 

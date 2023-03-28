@@ -3,31 +3,31 @@
 
   <div id="tablaEventos">
     <div
-      *ngFor="let evento of (listaEventos | async)?.reverse()"
+      *ngFor="let evento of (listaEventos | keyvalue)?.reverse()"
       class="evento"
     >
       <img
-        *ngIf="!evento.portadaImgPath"
+        *ngIf="!evento.value.portadaImgPath"
         class="imgEvento"
-        alt="{{ evento.nombre }}"
+        alt="{{ evento.value.nombre }}"
         src="../assets/images/principales/newevent.png"
         height="250px"
         width="180px"
       />
       <img
-        *ngIf="evento.portadaImgPath"
+        *ngIf="evento.value.portadaImgPath"
         class="imgEvento"
-        alt="{{ evento.nombre }}"
-        src="{{ evento.portadaImgPath }}"
+        alt="{{ evento.value.nombre }}"
+        src="{{ evento.value.portadaImgPath }}"
         height="250px"
         width="180px"
       />
 
       <p class="nombreEvento">
-        {{ aplicarNombreEsteticoSimplificado(evento.nombre) }}
+        {{ aplicarNombreEsteticoSimplificado(evento.value.nombre) }}
       </p>
       <div id="divDescripcionEvento">
-        <p class="descripcionEvento">{{ evento.descripcion }}</p>
+        <p class="descripcionEvento">{{ evento.value.descripcion }}</p>
       </div>
     </div>
   </div>

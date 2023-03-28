@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFireDatabase,
-  AngularFireList,
-} from '@angular/fire/compat/database';
-import { Database, push, ref } from '@angular/fire/database';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { Evento } from '../interfaces/Evento';
+import { getDatabase, ref, child, get } from 'firebase/database';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +13,7 @@ export class EventosService {
   constructor(
     // private db: AngularFireDatabase,
     // private dbFire: Database,
-    private httpClient: HttpClient
+    // private httpClient: HttpClient
   ) {
     // this.eventosDB = this.db.list('/eventos', (ref) => ref.orderByChild('id'));
   }
@@ -30,32 +25,40 @@ export class EventosService {
 
   addEventoHTTP(evento: Evento) {
     // Hacemos un post y un put para eliminar la key por defecto
-    this.httpClient
-      .post(
-        'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/eventos/' +
-          evento.nombre +
-          '.json',
-        evento
-      )
-      .subscribe(() => {
-        this.httpClient
-          .put(
-            'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/eventos/' +
-              evento.nombre +
-              '.json',
-            evento
-          )
-          .subscribe((r) => console.log(r));
-      });
+    // this.httpClient
+    //   .post(
+    //     'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/eventos/' +
+    //       evento.nombre +
+    //       '.json',
+    //     evento
+    //   )
+    //   .subscribe(() => {
+    //     this.httpClient
+    //       .put(
+    //         'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/eventos/' +
+    //           evento.nombre +
+    //           '.json',
+    //         evento
+    //       )
+    //       .subscribe((r) => console.log(r));
+    //   });
   }
 
-  getEventos(): Observable<Evento[]> {
-    // return this.eventosDB
-    //   .snapshotChanges()
-    //   .pipe(
-    //     map((changes) => changes.map((c) => this.getUserFromPayload(c.payload)))
-    //   );
-    return null;
+  async getLibros(): Promise<Observable<any>> {
+    const dbRef = ref(getDatabase());
+    try {
+      const snapshot = await get(child(dbRef, `libros/`));
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+        return from(Promise.resolve(snapshot.val()));
+      } else {
+        console.log('No data available');
+        return from(Promise.resolve(null));
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   getUserFromPayload(payload: any): Evento {
@@ -66,14 +69,14 @@ export class EventosService {
   }
 
   borrarEvento(id: any) {
-    this.httpClient
-      .delete(
-        'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/eventos/' +
-          id +
-          '.json'
-      )
-      .subscribe((r) => {
-        console.log(r);
-      });
+    // this.httpClient
+    //   .delete(
+    //     'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/eventos/' +
+    //       id +
+    //       '.json'
+    //   )
+    //   .subscribe((r) => {
+    //     console.log(r);
+    //   });
   }
 }

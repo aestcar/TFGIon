@@ -33,8 +33,8 @@ export class HomeComponent implements OnInit {
   isAdmin: Observable<boolean>;
 
   // Listas
-  lista: any;
-  listaEventos: Observable<Array<Evento>>;
+  lista: Observable<Libro[]>;
+  listaEventos: Observable<Libro[]>;
 
   //Calendario
   monday: number;
@@ -63,14 +63,12 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private libroService: LibrosService,
-    // private eventoService: EventosService,
+    private eventoService: EventosService,
     private router: Router,
     public dialog: MatDialog,
     private autorizacionService: AutenticacionService,
-    //  
     private tituloService: TitulosService // private storageService: StorageAndroidService, // private colaService: ColaReservasService
   ) {
-    // this.listaEventos = this.eventoService.getEventos();
     // // Calendario
     // this.monday = 1;
     // // HTML

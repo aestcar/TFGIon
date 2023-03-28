@@ -126,7 +126,7 @@
           <img
             *ngIf="!libro.value.portadaImgPath"
             class="imgLibro"
-            alt="libro"
+            alt="{{ libro.value.titulo }}"
             src="../assets/images/principales/portadanodisp.png"
             height="230px"
             width="153px"
@@ -135,7 +135,7 @@
           <img
             *ngIf="libro.value.portadaImgPath"
             class="imgLibro"
-            alt="libro"
+            alt="{{ libro.value.titulo }}"
             src="{{ libro.value.portadaImgPath }}"
             height="230px"
             width="153px"

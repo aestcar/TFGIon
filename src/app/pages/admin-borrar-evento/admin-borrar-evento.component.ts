@@ -24,7 +24,7 @@ export class AdminBorrarEventoComponent implements OnInit {
 
   ngOnInit(): void {
     // Instanciar tabla eventos
-    this.eventos = this.eventoServicio.getEventos();
+    // this.eventos = this.eventoServicio.getEventos();
   }
 
   async clickBorrarEvento() {
