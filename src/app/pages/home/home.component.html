@@ -62,65 +62,10 @@
       </div>
     </div>
 
-    <!-- <div *ngIf="!esOrdenAZ" class="tabla">
-      <div *ngFor="let libro of (lista | async)?.reverse()" class="card">
-        <div class="divImgLibro" (click)="libroClick(libro)">
-          <!-- Tiene o no imagen de portada? -->
-          <!-- <img
-            *ngIf="!libro.value.portadaImgPath"
-            class="imgLibro"
-            alt="libro"
-            src="../assets/images/principales/portadanodisp.png"
-            height="230px"
-            width="153px"
-          /> -->
-          <!-- por defecto -->
-          <!-- <img
-            *ngIf="libro.value.portadaImgPath"
-            class="imgLibro"
-            alt="libro"
-            src="{{ libro.value.portadaImgPath }}"
-            height="230px"
-            width="153px"
-          />
-        </div>
-
-        <p class="tituloLibro" (click)="libroClick(libro)">
-          {{ aplicarNombreEstetico(libro.value.titulo, 17) }}
-        </p>
-        <p class="autorLibro" (click)="libroClick(libro)">
-          {{ aplicarNombreEstetico(libro.value.autor, 19) }}
-        </p>
-
-        <div class="libroNoDisponible" *ngIf="!libro.value.disponible">
-          <div class="divBotonReservar">
-            <span title="No Disponible"
-              ><ion-icon name="warning-outline"></ion-icon
-            ></span>
-            <div class="centerBoto">
-              <button class="botonReservar" (click)="reservarClick(libro)">
-                Reservar
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="divBotonPedir">
-          <button
-            class="botonPedir"
-            (click)="pedirClick(libro)"
-            *ngIf="libro.value.disponible"
-          >
-            Pedir
-          </button>
-        </div>
-      </div>
-    </div> --> 
-
+    
     <!----------------------------------------------------------------------------------------------------------------->
-    <!-- Si el orden es A-Z hay que hacer reverse() a la lista, por tanto se debe duplicar-->
     <div class="tabla">
-      <div *ngFor="let libro of lista | keyvalue" class="card">
+      <div *ngFor="let libro of listaFiltrada | keyvalue" class="card">
         <div class="divImgLibro" (click)="libroClick(libro)">
           <!-- Tiene o no imagen de portada? -->
           <img

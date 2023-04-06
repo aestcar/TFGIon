@@ -34,7 +34,8 @@ export class HomeComponent implements OnInit {
 
   // Listas
   lista: Observable<Libro[]>;
-  listaEventos: Observable<Libro[]>;
+  listaFiltrada: Libro[];
+  listaEventos: Observable<Evento[]>;
 
   //Calendario
   monday: number;
@@ -50,9 +51,7 @@ export class HomeComponent implements OnInit {
   user: any;
 
   // Orden
-  esOrdenAZ: boolean; // Controla el reverse
-  esOrdenAZIcon: boolean;
-  esOrdenZA: boolean;
+  orden: string = 'az-0';
   esOrdenNew: boolean;
 
   categoria: string;
@@ -69,45 +68,41 @@ export class HomeComponent implements OnInit {
     private autorizacionService: AutenticacionService,
     private tituloService: TitulosService // private storageService: StorageAndroidService, // private colaService: ColaReservasService
   ) {
-    // // Calendario
-    // this.monday = 1;
-    // // HTML
-    // this.contadorLibros = 0;
-    // this.totalLibros = 60;
+    this.contadorLibros = 0;
+    this.totalLibros = 60;
   }
 
-  async ngOnInit() {
-    this.libroService.getLibros().then((lista$) => {
-      lista$.subscribe((lista) => {
-        this.lista = lista;
-      });
+  ngOnInit() {
+    this.libroService.getLibros().subscribe((lista) => {
+      console.log(lista);
+      this.lista = this.ordenarListas(lista);
+      this.listaFiltrada = lista;
     });
 
-    //this.funcionContadorLibros();
+    this.funcionContadorLibros();
 
     // Autenticacion
-    // this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = JSON.parse(localStorage.getItem('user'));
 
-    // if (this.user) {
-    //   this.isAdmin = this.getEsAdmin(this.user.uid);
-    // }
+    if (this.user) {
+      this.isAdmin = this.getEsAdmin(this.user.uid);
+    }
   }
 
   // ADMIN
   getEsAdmin(localUID: string): Observable<boolean> {
-    // return this.autorizacionService.esAdminLocalStorage(localUID).pipe(
-    //   map((r) => {
-    //     if (r) {
-    //       return true;
-    //     } else {
-    //       return false;
-    //     }
-    //   }),
-    //   catchError((err) => {
-    //     return of(false);
-    //   })
-    // );
-    return null;
+    return this.autorizacionService.esAdminLocalStorage(localUID).pipe(
+      map((r) => {
+        if (r) {
+          return true;
+        } else {
+          return false;
+        }
+      }),
+      catchError((err) => {
+        return of(false);
+      })
+    );
   }
 
   adminClick() {
@@ -143,56 +138,42 @@ export class HomeComponent implements OnInit {
     });
 
     // Vaciar lista
-    this.lista.forEach((e) => e.pop());
+    delete this.listaFiltrada;
 
     dialogo.afterClosed().subscribe(() => {
       // Obtiene los valores
-      let orden = dialogo.componentInstance.getOrden();
+      let nuevoOrden = dialogo.componentInstance.getOrden();
       let cat = dialogo.componentInstance.getCategoria();
 
-      // Si no hay categoria solo se Comprobar orden
-      if (!cat) {
-        if (!orden) {
-        } else if (orden.includes('0')) {
-          console.log('entra por 0');
-          // this.lista = this.libroService.getLibrosOrdenadosAZ();
-          this.esOrdenAZ = true;
-          this.esOrdenAZIcon = true;
-        } else if (orden.includes('1')) {
-          // Solo cambia el boolean y por tanto el HTML asociado
-          // this.lista = this.libroService.getLibrosOrdenadosAZ();
-          console.log('es orden 1');
-          this.esOrdenAZ = false;
-          this.esOrdenZA = true;
-        } else if (orden.includes('2')) {
-          console.log('entra por 2');
-          this.esOrdenNew = true;
-          // this.lista = this.libroService.getLibrosNuevos();
-        }
-      }
+      this.listaFiltrada = this.libroService.filterLibrosOrdenados(
+        this.listaFiltrada,
+        nuevoOrden,
+        this.orden,
+        cat
+      );
 
       // Comprobar categoria
-      if (cat) {
-        this.categoria = cat;
-        this.asignarIcono();
-        // this.lista = this.libroService.getLibrosPorCategoria(cat);
+      // if (cat) {
+      //   this.categoria = cat;
+      //   this.asignarIcono();
+      //   // this.lista = this.libroService.getLibrosPorCategoria(cat);
 
-        // El orden da igual siempre es A-Z
-        if (!orden) {
-        }
+      //   // El orden da igual siempre es A-Z
+      //   if (!orden) {
+      //   }
 
-        if (orden.includes('0')) {
-          this.esOrdenAZ = false;
-          this.esOrdenAZIcon = true;
-        } else if (orden.includes('1')) {
-          // Solo cambia el boolean y por tanto el HTML asociado
-          this.esOrdenAZ = true;
-          this.esOrdenAZIcon = false;
-          this.esOrdenZA = true;
-        } else if (orden.includes('2')) {
-          this.esOrdenNew = true;
-        }
-      }
+      //   if (orden.includes('0')) {
+      //     this.esOrdenAZ = false;
+      //     this.esOrdenAZIcon = true;
+      //   } else if (orden.includes('1')) {
+      //     // Solo cambia el boolean y por tanto el HTML asociado
+      //     this.esOrdenAZ = true;
+      //     this.esOrdenAZIcon = false;
+      //     this.esOrdenZA = true;
+      //   } else if (orden.includes('2')) {
+      //     this.esOrdenNew = true;
+      //   }
+      // }
     });
   }
 
@@ -383,5 +364,17 @@ export class HomeComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  ordenarListas(lista) {
+    return lista.sort((a, b) => {
+      if (a.titulo < b.titulo) {
+        return -1;
+      } else if (a.titulo > b.titulo) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
   }
 }

@@ -12,19 +12,19 @@ export class HeaderComponent implements OnInit {
   // Localstorage
   user: any;
 
-  constructor(
-    private router: Router,
-    private zone: NgZone
-  ) {
+  constructor(private router: Router, private zone: NgZone) {
     this.user = JSON.parse(localStorage.getItem('user'));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   esMovil(): boolean {
-    if (Capacitor.getPlatform() === 'android' || Capacitor.getPlatform() === 'ios') {
+    if (
+      Capacitor.getPlatform() === 'android' ||
+      Capacitor.getPlatform() === 'ios'
+    ) {
       return true;
-    }else if(window.screen.width < 650){
+    } else if (window.screen.width < 650) {
       return true;
     } else {
       return false;
@@ -36,11 +36,11 @@ export class HeaderComponent implements OnInit {
   }
 
   perfilClick() {
-    if(!this.user){
+    if (!this.user) {
       this.zone.run(() => {
         this.router.navigate(['/registrarse']);
       });
-    }else{
+    } else {
       this.zone.run(() => {
         this.router.navigate(['/perfil']);
       });

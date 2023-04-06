@@ -11,12 +11,8 @@ export class EventosService {
   // private eventosDB: AngularFireList<Evento>;
 
   constructor(
-    // private db: AngularFireDatabase,
-    // private dbFire: Database,
     // private httpClient: HttpClient
-  ) {
-    // this.eventosDB = this.db.list('/eventos', (ref) => ref.orderByChild('id'));
-  }
+  ) { }
 
   addEvento(evento: Evento) {
     // const doc = ref(this.dbFire, 'eventos'); // Doc = referencia a la BD + test = path
@@ -49,7 +45,6 @@ export class EventosService {
     try {
       const snapshot = await get(child(dbRef, `libros/`));
       if (snapshot.exists()) {
-        console.log(snapshot.val());
         return from(Promise.resolve(snapshot.val()));
       } else {
         console.log('No data available');
@@ -59,13 +54,6 @@ export class EventosService {
       console.error(error);
       throw error;
     }
-  }
-
-  getUserFromPayload(payload: any): Evento {
-    return {
-      $key: payload.key,
-      ...payload.val(),
-    };
   }
 
   borrarEvento(id: any) {

@@ -1,21 +1,17 @@
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
+import { toArray, map, switchMap } from 'rxjs/operators';
 import { Libro } from '../interfaces/Libro';
-import { getDatabase, ref, child, get } from 'firebase/database';
-import { HttpClient } from '@angular/common/http';
+import { getDatabase, ref, child, get, orderByChild } from 'firebase/database';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LibrosService {
-  // private librosDB: AngularFireList<Libro>;
-  // private librosDBOrdenadosAZ: AngularFireList<Libro>;
-
   // private libroSeleccionado: Libro;
 
-  constructor() { // private httpClient: HttpClient // private dbFire: Database, // private db: AngularFireDatabase,
-    // this.librosDB = this.db.list('/libros', (ref) => ref.orderByChild('id'));
-  }
+  constructor(private httpClient: HttpClient) { }
 
   // -------------------------------------------------------------------------------------------
 
@@ -45,21 +41,8 @@ export class LibrosService {
     //   });
   }
 
-  async getLibros(): Promise<Observable<any>> {
-    const dbRef = ref(getDatabase());
-    try {
-      const snapshot = await get(child(dbRef, `libros/`));
-      if (snapshot.exists()) {
-        console.log(snapshot.val());
-        return from(Promise.resolve(snapshot.val()));
-      } else {
-        console.log('No data available');
-        return from(Promise.resolve(null));
-      }
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+  getLibros(): Observable<Libro[]> {
+    return this.httpClient.get<Libro[]>('http://localhost:3000/api');
   }
 
   getUserFromPayload(payload: any): Libro {
@@ -93,15 +76,24 @@ export class LibrosService {
 
   // -------------------------------------------------------------------------------------------
 
-  getLibrosOrdenadosAZ() {
-    // this.librosDBOrdenadosAZ = this.db.list('/libros', (ref) =>
-    //   ref.orderByChild('titulo')
-    // );
-    // return this.librosDBOrdenadosAZ
-    //   .snapshotChanges()
-    //   .pipe(
-    //     map((changes) => changes.map((c) => this.getUserFromPayload(c.payload)))
-    //   );
+  filterLibrosOrdenados(
+    listaLibros: Libro[],
+    ordenNuevo: string,
+    ordenViejo: string,
+    categoria: string
+  ) {
+    if (!categoria) {
+      if (ordenNuevo !== ordenViejo) {
+        if (ordenNuevo === 'az-0') {
+          return listaLibros;
+        } else {
+          return listaLibros.reverse();
+        }
+      } else {
+        return listaLibros;
+      }
+    }
+    return null;
   }
 
   getLibrosNuevos() {
