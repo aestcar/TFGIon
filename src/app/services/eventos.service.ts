@@ -10,9 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class EventosService {
   // private eventosDB: AngularFireList<Evento>;
 
-  constructor(
-    // private httpClient: HttpClient
-  ) { }
+  constructor(private httpClient: HttpClient) {}
 
   addEvento(evento: Evento) {
     // const doc = ref(this.dbFire, 'eventos'); // Doc = referencia a la BD + test = path
@@ -40,20 +38,8 @@ export class EventosService {
     //   });
   }
 
-  async getLibros(): Promise<Observable<any>> {
-    const dbRef = ref(getDatabase());
-    try {
-      const snapshot = await get(child(dbRef, `libros/`));
-      if (snapshot.exists()) {
-        return from(Promise.resolve(snapshot.val()));
-      } else {
-        console.log('No data available');
-        return from(Promise.resolve(null));
-      }
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+  getEvents(): Observable<Evento[]> {
+    return this.httpClient.get<Evento[]>('http://localhost:3000/events');
   }
 
   borrarEvento(id: any) {

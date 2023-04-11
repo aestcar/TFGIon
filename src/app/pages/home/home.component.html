@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <div>
-  <div id="divAdmin" *ngIf="isAdmin | async">
+  <div id="divAdmin" *ngIf="isAdmin">
     <p>Visualizando vista del usuario...</p>
     <button (click)="adminClick()">Acceder a Administración</button>
   </div>
@@ -34,25 +34,13 @@
           <ion-label>{{
             aplicarNombreEsteticoSimplificado(quitarNumsYGuion(categoria))
           }}</ion-label>
-          <ion-icon name="close" (click)="cerrarIcono('cat')"></ion-icon>
+          <ion-icon name="close" (click)="cerrarIcono('categoria')"></ion-icon>
         </ion-chip>
 
-        <ion-chip *ngIf="esOrdenNew">
-          <ion-icon name="sparkles-outline"></ion-icon>
-          <ion-label>Nuevos</ion-label>
-          <ion-icon name="close" (click)="cerrarIcono('new')"></ion-icon>
-        </ion-chip>
-
-        <ion-chip *ngIf="esOrdenZA">
-          <ion-icon name="arrow-up-outline"></ion-icon>
-          <ion-label>Z-A</ion-label>
-          <ion-icon name="close" (click)="cerrarIcono('za')"></ion-icon>
-        </ion-chip>
-
-        <ion-chip *ngIf="esOrdenAZIcon">
-          <ion-icon name="arrow-down-outline"></ion-icon>
-          <ion-label>A-Z</ion-label>
-          <ion-icon name="close" (click)="cerrarIcono('az')"></ion-icon>
+        <ion-chip *ngIf="orden">
+          <ion-icon name="{{ orden === 'asc' ? 'arrow-up-outline' : 'arrow-down-outline'}}"></ion-icon>
+          <ion-label>{{ orden === 'asc' ? 'A-Z' : 'Z-A' }}</ion-label>
+          <ion-icon name="close" (click)="cerrarIcono('orden')"></ion-icon>
         </ion-chip>
 
         <ion-chip (click)="filtroClick()">
@@ -62,7 +50,6 @@
       </div>
     </div>
 
-    
     <!----------------------------------------------------------------------------------------------------------------->
     <div class="tabla">
       <div *ngFor="let libro of listaFiltrada | keyvalue" class="card">

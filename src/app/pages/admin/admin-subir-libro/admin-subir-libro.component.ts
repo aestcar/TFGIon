@@ -2,10 +2,10 @@ import { Component, Input, NgZone, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { NgxFileDropEntry } from 'ngx-file-drop';
-import { AdminComponent } from '../admin/admin.component';
-import { Libro } from '../../interfaces/Libro';
-import { LibrosService } from '../../services/libros.service';
-import { ReservasService } from '../../services/reservas.service';
+import { AdminComponent } from '../admin.component';
+import { Libro } from '../../../interfaces/Libro';
+import { LibrosService } from '../../../services/libros.service';
+import { ReservasService } from '../../../services/reservas.service';
 
 @Component({
   selector: 'app-admin-subir-libro',
@@ -143,10 +143,10 @@ export class AdminSubirLibroComponent implements OnInit {
       };
     }
 
-    this.libroService.addLibroHTTP(libro);
+    this.libroService.addLibro(libro);
 
     // Cambiar añadir estado de libro nuevo a disponibilidad
-    this.reservasService.addNuevaDisponibilidad(libro);
+    // this.reservasService.addNuevaDisponibilidad(libro);
 
     // Libro Subido
     alert('Se ha subido el libro con éxito');

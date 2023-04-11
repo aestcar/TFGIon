@@ -11,9 +11,8 @@ export class DialogoComponent implements OnInit {
   categoriaSeleccionada: string;
 
   orden: any[] = [
-    { value: 'az-0', viewValue: 'A-Z' },
-    { value: 'za-1', viewValue: 'Z-A' },
-    { value: 'new-2', viewValue: 'Solo Nuevos' },
+    { value: 'asc', viewValue: 'A-Z' },
+    { value: 'desc', viewValue: 'Z-A' }
   ];
 
   categorias: any[] = [
@@ -48,15 +47,7 @@ export class DialogoComponent implements OnInit {
     this.ordenSeleccionado = orden;
   }
 
-  getOrden() {
-    return this.ordenSeleccionado;
-  }
-
   categoriaCambiada(cat: any) {
     this.categoriaSeleccionada = cat;
-  }
-
-  getCategoria() {
-    return this.categoriaSeleccionada;
   }
 }

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Evento } from 'src/app/interfaces/Evento';
 import { EventosService } from 'src/app/services/eventos.service';
 import { TitulosService } from 'src/app/services/titulos.service';
-import { AdminComponent } from '../admin/admin.component';
+import { AdminComponent } from '../admin.component';
 
 @Component({
   selector: 'app-admin-borrar-evento',

@@ -29,23 +29,24 @@ export class GuardAdminGuard implements CanActivate {
     // falta arreglar
 
       let user = JSON.parse(this.authService.getLocalUser());
-      return this.authService
-        .esAdminLocalStorage(user.uid)
-        .pipe(
-          map(r => {
-          if(r) {
-            return true
-          }
-          else {
-            alert('No tienes permiso para acceder a este sitio');
-            this.router.navigate(['/']);
-            return false;
-          }
-        }),
-        catchError((err) =>{
-          alert('No tienes permiso para acceder a este sitio');
-          this.router.navigate(['/']);
-          return of(false);
-      }));
+      return of(true);
+      // return this.authService
+      //   .esAdminLocalStorage(user.uid)
+      //   .pipe(
+      //     map(r => {
+      //     if(r) {
+      //       return true
+      //     }
+      //     else {
+      //       alert('No tienes permiso para acceder a este sitio');
+      //       this.router.navigate(['/']);
+      //       return false;
+      //     }
+      //   }),
+      //   catchError((err) =>{
+      //     alert('No tienes permiso para acceder a este sitio');
+      //     this.router.navigate(['/']);
+      //     return of(false);
+      // }));
     }
 }

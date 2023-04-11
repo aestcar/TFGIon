@@ -10,7 +10,7 @@ import { TitulosService } from 'src/app/services/titulos.service';
   styleUrls: ['./eventos.component.scss'],
 })
 export class EventosComponent implements OnInit {
-  listaEventos: Observable<Evento[]>;
+  listaEventos: Evento[];
 
   constructor(
     private eventoService: EventosService,
@@ -18,10 +18,8 @@ export class EventosComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.eventoService.getLibros().then((listaEventos$) => {
-      listaEventos$.subscribe((listaEventos) => {
-        this.listaEventos = listaEventos;
-      });
+    this.eventoService.getEvents().subscribe((lista) => {
+      this.listaEventos = lista;
     });
   }
 

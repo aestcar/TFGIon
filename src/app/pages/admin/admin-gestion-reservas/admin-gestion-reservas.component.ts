@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AdminComponent } from '../admin/admin.component';
-import { Cola } from '../../interfaces/Cola';
-import { Reserva } from '../../interfaces/Reserva';
-import { AutenticacionService } from '../../services/autentication.service';
-import { ColaReservasService } from '../../services/cola-reservas.service';
-import { ReservasService } from '../../services/reservas.service';
+import { AdminComponent } from '../admin.component';
+import { Cola } from '../../../interfaces/Cola';
+import { Reserva } from '../../../interfaces/Reserva';
+import { AutenticacionService } from '../../../services/autentication.service';
+import { ColaReservasService } from '../../../services/cola-reservas.service';
+import { ReservasService } from '../../../services/reservas.service';
 
 @Component({
   selector: 'app-admin-gestion-reservas',
@@ -62,7 +62,7 @@ export class AdminGestionReservasComponent implements OnInit {
 
   async buscarUsuario() {
     // Checkear Inputs
-    const user = await this.autenticacionService.buscarUsuariosPorID(
+    const user = await this.autenticacionService.getUser(
       this.valorInputUser
     );
     user.subscribe((r) => {

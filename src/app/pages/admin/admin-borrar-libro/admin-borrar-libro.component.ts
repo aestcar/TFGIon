@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AdminComponent } from '../admin/admin.component';
-import { Libro } from '../../interfaces/Libro';
-import { LibrosService } from '../../services/libros.service';
-import { TitulosService } from '../../services/titulos.service';
+import { AdminComponent } from '../admin.component';
+import { Libro } from '../../../interfaces/Libro';
+import { LibrosService } from '../../../services/libros.service';
+import { TitulosService } from '../../../services/titulos.service';
 import { map } from 'rxjs/operators';
 
 @Component({

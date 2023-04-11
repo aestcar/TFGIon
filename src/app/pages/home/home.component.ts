@@ -9,7 +9,7 @@ import { LibrosService } from '../../services/libros.service';
 import { DialogoComponent } from '../../components/dialogo-filtro/dialogo-filtro.component';
 import { AutenticacionService } from '../../services/autentication.service';
 import { User } from 'firebase/auth';
-import { Admin } from '../../interfaces/Admin';
+import { User as IUser } from '../../interfaces/User';
 import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ReservasService } from '../../services/reservas.service';
@@ -29,8 +29,8 @@ import { ColaReservasService } from 'src/app/services/cola-reservas.service';
 export class HomeComponent implements OnInit {
   // Administracion
   currentUser?: User;
-  observer: Observable<Admin>;
-  isAdmin: Observable<boolean>;
+  observer: Observable<IUser>;
+  isAdmin: boolean = false;
 
   // Listas
   lista: Observable<Libro[]>;
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
   user: any;
 
   // Orden
-  orden: string = 'az-0';
+  orden: string;
   esOrdenNew: boolean;
 
   categoria: string;
@@ -74,7 +74,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.libroService.getLibros().subscribe((lista) => {
-      console.log(lista);
       this.lista = this.ordenarListas(lista);
       this.listaFiltrada = lista;
     });
@@ -85,24 +84,15 @@ export class HomeComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('user'));
 
     if (this.user) {
-      this.isAdmin = this.getEsAdmin(this.user.uid);
+      this.getEsAdmin(this.user.uid).subscribe((res) => {  
+        this.isAdmin = res[0].isAdmin;
+      });
     }
   }
 
   // ADMIN
-  getEsAdmin(localUID: string): Observable<boolean> {
-    return this.autorizacionService.esAdminLocalStorage(localUID).pipe(
-      map((r) => {
-        if (r) {
-          return true;
-        } else {
-          return false;
-        }
-      }),
-      catchError((err) => {
-        return of(false);
-      })
-    );
+  getEsAdmin(localUID: string) {
+    return this.autorizacionService.getUser(localUID);
   }
 
   adminClick() {
@@ -123,11 +113,16 @@ export class HomeComponent implements OnInit {
 
   cargarMas() {}
 
-  // Eventos
   onEnter() {
-    console.log('ha pulsado enter');
     const aBuscar = (<HTMLInputElement>document.getElementById('input')).value;
-    // this.lista = this.libroService.buscarLibros(aBuscar);
+
+    if (!aBuscar) {
+      this.lista.subscribe((res) => (this.listaFiltrada = res));
+    }
+
+    this.libroService
+      .getLibrosByName(aBuscar)
+      .subscribe((res) => (this.listaFiltrada = res));
   }
 
   // Filtros...
@@ -137,70 +132,54 @@ export class HomeComponent implements OnInit {
       width: '250px',
     });
 
-    // Vaciar lista
-    delete this.listaFiltrada;
-
-    dialogo.afterClosed().subscribe(() => {
+    dialogo.afterClosed().subscribe((res) => {
       // Obtiene los valores
-      let nuevoOrden = dialogo.componentInstance.getOrden();
-      let cat = dialogo.componentInstance.getCategoria();
+      this.orden = res.ordenSeleccionado;
+      this.categoria = res.categoriaSeleccionada;
 
-      this.listaFiltrada = this.libroService.filterLibrosOrdenados(
-        this.listaFiltrada,
-        nuevoOrden,
-        this.orden,
-        cat
-      );
+      this.asignarIcono();
 
-      // Comprobar categoria
-      // if (cat) {
-      //   this.categoria = cat;
-      //   this.asignarIcono();
-      //   // this.lista = this.libroService.getLibrosPorCategoria(cat);
-
-      //   // El orden da igual siempre es A-Z
-      //   if (!orden) {
-      //   }
-
-      //   if (orden.includes('0')) {
-      //     this.esOrdenAZ = false;
-      //     this.esOrdenAZIcon = true;
-      //   } else if (orden.includes('1')) {
-      //     // Solo cambia el boolean y por tanto el HTML asociado
-      //     this.esOrdenAZ = true;
-      //     this.esOrdenAZIcon = false;
-      //     this.esOrdenZA = true;
-      //   } else if (orden.includes('2')) {
-      //     this.esOrdenNew = true;
-      //   }
-      // }
+      this.libroService
+        .getFilteredBooks(this.orden, this.categoria)
+        .subscribe((res) => (this.listaFiltrada = res));
     });
   }
 
   cerrarIcono(s: string) {
-    // switch (s) {
-    //   case 'za':
-    //     this.esOrdenZA = false;
-    //     break;
-    //   case 'az':
-    //     this.esOrdenAZIcon = false;
-    //     break;
-    //   case 'new':
-    //     this.esOrdenNew = false;
-    //     this.lista = this.libroService.getLibros();
-    //     break;
-    //   case 'cat':
-    //     this.categoria = '';
-    //     // this.lista = this.libroService.getLibrosOrdenadosAZ();
-    //     break;
-    // }
+    switch (s) {
+      case 'categoria':
+        delete this.categoria;
+        break;
+      case 'orden':
+        delete this.orden;
+        break;
+    }
+    if (!this.orden && !this.categoria) {
+      return this.libroService
+        .getLibros()
+        .subscribe((res) => (this.listaFiltrada = res));
+    }
+    if (this.orden && this.categoria) {
+      return this.libroService
+        .getLibrosOrderedAndCategory(this.orden, this.categoria)
+        .subscribe((res) => (this.listaFiltrada = res));
+    }
+    if (this.orden) {
+      return this.libroService.getLibrosOrdered(this.orden).subscribe((res) => {
+        this.listaFiltrada = res;
+      });
+    }
+    if (this.categoria) {
+      return this.libroService
+        .getLibrosCategory(this.categoria)
+        .subscribe((res) => (this.listaFiltrada = res));
+    }
   }
 
   asignarIcono() {
     // No se puede hacer un switch ya que conitene includes
     if (!this.categoria) {
     } else if (this.categoria.includes('acción')) {
-      console.log('cambiado');
       this.iconCat = 'speedometer-outline';
     } else if (this.categoria.includes('autobiográficos')) {
       this.iconCat = 'book-outline';
@@ -349,11 +328,11 @@ export class HomeComponent implements OnInit {
   }
 
   aplicarNombreEsteticoSimplificado(s: string) {
-    // return this.tituloService.aplicarNombreEsteticoSimplificado(s);
+    return this.tituloService.aplicarNombreEsteticoSimplificado(s);
   }
 
   quitarNumsYGuion(s: string) {
-    // return this.tituloService.quitarNumsYGuion(s);
+    return this.tituloService.quitarNumsYGuion(s);
   }
 
   esAndroid(): boolean {

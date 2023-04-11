@@ -9,11 +9,11 @@ import {
   UserCredential,
 } from 'firebase/auth';
 
-
 import { FacebookAuthProvider } from 'firebase/auth';
 import { HttpClient } from '@angular/common/http';
-import { Admin } from '../interfaces/Admin';
+import { User as IUser} from '../interfaces/User';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +25,7 @@ export class AutenticacionService {
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  getLocalUser(){
+  getLocalUser() {
     return window.localStorage.getItem('user');
   }
 
@@ -41,7 +41,6 @@ export class AutenticacionService {
     localStorage.setItem('user', JSON.stringify(user));
     return user;
   }
-
 
   /* -----------------------  FACEBOOK  ---------------------------------- */
 
@@ -73,7 +72,7 @@ export class AutenticacionService {
     return user;
   }
 
-    /* -----------------------  CÓRDOVA - Google  ---------------------------------- */
+  /* -----------------------  CÓRDOVA - Google  ---------------------------------- */
 
   // async getAutorizacionCordova(){
   //   let resLogin:MobileUser = await this.googlePlus.login({});
@@ -87,7 +86,7 @@ export class AutenticacionService {
   //     .catch(err => {return null});
   //       console.log(err);
   //       return undefined;*/
-  
+
   // }
 
   /* -----------------------  LOGOUT (Arreglar)  ---------------------------------- */
@@ -97,7 +96,7 @@ export class AutenticacionService {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        localStorage.clear()
+        localStorage.clear();
         this.router.navigate(['/']);
       })
       .catch((error) => {
@@ -107,19 +106,11 @@ export class AutenticacionService {
 
   /* -----------------------  OTHER STUFF  ---------------------------------- */
 
-  esAdminLocalStorage(uid: any) {
-    return this.httpClient.get<Admin>(
-      'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/admins/' +
-        uid +
-        '.json'
-    );
+  getUsers(): Observable<IUser[]>{
+    return this.httpClient.get<IUser[]>('http://localhost:3000/users');
   }
 
-  buscarUsuariosPorID(id: string) {
-    return this.httpClient.get<any>(
-      'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/users/' +
-        id +
-        '.json'
-    );
+  getUser(id: string): Observable<IUser> {
+    return this.httpClient.get<IUser>('http://localhost:3000/users/' + id);
   }
 }
