@@ -67,7 +67,7 @@ export class AdminSubirEventoComponent implements OnInit {
       };
     }
 
-    this.eventoServicio.addEventoHTTP(evento);
+    this.eventoServicio.addEvento(evento);
 
     // Libro Subido
     alert('Se ha subido el evento con éxito');

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Reserva } from '../interfaces/Reserva';
-import {
-  AngularFireDatabase,
-  AngularFireList,
-} from '@angular/fire/compat/database';
-import { Database, push, ref } from '@angular/fire/database';
+// import {
+//   AngularFireDatabase,
+//   AngularFireList,
+// } from '@angular/fire/compat/database';
+// import { Database, push, ref } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Libro } from '../interfaces/Libro';
@@ -14,13 +14,13 @@ import { Libro } from '../interfaces/Libro';
   providedIn: 'root',
 })
 export class ReservasService {
-  private reservasDB: AngularFireList<Reserva>;
+  // private reservasDB: AngularFireList<Reserva>;
 
   /* En este servicio todas las llamadas se hacen con HTTP Client, excepto GET Reservas (por el snapshotChanges())*/
 
   constructor(
     private httpClient: HttpClient,
-    private db: AngularFireDatabase
+    // private db: AngularFireDatabase
   ) {}
 
   addNuevaReserva(id: string, lector: string) {
@@ -52,15 +52,15 @@ export class ReservasService {
   }
 
   getReservas(userID: string): Observable<Reserva[]> {
-    this.reservasDB = this.db.list('/reservas/' + userID, (ref) =>
-      ref.orderByChild('id')
-    );
+    // this.reservasDB = this.db.list('/reservas/' + userID, (ref) =>
+    //   ref.orderByChild('id')
+    // );
 
-    // return this.reservasDB
-    //   .snapshotChanges()
-    //   .pipe(
-    //     map((changes) => changes.map((c) => this.getUserFromPayload(c.payload)))
-    //   );
+    // // return this.reservasDB
+    // //   .snapshotChanges()
+    // //   .pipe(
+    // //     map((changes) => changes.map((c) => this.getUserFromPayload(c.payload)))
+    // //   );
     return null;
   }
 

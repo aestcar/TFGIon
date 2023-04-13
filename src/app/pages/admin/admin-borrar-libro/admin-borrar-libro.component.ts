@@ -12,8 +12,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./admin-borrar-libro.component.css'],
 })
 export class AdminBorrarLibroComponent implements OnInit {
-  libros: any;
-  librosAUX: Observable<Libro[]>;
+  libros: Libro[];
   displayedColumns: string[] = ['título', 'autor', 'isbn', 'editorial'];
   cargado: boolean;
   filaABorrar: any;
@@ -27,20 +26,16 @@ export class AdminBorrarLibroComponent implements OnInit {
 
   ngOnInit(): void {
     // Instanciar tabla libros
-    this.libros = this.libroService.getLibros();
-    if (this.libros) {
+    this.libroService.getLibros().subscribe((res) => {
+      this.libros = res;
       this.cargado = true;
-    }
-    // Guardamos la lista en AUX
-    this.librosAUX = this.libros;
+    });
   }
 
   async clickBorrarLibro() {
-    // TODO BORRARLO DE LA BD
-    // this.libros = this.libros.pipe(
-    //   map((libros) => libros.filter((libro) => libro.isbn != this.isbnABorrar))
-    // );
-    // this.libroService.borrarLibro(this.isbnABorrar);
+    const libros = this.libros;
+    this.libros = libros.filter((libro) => libro.isbn != this.isbnABorrar);
+    this.libroService.deleteLibro(this.isbnABorrar);
 
     alert('Se ha borrado el libro con éxito');
 
@@ -55,7 +50,7 @@ export class AdminBorrarLibroComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     if (filterValue == '') {
-      this.libros = this.librosAUX;
+      // this.libros = this.librosAUX;
     } else {
       // this.libros = this.libros.pipe(
       //   map((libros) =>

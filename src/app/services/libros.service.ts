@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
 import { toArray, map, switchMap } from 'rxjs/operators';
 import { Libro } from '../interfaces/Libro';
-import { getDatabase, ref, child, get, orderByChild } from 'firebase/database';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -14,10 +13,7 @@ export class LibrosService {
   constructor(private httpClient: HttpClient) {}
 
   addLibro(libro: Libro) {
-    this.httpClient.post(
-      'http://localhost:3000/books/' + libro.isbn + '.json',
-      libro
-    );
+    this.httpClient.post('http://localhost:3000/books', libro).subscribe(r => console.log(r));
   }
 
   getLibros(): Observable<Libro[]> {
@@ -48,26 +44,8 @@ export class LibrosService {
     );
   }
 
-  borrarLibro(isbn: string) {
-    // this.httpClient
-    //   .delete(
-    //     'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/libros/' +
-    //       isbn +
-    //       '.json'
-    //   )
-    //   .subscribe((r) => {
-    //     console.log(r);
-    //   });
-    // // Borrar tmb disponibilidad del mismo
-    // this.httpClient
-    //   .delete(
-    //     'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/disponibilidad/' +
-    //       isbn +
-    //       '.json'
-    //   )
-    //   .subscribe((r) => {
-    //     console.log(r);
-    //   });
+  deleteLibro(isbn: string) {
+    this.httpClient.delete('http://localhost:3000/books/' + isbn).subscribe(r => console.log(r));
   }
 
   // -------------------------------------------------------------------------------------------
