@@ -11,7 +11,7 @@ import { TitulosService } from '../../../services/titulos.service';
   styleUrls: ['./admin-gestion-errores.component.css'],
 })
 export class AdminGestionErroresComponent implements OnInit {
-  errores: Observable<Problema[]>;
+  errores: Problema[];
   errorSeleccionado: Problema;
   index?: number;
 
@@ -22,8 +22,7 @@ export class AdminGestionErroresComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.errores = this.erroresService.getErrores();
-    console.log(this.errores);
+    this.erroresService.getErrores().subscribe(res => this.errores = res);
   }
 
   atrasDesdeGestion() {
@@ -47,6 +46,8 @@ export class AdminGestionErroresComponent implements OnInit {
 
   borrar(errorSeleccionado: Problema) {
     this.erroresService.borrarError(errorSeleccionado);
+    const errores = this.errores;
+    this.errores = errores.filter((err) => err.id != this.errorSeleccionado.id);
     delete this.index;
     this.errorSeleccionado.msg = '';
   }

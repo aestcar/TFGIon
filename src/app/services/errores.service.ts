@@ -12,46 +12,21 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ErroresService {
-  erroresDB: AngularFireList<Problema>;
-
-  constructor(private httpClient: HttpClient, private db: AngularFireDatabase) {
-    this.erroresDB = this.db.list('/errores', (ref) => ref.orderByChild('id'));
-  }
+  constructor(private httpClient: HttpClient) {}
 
   subirError(error: any) {
     this.httpClient
-      .post(
-        'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/errores.json',
-        error
-      )
+      .post('http://localhost:3000/errors', error)
       .subscribe((r) => console.log(r));
   }
 
   getErrores(): Observable<Problema[]> {
-    // return this.erroresDB
-    //   .snapshotChanges()
-    //   .pipe(
-    //     map((changes) => changes.map((c) => this.getUserFromPayload(c.payload)))
-    //   );
-    return null;
-  }
-
-  getUserFromPayload(payload: any): Problema {
-    return {
-      $key: payload.key,
-      ...payload.val(),
-    };
+    return this.httpClient.get<Problema[]>('http://localhost:3000/errors');
   }
 
   borrarError(errora: Problema) {
-    this.httpClient
-      .delete(
-        'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/errores/' +
-          errora.$key +
-          '.json'
-      )
-      .subscribe(() => {
-        alert('Error borrado');
-      });
+    return this.httpClient
+      .delete('http://localhost:3000/errors/' + errora.id)
+      .subscribe((r) => console.log(r));
   }
 }

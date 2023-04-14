@@ -21,5 +21,6 @@ export class ReportesComponent implements OnInit {
     };
     this.erroresService.subirError(error);
     alert('Tu mensaje se ha enviado correctamente. Muchas gracias');
+    this.inputText = '';
   }
 }

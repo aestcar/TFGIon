@@ -8,7 +8,7 @@
   <div id="lista">
     <mat-list>
       <mat-list-item
-        *ngFor="let error of errores | async; index as indexOfelement"
+        *ngFor="let error of errores; index as indexOfelement"
         (click)="itemClick(error, indexOfelement)"
       >
         <div class="item">
