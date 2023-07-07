@@ -305,3 +305,6 @@ ion-chip {
   color: white !important;
 }
 
+app-component{
+  background-color: #2b2d42;
+}

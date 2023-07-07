@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class LibrosService {
-  // private libroSeleccionado: Libro;
+  private libroSeleccionado: Libro;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -23,6 +23,12 @@ export class LibrosService {
   getLibrosByName(name: string) {
     return this.httpClient.get<Libro[]>(
       'http://localhost:3000/books/name/' + name
+    );
+  }
+
+  getLibrosById(id: string) {
+    return this.httpClient.get<Libro[]>(
+      'http://localhost:3000/books/' + id
     );
   }
 
@@ -86,10 +92,12 @@ export class LibrosService {
 
   // -------------------------------------------------------------------------------------------
   setLibroSeleccionado(libro: Libro) {
-    // this.libroSeleccionado = libro;
+    console.log('Seteamos el libro a -> ' + libro);
+    this.libroSeleccionado = libro;
   }
 
-  getLibroSeleccionado() {
-    // return this.libroSeleccionado;
+  getLibroSeleccionado(): Libro {
+    console.log('Geteamos el libro a -> ' + this.libroSeleccionado);
+    return this.libroSeleccionado;
   }
 }

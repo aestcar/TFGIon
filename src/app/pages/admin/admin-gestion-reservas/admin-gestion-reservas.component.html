@@ -39,11 +39,11 @@
     </button>
   </div>
 
-  <div *ngIf="existeLibro == false">
+  <div *ngIf="existeLibro === false">
     <p>No está disponible</p>
   </div>
 
-  <div *ngIf="existeLibro == true">
+  <div *ngIf="existeLibro === true && resDisponibilidad">
     <p>{{ resDisponibilidad.estado }}</p>
     <p>{{ resDisponibilidad.localizacion }}</p>
   </div>
@@ -64,8 +64,8 @@
 
     <button
       *ngIf="
-        resDisponibilidad.estado == 'No Disponible' &&
-        resDisponibilidad.localizacion == 'En Biblioteca'
+        resDisponibilidad.estado === 'No disponible' &&
+        resDisponibilidad.localizacion === 'En Biblioteca'
       "
       (click)="seHaDevuelto(valorInputGR)"
     >
@@ -74,7 +74,7 @@
     <button
       id="reservas"
       *ngIf="
-        resDisponibilidad.estado == 'No Disponible' &&
+        resDisponibilidad.estado == 'No disponible' &&
         resDisponibilidad.localizacion == 'En Biblioteca'
       "
       (click)="reservarLibro(valorInputGR)"

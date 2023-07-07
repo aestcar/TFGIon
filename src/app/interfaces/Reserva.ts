@@ -1,6 +1,6 @@
 export interface Reserva {
   isbn: string;
-
+  id: string;
   /* Los estados pueden ser: 
         - enBiblioteca -> si está en la presente biblioteca y por tanto se puede reservar
         - enOtraBiblioteca -> si está en la otra biblioteca y por tanto se debe pedir para traer
@@ -14,6 +14,6 @@ export interface Reserva {
 
   fechaIni: string;
   fechaFin: string;
-  lector: string;
+  lectorId: string;
   devuelto?: boolean;
 }

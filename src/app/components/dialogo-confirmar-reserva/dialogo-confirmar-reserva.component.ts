@@ -14,7 +14,7 @@ export class DialogoConfirmarReservaComponent implements OnInit {
 
   ngOnInit() {}
 
-  darFormatoNombre(s:string){
-    return this.tituloService.aplicarNombreEsteticoSimplificado(s);
+  darFormatoNombre(s){
+    return this.tituloService.aplicarNombreEsteticoSimplificado(s.libro.value.titulo.toString());
   }
 }

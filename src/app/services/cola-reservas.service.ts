@@ -1,9 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  AngularFireDatabase,
-  AngularFireList,
-} from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
 import { Cola } from '../interfaces/Cola';
 
@@ -13,23 +9,12 @@ import { Cola } from '../interfaces/Cola';
 export class ColaReservasService {
   // Una vez reservado el libro se encola la peticion de resreva
 
-  private colaDB: AngularFireList<any>;
-
   // Colas de reservas
   resCola: Cola[];
   colaFiltradaGlobal: Cola[];
   noQuedanUsuarios: boolean;
 
-  constructor(private httpClient: HttpClient, private db: AngularFireDatabase) {
-    this.colaDB = this.db.list('/colareservas', (ref) =>
-      ref.orderByChild('id')
-    );
-  }
-
-  obtenerColaInicializada(): Observable<Cola[]> {
-    // Obtener todas las colasDe reservas
-    return this.getColaHTTP();
-  }
+  constructor(private httpClient: HttpClient) {}
 
   /* -------------------------------------------------------------------------------------------------------- */
 
@@ -42,7 +27,7 @@ export class ColaReservasService {
     // Añade una reserva en la cola, si no hay cola la crea
     // Si la hay, la añade asi -> id User = [..., ..., ..., new]
     // cambio
-    let estruct: Cola;
+    let estruct;
 
     if (this.hayColaEnBD(colaAux)) {
       if (this.hayColaParaElLibro(isbn, colaAux)) {
@@ -67,9 +52,8 @@ export class ColaReservasService {
           id: isbn,
         };
       } else {
+        // NO ENTRA SIEMPRE POR AQI
         // No hay cola filtrada
-        console.log('No hay cola filtrada');
-        console.log(idUser);
         estruct = {
           idUser: idUser,
           id: isbn,
@@ -77,83 +61,36 @@ export class ColaReservasService {
       }
     } else {
       // No hay cola
-      console.log('No hay cola');
+      // ENTRA SIEMPRE POR AQI
+      console.log('No hay cola filtrada - O por aqui');
       estruct = {
+        isbn: isbn,
         idUser: idUser,
-        id: isbn,
       };
     }
+
+    console.log(estruct);
 
     // Se suben los cambios a la BD
     this.httpClient
       .post(
-        'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/colareservas/' +
-          isbn +
-          '.json',
+        'http://localhost:3000/colareservas/',
         estruct
       )
-      .subscribe(() => {
-        this.httpClient
-          .put(
-            'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/colareservas/' +
-              isbn +
-              '.json',
-            estruct
-          )
-          .subscribe(() => alert('Se ha reservado el libro con éxito'));
-      });
+      .subscribe((res) => console.log(res),
+       (err) => console.log(err));
   }
 
-  getColaHTTP(): Observable<Cola[]> {
-    return this.httpClient.get<Cola[]>(
-      'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/colareservas.json'
-    );
+  getCola(): Observable<Cola[]> {
+    return this.httpClient.get<Cola[]>('http://localhost:3000/colareservas');
   }
 
-  /* -------------------------------------------------------------------------------------------------------- */
-
-  obtenerElementosColaReservas(isbn: string) {
-    // Obtenemos el id del usuario = elementos de la cola de reservas
-    return this.httpClient.get(
-      'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/colareservas/' +
-        isbn +
-        '/idUser.json'
-    );
+  getColaByIsbn(isbn: string): Observable<Cola[]> {
+    return this.httpClient.get<any>('http://localhost:3000/colareservas/'+isbn);
   }
 
-  eliminarElementoColaReservas(isbn: string, arrayRes: string[]) {
-    if (arrayRes.length == 1) {
-      console.log('Entra por 1 --');
-      // Se debe eliminar el id de ese libro y su cola de idsUsuarios en este caso 1 (Es decir, todo)
-      this.httpClient
-        .delete(
-          'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/colareservas/' +
-            isbn +
-            '.json'
-        )
-        .subscribe((r) => console.log(r));
-    } else if (arrayRes.length > 1) {
-      console.log('Entra por 2 --');
-      // Se debe desapilar un elemento de la cola de idsUsuarios, se elimina el ultimo elemento
-      arrayRes.pop();
-      console.log('Se ha eliminado?');
-      console.log(arrayRes);
-      // Y subir cambios a la BD
-      let estruct = {
-        id: isbn,
-        idUser: arrayRes.toString(),
-      };
-
-      // Se suben los cambios a la BD
-      this.httpClient
-        .put(
-          'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/colareservas/' +
-            isbn +
-            '.json',
-          estruct
-        )
-        .subscribe(() => alert('Se ha devuelto el libro con éxito'));
-    }
+  eliminarElementoColaReservas(isbn: string) {
+   return this.httpClient.delete('http://localhost:3000/colareservas/' + isbn);
   }
 
   /**
@@ -170,12 +107,13 @@ export class ColaReservasService {
   }
 
   hayColaEnBD(colaAux: Cola[]): boolean {
-    console.log(colaAux);
-    if (!colaAux) {
-      return false;
-    } else {
-      return true;
-    }
+    return false;
+    // console.log(colaAux);
+    // if (!colaAux) {
+    //   return false;
+    // } else {
+    //   return true;
+    // }
   }
 
   hayColaParaElLibro(isbn: string, cola: Cola[]): boolean {

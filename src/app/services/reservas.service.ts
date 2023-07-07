@@ -1,26 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Reserva } from '../interfaces/Reserva';
-// import {
-//   AngularFireDatabase,
-//   AngularFireList,
-// } from '@angular/fire/compat/database';
-// import { Database, push, ref } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Libro } from '../interfaces/Libro';
+import { LibrosService } from './libros.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReservasService {
-  // private reservasDB: AngularFireList<Reserva>;
-
-  /* En este servicio todas las llamadas se hacen con HTTP Client, excepto GET Reservas (por el snapshotChanges())*/
-
   constructor(
     private httpClient: HttpClient,
-    // private db: AngularFireDatabase
+    private libroService: LibrosService
   ) {}
 
   addNuevaReserva(id: string, lector: string) {
@@ -32,52 +24,43 @@ export class ReservasService {
 
     // Construir objeto JSON a actualizar
     const reserva: Reserva = {
+      id: fechaIni + 'x' + Math.floor(Math.random() * 10000),
       isbn: id,
       fechaIni: fechaIni,
       fechaFin: fechaFin,
-      lector: idLector,
+      lectorId: idLector,
     };
 
+
     // Posteamos la reserva en /reservas
-    this.httpClient
-      .post<any>(
-        'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/reservas/' +
-          lector +
-          '.json',
-        reserva
-      )
+    return this.httpClient
+      .post('http://localhost:3000/reservas/', reserva)
       .subscribe((r) => {
         console.log(r);
       });
   }
 
-  getReservas(userID: string): Observable<Reserva[]> {
-    // this.reservasDB = this.db.list('/reservas/' + userID, (ref) =>
-    //   ref.orderByChild('id')
-    // );
-
-    // // return this.reservasDB
-    // //   .snapshotChanges()
-    // //   .pipe(
-    // //     map((changes) => changes.map((c) => this.getUserFromPayload(c.payload)))
-    // //   );
-    return null;
+  getReservas(userID: string) {
+    return this.httpClient
+    .get<any>('http://localhost:3000/reservasID/' + userID);
+    // .subscribe((r) => {
+    //   console.log(r);
+    // });;
   }
 
-  getUserFromPayload(payload: any): Reserva {
-    return {
-      $key: payload.key,
-      ...payload.val(),
-    };
+  deleteReserva(isbn: string) {
+    return this.httpClient
+      .delete('http://localhost:3000/reservas/' + isbn)
+      .subscribe((r) => {
+        console.log(r);
+      });
   }
 
   /* --------------------------------------------------------------------------------- */
 
-  buscarDisponibilidad(id: string) {
+  getDisponibilidad(isbn: string) {
     return this.httpClient.get<any>(
-      'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/disponibilidad/' +
-        id +
-        '.json'
+      'http://localhost:3000/disponibilidades/' + isbn
     );
   }
 
@@ -90,62 +73,41 @@ export class ReservasService {
     const fechaFin = now.toLocaleDateString();
     const idLector = lector;
 
-    // Construir objeto JSON a actualizar
-    const objeto = {
-      estado: 'No Disponible',
-      isbn: isbnAPedir,
-      localizacion: 'En Biblioteca',
-      fechaIni: fechaIni,
-      fechaFin: fechaFin,
-      lector: idLector,
-    };
-
     this.httpClient
-      .put<any>(
-        'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/disponibilidad/' +
-          isbnAPedir +
-          '.json',
-        objeto
-      )
+      .put('http://localhost:3000/disponibilidades/' + isbnAPedir, {
+        isbn: isbnAPedir,
+        estado: 'No disponible',
+      })
       .subscribe((r) => console.log(r));
     // Cambiar estado en el atributo 'disponible' a 'no disponible' de libro
     this.httpClient
-      .put<any>(
-        'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/libros/' +
-          isbnAPedir +
-          '/disponible.json',
-        false
-      )
+      .put('http://localhost:3000/books/' + isbnAPedir, {
+        isbn: isbnAPedir,
+        disponible: false,
+      })
       .subscribe((r) => console.log(r));
-    console.log('cambiado');
   }
 
-  cambiarEstadoaD(isbnAPedir: string) {
-    // Construir objeto JSON a actualizar
-    const objeto = {
-      estado: 'Disponible',
-      isbn: isbnAPedir,
-      localizacion: 'En Biblioteca',
-    };
+  cambiarEstadoaD(isbnAPedir: string, lector: string) {
+    const now = new Date();
+    const fechaIni = new Date().toLocaleDateString();
+    now.setDate(now.getDate() + 15);
+    const fechaFin = now.toLocaleDateString();
+    const idLector = lector;
 
     this.httpClient
-      .put<any>(
-        'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/disponibilidad/' +
-          isbnAPedir +
-          '.json',
-        objeto
-      )
+      .put('http://localhost:3000/disponibilidades/' + isbnAPedir, {
+        isbn: isbnAPedir,
+        estado: 'Disponible',
+      })
       .subscribe((r) => console.log(r));
-    // Cambiar estado en el atributo 'no disponible' a 'disponible' de libro
+    // Cambiar estado en el atributo 'disponible' a 'no disponible' de libro
     this.httpClient
-      .put<any>(
-        'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/libros/' +
-          isbnAPedir +
-          '/disponible.json',
-        true
-      )
+      .put('http://localhost:3000/books/' + isbnAPedir, {
+        isbn: isbnAPedir,
+        disponible: true,
+      })
       .subscribe((r) => console.log(r));
-    console.log('cambiado');
   }
 
   addNuevaDisponibilidad(libro: Libro) {
@@ -155,22 +117,9 @@ export class ReservasService {
       localizacion: 'En Biblioteca',
     };
 
-    this.httpClient
-      .post<any>(
-        'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/disponibilidad/' +
-          libro.isbn +
-          '.json',
-        objeto
-      )
-      .subscribe(() => {
-        this.httpClient
-          .put(
-            'https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/disponibilidad/' +
-              libro.isbn +
-              '.json',
-            objeto
-          )
-          .subscribe((r) => console.log(r));
-      });
+    return this.httpClient.post(
+      'https://localhost:3000/disponibilidades/',
+      objeto
+    );
   }
 }

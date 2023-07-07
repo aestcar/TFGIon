@@ -24,7 +24,7 @@ export class EditarPerfilComponent implements OnInit {
     Validators.max(999999999),
     Validators.min(99999999),
   ]);
-  bibliotecaFav = new FormControl('', [Validators.required]);
+  bibliotecaFav = new FormControl('', [Validators.required, Validators.pattern('/^[A-Za-z]+$/')]);
   secBibliotecaFav = new FormControl('', [Validators.required]);
 
   constructor(

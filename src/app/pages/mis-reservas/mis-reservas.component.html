@@ -34,12 +34,12 @@
       <tr
         mat-row
         *matRowDef="let row; columns: displayedColumns"
-        [ngClass]="{ filaSeleccionada: esMenorAActual(row) }"
+        [ngClass]="{ filaSeleccionada: !esMenorAActual(row) }"
       ></tr>
     </table>
 
     <div *ngIf="reservasPasadas != [] && reservasPasadas">
-      <p>Tienes {{ reservasPasadas.length }} reserva(s) pasada(s)</p>
+      <p>Tienes 0 reserva(s) pasada(s)</p>
     </div>
   </div>
 </div>

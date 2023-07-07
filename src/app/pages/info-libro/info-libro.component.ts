@@ -28,11 +28,11 @@ export class InfoLibroComponent implements OnInit {
     private storageService: StorageAndroidService,
     private colaService: ColaReservasService,
     public dialog: MatDialog
-  ) {
-    // this.libroSeleccionado = this.libroService.getLibroSeleccionado();
-  }
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.libroSeleccionado = this.libroService.getLibroSeleccionado();
+  }
 
   async clickPedir() {
     let libro = this.libroSeleccionado;
@@ -81,58 +81,56 @@ export class InfoLibroComponent implements OnInit {
   }
 
   async clickReservar() {
-    let libro = this.libroSeleccionado;
-    // Abre el dialogo selector
-    const dialogo = this.dialog.open(DialogoConfirmarReservaComponent, {
-      width: '50%',
-      data: { libro: libro, biblioteca: 'Biblioteca 66' },
-    });
-
-    dialogo.afterClosed().subscribe(async (result) => {
-      if (result == true) {
-        let lector;
-        let lectorID;
-        if (isPlatform('mobileweb')) {
-          lector = JSON.parse(localStorage.getItem('user'));
-          try {
-            lectorID = lector.uid;
-          } catch (e) {
-            alert('Usuario no encontrado');
-          }
-        } else if (isPlatform('mobile')) {
-          lector = await this.storageService.getUser();
-          let aux = await JSON.parse(lector);
-          lectorID = aux.userId;
-        } else {
-          lector = JSON.parse(localStorage.getItem('user'));
-          try {
-            lectorID = lector.uid;
-          } catch (e) {
-            alert('Usuario no encontrado');
-          }
-        }
-
-        if (lector && lectorID) {
-          // Obtener cola
-          let res = this.colaService.getColaHTTP();
-          res.subscribe((r) => {
-            try {
-              if (lector && lectorID) {
-                this.colaService.addReservaCola(libro.isbn, lectorID, r);
-              } else {
-                alert('ERROR, no se ha podido encontrar al usuario');
-              }
-            } catch (e) {
-              alert('Ha habido un error en la reserva');
-            }
-          });
-        } else {
-          alert(
-            'No se ha podido completar la operación, no se detecta el usuario'
-          );
-        }
-      }
-    });
+    // let libro = this.libroSeleccionado;
+    // // Abre el dialogo selector
+    // const dialogo = this.dialog.open(DialogoConfirmarReservaComponent, {
+    //   width: '50%',
+    //   data: { libro: libro, biblioteca: 'Biblioteca 66' },
+    // });
+    // dialogo.afterClosed().subscribe(async (result) => {
+    //   if (result == true) {
+    //     let lector;
+    //     let lectorID;
+    //     if (isPlatform('mobileweb')) {
+    //       lector = JSON.parse(localStorage.getItem('user'));
+    //       try {
+    //         lectorID = lector.uid;
+    //       } catch (e) {
+    //         alert('Usuario no encontrado');
+    //       }
+    //     } else if (isPlatform('mobile')) {
+    //       lector = await this.storageService.getUser();
+    //       let aux = await JSON.parse(lector);
+    //       lectorID = aux.userId;
+    //     } else {
+    //       lector = JSON.parse(localStorage.getItem('user'));
+    //       try {
+    //         lectorID = lector.uid;
+    //       } catch (e) {
+    //         alert('Usuario no encontrado');
+    //       }
+    //     }
+    //     if (lector && lectorID) {
+    //       // Obtener cola
+    //       let res = this.colaService.getColaHTTP();
+    //       res.subscribe((r) => {
+    //         try {
+    //           if (lector && lectorID) {
+    //             this.colaService.addReservaCola(libro.isbn, lectorID, r);
+    //           } else {
+    //             alert('ERROR, no se ha podido encontrar al usuario');
+    //           }
+    //         } catch (e) {
+    //           alert('Ha habido un error en la reserva');
+    //         }
+    //       });
+    //     } else {
+    //       alert(
+    //         'No se ha podido completar la operación, no se detecta el usuario'
+    //       );
+    //     }
+    //   }
+    // });
   }
 
   aplicarEsteticos(s: string, i: number) {

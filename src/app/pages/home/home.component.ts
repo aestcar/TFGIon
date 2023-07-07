@@ -66,7 +66,11 @@ export class HomeComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private autorizacionService: AutenticacionService,
-    private tituloService: TitulosService // private storageService: StorageAndroidService, // private colaService: ColaReservasService
+    private tituloService: TitulosService,
+     // private storageService: StorageAndroidService,
+      private colaService: ColaReservasService,
+      private reservasService: ReservasService,
+      private zone: NgZone
   ) {
     this.contadorLibros = 0;
     this.totalLibros = 60;
@@ -226,100 +230,96 @@ export class HomeComponent implements OnInit {
 
   buscar() {}
 
-  pedirClick(libro: Libro) {
-    // const dialogo = this.dialog.open(DialogoConfirmarPedirComponent, {
-    //   width: '50%',
-    //   data: { libro: libro, biblioteca: 'Biblioteca 66' },
-    // });
-    // dialogo.afterClosed().subscribe(async (result) => {
-    //   if (result == true) {
-    //     let lector;
-    //     let lectorID;
-    //     if (isPlatform('mobileweb')) {
-    //       lector = JSON.parse(localStorage.getItem('user'));
-    //       try {
-    //         lectorID = lector.uid;
-    //       } catch (e) {
-    //         alert('Usuario no encontrado');
-    //       }
-    //     } else if (isPlatform('mobile')) {
-    //       lector = await this.storageService.getUser();
-    //       let aux = await JSON.parse(lector);
-    //       lectorID = aux.userId;
-    //     } else {
-    //       // Web
-    //       lector = JSON.parse(localStorage.getItem('user'));
-    //       try {
-    //         lectorID = lector.uid;
-    //       } catch (e) {
-    //         alert('Usuario no encontrado');
-    //       }
-    //     }
-    //     if (lector && lectorID) {
-    //       this.reservasService.addNuevaReserva(libro.isbn, lectorID);
-    //       this.reservasService.cambiarEstadoaND(libro.isbn, lectorID);
-    //     } else {
-    //       alert(
-    //         'No se ha podido completar la operación, no se detecta el usuario'
-    //       );
-    //     }
-    //   }
-    // });
+  pedirClick(libro) {
+    const dialogo = this.dialog.open(DialogoConfirmarPedirComponent, {
+      width: '50%',
+      data: { libro: libro, biblioteca: 'Biblioteca 66' },
+    });
+    dialogo.afterClosed().subscribe(async (result) => {
+      if (result == true) {
+        let lector;
+        let lectorID;
+        if (isPlatform('mobileweb')) {
+          lector = JSON.parse(localStorage.getItem('user'));
+          try {
+            lectorID = lector.uid;
+          } catch (e) {
+            alert('Usuario no encontrado');
+          }
+        } else if (isPlatform('mobile')) {
+          // lector = await this.storageService.getUser();
+          // let aux = await JSON.parse(lector);
+          // lectorID = aux.userId;
+        } else {
+          // Web
+          lector = JSON.parse(localStorage.getItem('user'));
+          try {
+            lectorID = lector.uid;
+          } catch (e) {
+            alert('Usuario no encontrado');
+          }
+        }
+        if (lector && lectorID) {
+          this.reservasService.addNuevaReserva(libro.value.isbn, lectorID);
+          this.reservasService.cambiarEstadoaND(libro.value.isbn, lectorID);
+          libro.value.disponible = false;
+        } else {
+          alert(
+            'No se ha podido completar la operación, no se detecta el usuario'
+          );
+        }
+      }
+    });
   }
 
-  reservarClick(libro: Libro) {
-    // // Abre el dialogo selector
-    // const dialogo = this.dialog.open(DialogoConfirmarReservaComponent, {
-    //   width: '50%',
-    //   data: { libro: libro, biblioteca: 'Biblioteca 66' },
-    // });
-    // dialogo.afterClosed().subscribe((result) => {
-    //   if (result == true) {
-    //     // Obtener lector
-    //     let lector;
-    //     let lectorID;
-    //     if (isPlatform('mobileweb')) {
-    //       lector = JSON.parse(localStorage.getItem('user'));
-    //       try {
-    //         lectorID = lector.uid;
-    //       } catch (e) {
-    //         alert('Usuario no encontrado');
-    //       }
-    //     } else if (isPlatform('mobile')) {
-    //       lector = this.storageService.getUser();
-    //       lectorID = lector.userId;
-    //     } else {
-    //       // Web
-    //       lector = JSON.parse(localStorage.getItem('user'));
-    //       try {
-    //         lectorID = lector.uid;
-    //       } catch (e) {
-    //         alert('Usuario no encontrado');
-    //       }
-    //     }
-    //     // Obtener cola
-    //     let res = this.colaService.getColaHTTP();
-    //     res.subscribe((r) => {
-    //       try {
-    //         if (lector && lectorID) {
-    //           this.colaService.addReservaCola(libro.isbn, lectorID, r);
-    //         } else {
-    //           alert('ERROR, no se ha podido encontrar al usuario');
-    //         }
-    //       } catch (e) {
-    //         alert('Ha habido un error en la reserva');
-    //       }
-    //     });
-    //   }
-    // });
+  reservarClick(libro) {
+    // Abre el dialogo selector
+    const dialogo = this.dialog.open(DialogoConfirmarReservaComponent, {
+      width: '50%',
+      data: { libro: libro, biblioteca: 'Biblioteca 66' },
+    });
+    dialogo.afterClosed().subscribe((result) => {
+      if (result == true) {
+        // Obtener lector
+        let lector;
+        let lectorID;
+        if (isPlatform('mobileweb')) {
+          lector = JSON.parse(localStorage.getItem('user'));
+          try {
+            lectorID = lector.uid;
+          } catch (e) {
+            alert('Usuario no encontrado');
+          }
+        } else if (isPlatform('mobile')) {
+          // lector = this.storageService.getUser();
+          // lectorID = lector.userId;
+        } else {
+          // Web
+          lector = JSON.parse(localStorage.getItem('user'));
+          try {
+            lectorID = lector.uid;
+          } catch (e) {
+            alert('Usuario no encontrado');
+          }
+        }
+        try {
+          if (lector && lectorID) {
+            this.colaService.addReservaCola(libro.value.isbn, lectorID, []);
+          } else {
+            console.log('ERROR, no se ha podido encontrar al usuario');
+          }
+        } catch (e) {
+          console.log('Ha habido un error en la reserva');
+        }
+      }
+    });
   }
 
   libroClick(libro: any) {
-    // this.libroSeleccionado = libro;
-    // this.libroService.setLibroSeleccionado(libro);
-    // this.zone.run(() => {
-    //   this.router.navigate(['/detalles-libro']);
-    // });
+    this.libroSeleccionado = libro.value;
+    console.log(libro.value);
+    this.libroService.setLibroSeleccionado(libro.value);
+    this.router.navigate(['/detalles-libro']);
   }
 
   // Esteticos

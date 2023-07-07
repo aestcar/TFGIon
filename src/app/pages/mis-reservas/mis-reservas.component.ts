@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
 })
 export class MisReservasComponent implements OnInit {
   currentUserID?: any;
-  reservas: Observable<Reserva[]>;
+  reservas;
   displayedColumns: string[] = ['isbn', 'fecha inicio', 'fecha fin'];
   reservasPasadas: Reserva[] = [];
   //reservasPasadasArray:Reserva[];
@@ -32,7 +32,9 @@ export class MisReservasComponent implements OnInit {
     this.reservas = this.reservasService.getReservas(this.currentUserID);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.reservas);
+  }
 
   esMenorAActual(row: any): boolean {
     // fecha actual = 'mes/dia/año'

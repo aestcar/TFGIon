@@ -73,6 +73,9 @@
               <mat-error *ngIf="bibliotecaFav.hasError('required')">
                 La biblioteca primaria es <strong>obligatoria</strong>
               </mat-error>
+              <mat-error *ngIf="bibliotecaFav.hasError('pattern')">
+                No se pueden introducir los siguientes caracteres: <strong> &lt; &gt; &#47; &apos; </strong>
+              </mat-error>
               <mat-icon matSuffix>mode_edit</mat-icon>
             </mat-form-field>
           </form>
