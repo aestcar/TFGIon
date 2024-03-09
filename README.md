@@ -2,18 +2,18 @@
 
 <img src=https://cdn-icons-png.flaticon.com/512/3238/3238024.png width="50"> <a href="https://riunet.upv.es/handle/10251/196821" > Documentation of the project </a>  </br>  </br> 
 
-🇪🇸 🔱<b>Aplicación para la gestión de biblioteca de forma virtual</b>🔱
+🇪🇸 🔱<b>Aplicación para la gestión de biblioteca de forma virtual</b>🔱 (FRONTEND)
 
 Inicializar -> ```ionic serve --port 8100 --proxy-config proxy.conf.json  ```
 
 Tecnologias -> Ionic, Angular, Firebase, Angular Materials, Bootstrap...
 
-Continuación de Repositorio TFG
+Continuación de Repositorio TFG 
 
 </br>
 
 
-🇺🇸 🔱<b>Application for virtual form library management</b>🔱.
+🇺🇸 🔱<b>Application for virtual form library management</b>🔱 (FRONTEND)
 
 Initialize -> ```ionic serve --port 8100 --proxy-config proxy.conf.json  ```
 
