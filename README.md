@@ -12,6 +12,8 @@ Tecnologias -> Ionic, Angular, Firebase, Angular Materials, Bootstrap, NodeJS, M
 
 Continuación de Repositorio TFG
 
+Claves de Firebase borradas para que no se puedan usar
+
 </br>
 
 🇺🇸 This was my final project, my grade was a 9.5 and it is the project I am most proud of
@@ -23,3 +25,5 @@ Initialize -> ```ionic serve --port 8100 --proxy-config proxy.conf.json  ```
 Technologies -> Ionic, Angular, Firebase, Angular Materials, Bootstrap, NodeJS, MySQL, Express...
 
 Continuation of TFG Repository
+
+Firebase keys deleted so they can't be used
